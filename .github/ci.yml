@@ -1,0 +1,73 @@
+name: CI
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+    branches: [main]
+
+jobs:
+  unit-test:
+    name: Unit Tests
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-go@v5
+        with:
+          go-version: "1.25"
+
+
+      - name: "[unit] Run calculator unit tests"
+        uses: ./.github/actions/run-and-capture
+        with:
+          step-name: unit-tests
+          command: go test -v -count=1 ./pkg/...
+
+      - name: Upload unit test log
+        if: failure()
+        uses: actions/upload-artifact@v4
+        with:
+          name: unit-test-log-${{ github.run_id }}
+          path: /tmp/ci_capture_unit-tests_${{ github.run_id }}.log
+          retention-days: 7
+
+  integration-test:
+    name: Integration Tests
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-go@v5
+        with:
+          go-version: "1.25"
+
+      - name: "[integration] Run integration tests"
+        uses: ./.github/actions/run-and-capture
+        with:
+          step-name: integration-tests
+          command: go test -v -count=1 -timeout=60s ./tests/integration/...
+
+      - name: Upload integration test log
+        if: failure()
+        uses: actions/upload-artifact@v4
+        with:
+          name: integration-test-log-${{ github.run_id }}
+          path: /tmp/ci_capture_integration-tests_${{ github.run_id }}.log
+          retention-days: 7
+
+  build:
+    name: Build
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-go@v5
+        with:
+          go-version: "1.25"
+
+      - name: "[build] Build binary"
+        uses: ./.github/actions/run-and-capture
+        with:
+          step-name: build
+          command: go build ./...
