@@ -8,7 +8,7 @@ settings:
 
 notify:
   enabled: true
-  target_repo: "7h3-3mp7y-m4n/GitHub-api-learner"
+  target_repo: "7h3-3mp7y-m4n/testLogCapture"
   label: "ci-failure"
   consecutive_failures: 1
 
