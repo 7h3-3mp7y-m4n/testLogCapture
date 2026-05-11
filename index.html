@@ -1,0 +1,164 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>urunc CI Dashboard</title>
+  <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;600;700&family=DM+Sans:wght@400;500;600&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="styles.css" />
+</head>
+<body>
+
+  <header>
+    <h1>urunc CI Dashboard</h1>
+    <button id="themeToggle" class="theme-toggle" title="Toggle theme" aria-label="Toggle theme">
+      <svg id="iconSun" xmlns="http://www.w3.org/2000/svg" width="18" height="18" fill="currentColor" viewBox="0 0 16 16">
+        <path d="M12 8a4 4 0 1 1-8 0 4 4 0 0 1 8 0M8 0a.5.5 0 0 1 .5.5v2a.5.5 0 0 1-1 0v-2A.5.5 0 0 1 8 0m0 13a.5.5 0 0 1 .5.5v2a.5.5 0 0 1-1 0v-2A.5.5 0 0 1 8 13m8-5a.5.5 0 0 1-.5.5h-2a.5.5 0 0 1 0-1h2a.5.5 0 0 1 .5.5M3 8a.5.5 0 0 1-.5.5h-2a.5.5 0 0 1 0-1h2A.5.5 0 0 1 3 8m10.657-5.657a.5.5 0 0 1 0 .707l-1.414 1.415a.5.5 0 1 1-.707-.708l1.414-1.414a.5.5 0 0 1 .707 0m-9.193 9.193a.5.5 0 0 1 0 .707L3.05 13.657a.5.5 0 0 1-.707-.707l1.414-1.414a.5.5 0 0 1 .707 0zm9.193 2.121a.5.5 0 0 1-.707 0l-1.414-1.414a.5.5 0 0 1 .707-.707l1.414 1.414a.5.5 0 0 1 0 .707M4.464 4.465a.5.5 0 0 1-.707 0L2.343 3.05a.5.5 0 1 1 .707-.707l1.414 1.414a.5.5 0 0 1 0 .707"/>
+      </svg>
+      <svg id="iconMoon" xmlns="http://www.w3.org/2000/svg" width="18" height="18" fill="currentColor" viewBox="0 0 16 16" style="display:none">
+        <path d="M6 .278a.77.77 0 0 1 .08.858 7.2 7.2 0 0 0-.878 3.46c0 4.021 3.278 7.277 7.318 7.277q.792-.001 1.533-.16a.79.79 0 0 1 .81.316.73.73 0 0 1-.031.893A8.35 8.35 0 0 1 8.344 16C3.734 16 0 12.286 0 7.71 0 4.266 2.114 1.312 5.124.06A.75.75 0 0 1 6 .278"/>
+      </svg>
+    </button>
+    <span class="last-updated" id="lastUpdated">—</span>
+  </header>
+
+<main>
+  <div class="stats-section-label">CI Activity · Last 24 Hours</div>
+
+  <div class="stats-grid">
+
+    <!-- Success Rate -->
+    <div class="stat-card health-card">
+      <div class="stat-label">Success Rate</div>
+      <div class="stat-value green" id="healthTodayVal">—</div>
+      <div class="health-bar-track">
+        <div class="health-bar-fill" id="healthTodayBarFill" style="width:0%"></div>
+      </div>
+    </div>
+
+    <!-- Total Runs -->
+    <div class="stat-card total-card clickable" data-filter="recent-run">
+      <div class="stat-label">Runs Executed</div>
+      <div class="stat-value blue" id="runsTodayVal">—</div>
+    </div>
+
+    <!-- Passed -->
+    <div class="stat-card pass-card clickable" data-filter="passing">
+      <div class="stat-label">Passed</div>
+      <div class="stat-value green" id="passTodayVal">—</div>
+    </div>
+
+    <!-- Failed -->
+    <div class="stat-card fail-card clickable" data-filter="recent-failure">
+      <div class="stat-label">Failed</div>
+      <div class="stat-value red" id="failTodayVal">—</div>
+    </div>
+
+  </div>
+
+  <!-- ── Stat cards all time ── -->
+  <div class="stats-section-label" style="margin-top: 20px;">All time</div>
+  <div class="stats-grid">
+
+    <!-- Overall Health (not clickable) -->
+    <div class="stat-card health-card">
+      <div class="stat-label">Overall Health</div>
+      <div class="stat-value green" id="healthVal">—</div>
+      <div class="health-bar-track">
+        <div class="health-bar-fill" id="healthBarFill" style="width:0%"></div>
+      </div>
+    </div>
+
+    <!-- Workflows -->
+    <div class="stat-card total-card clickable" data-filter="all">
+      <div class="stat-label">Workflows</div>
+      <div class="stat-value blue" id="totalVal">—</div>
+    </div>
+
+    <!-- Passing -->
+    <div class="stat-card pass-card clickable" data-filter="passing">
+      <div class="stat-label">Passing</div>
+      <div class="stat-value green" id="passVal">—</div>
+    </div>
+
+    <!-- Currently Failing -->
+    <div class="stat-card fail-card clickable" data-filter="failing">
+      <div class="stat-label">Currently Failing</div>
+      <div class="stat-value red" id="failVal">—</div>
+    </div>
+
+  </div>
+
+  <!-- Filter bar -->
+  <div class="filter-bar">
+    <div class="search-wrap">
+      <svg width="14" height="14" viewBox="0 0 16 16" fill="currentColor">
+        <path d="M11.742 10.344a6.5 6.5 0 1 0-1.397 1.398h-.001c.03.04.062.078.098.115l3.85 3.85a1 1 0 0 0 1.415-1.414l-3.85-3.85a1.007 1.007 0 0 0-.115-.099zm-5.242 1.656a5.5 5.5 0 1 1 0-11 5.5 5.5 0 0 1 0 11z"/>
+      </svg>
+      <input class="search-input" id="searchInput" type="text" placeholder="Search workflows…" />
+    </div>
+
+    <div class="filter-chips">
+      <span class="chip active"      data-filter="all">All</span>
+      <span class="chip red-chip"    data-filter="failing">Failing</span>
+      <span class="chip green-chip"  data-filter="passing">Passing</span>
+      <span class="chip red-chip"    data-filter="critical">Critical</span>
+      <span class="chip orange-chip" data-filter="recent-failure">Recent Failure</span>
+      <span class="chip"             data-filter="recent-run">Recent Run</span>
+      <span class="chip"             data-filter="no-runs">No Runs</span>
+      <span class="chip purple-chip" data-filter="chart">Charts</span>
+    </div>
+
+    <span class="filter-count" id="filterCount"></span>
+  </div>
+
+  <!-- Charts panel -->
+  <div class="charts-panel" id="chartsPanel">
+    <div class="charts-overview-grid">
+      <div class="chart-card">
+        <h3>Overall Passed vs Failed</h3>
+        <canvas id="chartPie"></canvas>
+      </div>
+      <div class="chart-card">
+        <h3>Avg Duration</h3>
+        <canvas id="chartDuration"></canvas>
+      </div>
+      <div class="chart-card">
+        <h3>Execution Time - Last 7 Runs</h3>
+        <canvas id="chartBar"></canvas>
+      </div>
+      <div class="chart-card">
+        <h3>Success Rate by Workflow</h3>
+        <canvas id="chartSuccess"></canvas>
+      </div>
+    </div>
+  </div>
+
+  <!-- Table -->
+  <div class="table-wrap" id="tableWrap">
+    <table>
+      <thead>
+        <tr>
+          <th>Workflow</th>
+          <th>Last Run</th>
+          <th>Success Rate</th>
+          <th>History (oldest → newest)</th>
+          <th>Avg Duration</th>
+          <th>Link</th>
+        </tr>
+      </thead>
+      <tbody id="wfBody">
+        <tr class="loading-row"><td colspan="6">Loading workflow data...</td></tr>
+      </tbody>
+    </table>
+  </div>
+</main>
+
+<footer>
+  Data from <a id="footerLink" href="#" target="_blank">—</a>
+  &nbsp;·&nbsp; auto-updates every hour
+</footer>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.9.4/Chart.js"></script>
+<script src="script.js"></script>
+</body>
+</html>

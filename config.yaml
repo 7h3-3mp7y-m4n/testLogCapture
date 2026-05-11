@@ -1,0 +1,177 @@
+settings:
+  source_repo: "urunc-dev/urunc"
+  history_days: 20
+  refresh_interval: 60
+  max_runs_per_workflow: 20
+  recent_runs_in_output: 20
+  max_log_concurrency: 5
+
+notify:
+  enabled: true
+  target_repo: "7h3-3mp7y-m4n/GitHub-api-learner"
+  label: "ci-failure"
+  consecutive_failures: 1
+
+log_analysis:
+  max_signals_per_job: 40
+
+  # Lines containing these patterns are ignored before analysis.
+  noise_patterns:
+    - "sudo process started"
+    - "/usr/lib/gcc/"
+    - "/usr/bin/gcc"
+    - "gcc_fatalf.c"
+    - "-werror"
+    - "/opt/hostedtoolcache/"
+    - "arguments: ["
+    - "cc1,"
+    - "gmt:sudo process started"
+
+  # Lower priority number = more important
+  categories:
+    - name: "Crash / Timeout"
+      priority: 1
+      patterns:
+        - "panic:"
+        - "test timed out"
+        - "all goroutines are asleep"
+        - "deadlock"
+        - "segmentation violation"
+
+    - name: "Network Failure"
+      priority: 2
+      patterns:
+        - "connection reset by peer"
+        - "i/o timeout"
+        - "tls handshake timeout"
+        - "no route to host"
+        - "temporary failure in name resolution"
+        - "context deadline exceeded"
+
+    - name: "Test Failure"
+      priority: 3
+      patterns:
+        - "fail\t"
+        - "--- fail:"
+        - "failing specs"
+        - "expected"
+        - "received"
+
+    - name: "Build Failure"
+      priority: 4
+      patterns:
+        - "make: ***"
+        - "exit status"
+        - "process completed with exit code"
+        - "##[error]"
+        - "compilation terminated"
+
+    - name: "Fatal Runtime Error"
+      priority: 5
+      patterns:
+        - "level=fatal"
+        - "fatal msg="
+        - "failed to copy"
+        - "fatal: "
+
+workflows:
+  - name: "add-git-trailers"
+    description: "Git trailer validation"
+    critical: false
+
+  - name: "build"
+    description: "Build workflow"
+    critical: true
+
+  - name: "build-latest"
+    description: "Build latest version"
+    critical: true
+
+  - name: "build-trigger"
+    description: "Trigger build pipeline"
+    critical: false
+
+  - name: "ci"
+    description: "Main CI workflow"
+    critical: true
+
+  # old and noisy
+  # - name: "ci_devel"
+  #   description: "Development CI"
+  #   critical: false
+
+  - name: "ci_main"
+    description: "Main branch CI"
+    critical: true
+
+  - name: "ci_nightly"
+    description: "Nightly builds"
+    critical: false
+
+  - name: "ci_on_push"
+    description: "CI on push"
+    critical: true
+
+  - name: "codeql"
+    description: "Security analysis"
+    critical: true
+
+  - name: "dependency-review"
+    description: "Dependency checks"
+    critical: false
+
+  # - name: "kind_test"
+  #   description: "Kubernetes tests"
+  #   critical: true
+
+  # - name: "lint"
+  #   description: "Lint checks"
+  #   critical: true
+
+  - name: "pr-merge"
+    description: "PR merge checks"
+    critical: true
+
+  - name: "pr-takeover"
+    description: "PR takeover automation"
+    critical: false
+
+  - name: "pr-trailers"
+    description: "PR trailer validation"
+    critical: false
+
+  - name: "publish_docs"
+    description: "Documentation publishing"
+    critical: false
+
+  - name: "release-trigger"
+    description: "Release pipeline"
+    critical: true
+
+  - name: "scorecard"
+    description: "Security scorecard"
+    critical: false
+
+  - name: "stale"
+    description: "Stale issue cleanup"
+    critical: false
+
+  - name: "unit_test"
+    description: "Unit tests"
+    critical: true
+
+  - name: "upload_s3"
+    description: "Upload artifacts to S3"
+    critical: false
+
+  - name: "urunc-deploy-test"
+    description: "Deployment test"
+    critical: true
+
+  - name: "validate-files-and-commits"
+    description: "Validation checks"
+    critical: true
+
+  - name: "vm_test"
+    description: "VM tests"
+    critical: true

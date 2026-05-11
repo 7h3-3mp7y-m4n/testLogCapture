@@ -1,74 +1,44 @@
-name: CI
+name: Update Stats
 
 on:
-  push:
-    branches: [main]
-  pull_request:
-    branches: [main]
-  workflow_dispatch:  
+  schedule:
+    - cron: "0 * * * *"
+  workflow_dispatch:
+
+permissions:
+  contents: write
+  issues: write
+  actions: read
 
 jobs:
-  unit-test:
-    name: Unit Tests
+  update:
     runs-on: ubuntu-latest
-    steps:
-      - uses: actions/checkout@v4
+    timeout-minutes: 30
 
-      - uses: actions/setup-go@v5
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@de0fac2e4500dabe0009e67214ff5f5447ce83dd # v6.0.2
+
+      - name: Setup Go
+        uses: actions/setup-go@4b73464bb391d4059bd26b0524d20df3927bd417 # v6.3.0
         with:
           go-version: "1.25"
 
+      - name: Generate stats
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: go run .
 
-      - name: "[unit] Run calculator unit tests"
-        uses: ./.github/actions/run-and-capture
-        with:
-          step-name: unit-tests
-          command: go test -v -count=1 ./pkg/...
+      - name: Commit changes if needed
+        run: |
+          if git diff --quiet stats.json; then
+            echo "No changes"
+            exit 0
+          fi
 
-      - name: Upload unit test log
-        if: failure()
-        uses: actions/upload-artifact@v4
-        with:
-          name: unit-test-log-${{ github.run_id }}
-          path: /tmp/ci_capture_unit-tests_${{ github.run_id }}.log
-          retention-days: 7
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
 
-  integration-test:
-    name: Integration Tests
-    runs-on: ubuntu-latest
-    steps:
-      - uses: actions/checkout@v4
-
-      - uses: actions/setup-go@v5
-        with:
-          go-version: "1.25"
-
-      - name: "[integration] Run integration tests"
-        uses: ./.github/actions/run-and-capture
-        with:
-          step-name: integration-tests
-          command: go test -v -count=1 -timeout=60s ./tests/integration/...
-
-      - name: Upload integration test log
-        if: failure()
-        uses: actions/upload-artifact@v4
-        with:
-          name: integration-test-log-${{ github.run_id }}
-          path: /tmp/ci_capture_integration-tests_${{ github.run_id }}.log
-          retention-days: 7
-
-  build:
-    name: Build
-    runs-on: ubuntu-latest
-    steps:
-      - uses: actions/checkout@v4
-
-      - uses: actions/setup-go@v5
-        with:
-          go-version: "1.25"
-
-      - name: "[build] Build binary"
-        uses: ./.github/actions/run-and-capture
-        with:
-          step-name: build
-          command: go build ./...
+          git add -A
+          git commit -m "update stats"
+          git push
