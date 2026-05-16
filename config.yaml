@@ -106,7 +106,7 @@ workflows:
 
   - name: "ci_nightly"
     description: "Nightly builds"
-    critical: false
+    critical: true
 
   - name: "ci_on_push"
     description: "CI on push"
