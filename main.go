@@ -9,7 +9,6 @@ import (
 	"os"
 	"sort"
 	"strings"
-	"sync"
 	"time"
 
 	"go.yaml.in/yaml/v3"
@@ -20,7 +19,6 @@ type Config struct {
 		SourceRepo         string `yaml:"source_repo"`
 		MaxRunsPerWorkflow int    `yaml:"max_runs_per_workflow"`
 		RecentRunsInOutput int    `yaml:"recent_runs_in_output"`
-		MaxLogConcurrency  int    `yaml:"max_log_concurrency"`
 	} `yaml:"settings"`
 
 	Notify      NotifyConfig      `yaml:"notify"`
@@ -73,6 +71,16 @@ type WorkflowsResponse struct {
 	WorkflowRuns []Run `json:"workflow_runs"`
 }
 
+// Step represents one step inside a GitHub Actions job.
+// StartedAt and CompletedAt are used for timestamp-based log slicing.
+type Step struct {
+	Name        string    `json:"name"`
+	Conclusion  string    `json:"conclusion"`
+	Number      int       `json:"number"`
+	StartedAt   time.Time `json:"started_at"`
+	CompletedAt time.Time `json:"completed_at"`
+}
+
 type FailedJob struct {
 	ID         int    `json:"id"`
 	Name       string `json:"name"`
@@ -105,6 +113,7 @@ type Job struct {
 	HTMLURL     string    `json:"html_url"`
 	StartedAt   time.Time `json:"started_at"`
 	CompletedAt time.Time `json:"completed_at"`
+	Steps       []Step    `json:"steps"`
 }
 
 type JobSummary struct {
@@ -142,38 +151,53 @@ type DashboardData struct {
 type Client struct {
 	token       string
 	repo        string
-	http        *http.Client
-	logHTTP     *http.Client
+	httpClient  *http.Client
+	logClient   *http.Client
 	logAnalysis LogAnalysisConfig
-	logSem      chan struct{} // semaphore: caps concurrent log fetches
 }
 
-func NewClient(token, repo string, la LogAnalysisConfig, maxLogConcurrency int) *Client {
-	if maxLogConcurrency <= 0 {
-		maxLogConcurrency = 5
-	}
+func NewClient(token, repo string, la LogAnalysisConfig) *Client {
 	return &Client{
 		token:       token,
 		repo:        repo,
-		http:        &http.Client{Timeout: 20 * time.Second},
-		logHTTP:     &http.Client{Timeout: 2 * time.Minute},
+		httpClient:  &http.Client{Timeout: 20 * time.Second},
+		logClient:   &http.Client{Timeout: 2 * time.Minute},
 		logAnalysis: la,
-		logSem:      make(chan struct{}, maxLogConcurrency),
 	}
 }
 
 func (c *Client) get(url string, v interface{}) error {
-	req, _ := http.NewRequest("GET", url, nil)
+	req, err := http.NewRequest("GET", url, nil)
+	if err != nil {
+		return err
+	}
 	if c.token != "" {
 		req.Header.Set("Authorization", "Bearer "+c.token)
 	}
 	req.Header.Set("Accept", "application/vnd.github+json")
-	resp, err := c.http.Do(req)
+
+	resp, err := c.httpClient.Do(req)
 	if err != nil {
 		return err
 	}
 	defer resp.Body.Close()
+
+	if resp.StatusCode < 200 || resp.StatusCode >= 300 {
+		return fmt.Errorf("GitHub API returned HTTP %d for %s", resp.StatusCode, url)
+	}
 	return json.NewDecoder(resp.Body).Decode(v)
+}
+
+// parseGHTimestamp parses the 28-char nanosecond timestamp GitHub Actions
+// prepends to every log line. Format: "2026-05-04T09:43:27.8606742Z"
+// This gives us sub-millisecond precision for step boundary detection —
+// proved necessary on real urunc data where the gap between the failure
+// signal and the next step's first line was only 237ms.
+func parseGHTimestamp(line string) (time.Time, error) {
+	if len(line) < 28 {
+		return time.Time{}, fmt.Errorf("line too short")
+	}
+	return time.Parse("2006-01-02T15:04:05.9999999Z", line[:28])
 }
 
 func analyseLog(scanner *bufio.Scanner, cfg LogAnalysisConfig) LogSummary {
@@ -211,18 +235,15 @@ func analyseLog(scanner *bufio.Scanner, cfg LogAnalysisConfig) LogSummary {
 	if len(signals) == 0 {
 		return LogSummary{Empty: true}
 	}
+
 	sort.SliceStable(signals, func(i, j int) bool {
 		return signals[i].Priority < signals[j].Priority
 	})
-	byCategory := make(map[string][]string)
-	topPriority := signals[0].Priority
 	topCategory := signals[0].Category
+
+	byCategory := make(map[string][]string)
 	for _, s := range signals {
 		byCategory[s.Category] = append(byCategory[s.Category], s.Line)
-		if s.Priority < topPriority {
-			topPriority = s.Priority
-			topCategory = s.Category
-		}
 	}
 
 	return LogSummary{
@@ -271,26 +292,35 @@ func matchesAny(lower string, patterns []string) bool {
 	return false
 }
 
-func (c *Client) fetchAndAnalyseLog(logURL string) (string, string, error) {
-	// Acquire semaphore slot before making the long-lived request.
-	c.logSem <- struct{}{}
-	defer func() { <-c.logSem }()
-
+// fetchAndAnalyseLog fetches the flat job log, slices it to the failed
+// step(s) using nanosecond timestamp precision, then returns:
+//   - snippet: signal summary from analyseLog (for issue header)
+//   - raw:     full captured step output (for debugging in issue body)
+//
+// Parallel jobs: each job has its own flat log file fetched by job ID —
+// no cross-contamination possible between parallel jobs.
+//
+// Multiple failed steps: window spans all failed steps so all failures
+// are captured in a single pass.
+//
+// Precise end detection: finds the last failure signal's exact nanosecond
+// timestamp in the log and cuts there — prevents post-failure steps like
+// "Dump urunc logs on failure" from leaking into the capture. Proved on
+// real urunc data: 237ms gap between ##[error] and step 27's first line.
+func (c *Client) fetchAndAnalyseLog(logURL string, failedSteps []Step) (snippet, raw string, err error) {
 	var resp *http.Response
-	var err error
-
 	for attempt := 0; attempt < 2; attempt++ {
 		req, _ := http.NewRequest("GET", logURL, nil)
 		if c.token != "" {
 			req.Header.Set("Authorization", "Bearer "+c.token)
 		}
 		req.Header.Set("Accept", "application/vnd.github+json")
-		resp, err = c.logHTTP.Do(req)
+		resp, err = c.logClient.Do(req)
 		if err == nil {
 			break
 		}
 		if attempt == 0 {
-			log.Printf("log fetch attempt 1 failed (%v), retrying...", err)
+			log.Printf("  log fetch attempt 1 failed (%v), retrying...", err)
 			time.Sleep(3 * time.Second)
 		}
 	}
@@ -299,46 +329,217 @@ func (c *Client) fetchAndAnalyseLog(logURL string) (string, string, error) {
 	}
 	defer resp.Body.Close()
 
-	const maxRawBytes = 64 * 1024
-	var rawBuf strings.Builder
-	truncated := false
+	if resp.StatusCode == http.StatusNotFound {
+		return "", "", fmt.Errorf("log expired (404)")
+	}
+	if resp.StatusCode < 200 || resp.StatusCode >= 300 {
+		return "", "", fmt.Errorf("log fetch returned HTTP %d", resp.StatusCode)
+	}
+
+	// Build timestamp window spanning all failed steps.
+	// API gives second-precision timestamps; log lines have nanoseconds.
+	// We use -1s on start (handles rounding) and +5s on end as initial buffer
+	// before the precise-end pass narrows it further.
+	var windowStart, windowEnd time.Time
+	hasWindow := false
+	for _, step := range failedSteps {
+		if step.StartedAt.IsZero() {
+			continue
+		}
+		s := step.StartedAt.Add(-time.Second)
+		e := step.CompletedAt.Add(5 * time.Second)
+		if !hasWindow {
+			windowStart, windowEnd = s, e
+			hasWindow = true
+		} else {
+			if s.Before(windowStart) {
+				windowStart = s
+			}
+			if e.After(windowEnd) {
+				windowEnd = e
+			}
+		}
+	}
+
+	if hasWindow {
+		log.Printf("  window: %s → %s (%d failed step(s))",
+			windowStart.Format(time.RFC3339),
+			windowEnd.Format(time.RFC3339),
+			len(failedSteps))
+	} else {
+		log.Printf("  no step timestamps — capturing full job log")
+	}
+
+	// Stream log line by line — slice by timestamp window.
+	// Log is chronological so we break early when past the window end.
 	scanner := bufio.NewScanner(resp.Body)
 	scanner.Buffer(make([]byte, 256*1024), 256*1024)
-	var allLines []string
+
+	var sliced []string
 	for scanner.Scan() {
-		allLines = append(allLines, scanner.Text())
-	}
-	if err := scanner.Err(); err != nil {
-		return "", "", err
-	}
-	lineReader := strings.NewReader(strings.Join(allLines, "\n"))
-	summary := analyseLog(bufio.NewScanner(lineReader), c.logAnalysis)
-	for _, line := range allLines {
-		clean := stripGHTimestamp(line)
-		if rawBuf.Len()+len(clean)+1 > maxRawBytes {
-			truncated = true
-			break
+		line := scanner.Text()
+		if hasWindow {
+			ts, parseErr := parseGHTimestamp(line)
+			if parseErr != nil || ts.Before(windowStart) {
+				continue
+			}
+			if ts.After(windowEnd) {
+				break // chronological — safe to stop
+			}
 		}
-		rawBuf.WriteString(clean)
-		rawBuf.WriteByte('\n')
+		sliced = append(sliced, line)
 	}
-	raw := strings.TrimRight(rawBuf.String(), "\n")
-	if truncated {
-		raw += "\n\n[log truncated at 64KB]"
+	if scanErr := scanner.Err(); scanErr != nil {
+		return "", "", scanErr
 	}
 
-	return renderSummary(summary), raw, nil
+	log.Printf("  sliced: %d lines", len(sliced))
+
+	// Precise end detection — find the last failure signal's exact nanosecond
+	// timestamp and cut there. This is the key step that prevents step 27
+	// ("Dump urunc logs on failure") from polluting the capture.
+	// The +5s buffer above is intentionally generous; this pass tightens it.
+	if hasWindow && len(sliced) > 0 {
+		preciseSignals := []string{
+			"##[error]",
+			"--- fail:",
+			"fail!",
+			"[fail]",
+			"panic:",
+			"✖",
+			"timed out after",
+		}
+		var preciseEnd time.Time
+		for _, line := range sliced {
+			lower := strings.ToLower(stripGHTimestamp(line))
+			for _, sig := range preciseSignals {
+				if strings.Contains(lower, sig) {
+					if ts, parseErr := parseGHTimestamp(line); parseErr == nil {
+						preciseEnd = ts
+					}
+					break
+				}
+			}
+		}
+		if !preciseEnd.IsZero() {
+			log.Printf("  precise end: %s",
+				preciseEnd.Format("2006-01-02T15:04:05.9999999Z"))
+			var precise []string
+			for _, line := range sliced {
+				ts, parseErr := parseGHTimestamp(line)
+				if parseErr != nil {
+					precise = append(precise, line)
+					continue
+				}
+				if ts.After(preciseEnd) {
+					break
+				}
+				precise = append(precise, line)
+			}
+			sliced = precise
+		}
+	}
+
+	// Strip timestamps and apply noise filter from config.yaml.
+	var captured []string
+	for _, line := range sliced {
+		clean := stripGHTimestamp(line)
+		if clean == "" {
+			continue
+		}
+		if matchesAny(strings.ToLower(clean), c.logAnalysis.NoisePatterns) {
+			continue
+		}
+		captured = append(captured, clean)
+	}
+
+	log.Printf("  captured: %d lines after noise filter", len(captured))
+
+	// LogSnippet — signal extraction for the issue header.
+	lineReader := strings.NewReader(strings.Join(captured, "\n"))
+	summary := analyseLog(bufio.NewScanner(lineReader), c.logAnalysis)
+	snippet = renderSummary(summary)
+
+	// RawLog — the full captured step output for debugging.
+	// Senior confirmed: full log is needed, long files are not a concern.
+	// Cap at 50KB to stay within GitHub issue body limit (~65KB total).
+	raw = strings.Join(captured, "\n")
+	if len(raw) > 50000 {
+		raw = raw[:50000] + "\n\n[truncated at 50KB — see full log at: " + logURL + "]"
+	}
+
+	return snippet, raw, nil
 }
 
-// fetchJobSummaries populates run.Jobs. Safe to call concurrently for different runs.
-func (c *Client) fetchJobSummaries(run *Run) {
-	url := fmt.Sprintf("https://api.github.com/repos/%s/actions/runs/%d/jobs", c.repo, run.ID)
+// fetchAnnotationFallback is used when the flat log is expired (404).
+// Annotations live in the Checks API permanently and never expire.
+// For urunc this typically returns "Process completed with exit code N"
+// which is minimal but better than nothing and always available.
+func (c *Client) fetchAnnotationFallback(jobID int, htmlURL string) (snippet, raw string) {
+	url := fmt.Sprintf(
+		"https://api.github.com/repos/%s/check-runs/%d/annotations",
+		c.repo, jobID)
+
+	var annotations []struct {
+		Level   string `json:"annotation_level"`
+		Message string `json:"message"`
+		Title   string `json:"title"`
+	}
+
+	if err := c.get(url, &annotations); err != nil {
+		log.Printf("  annotation fallback failed for job %d: %v", jobID, err)
+		snippet = "(log expired — no annotations available)"
+		raw = fmt.Sprintf("(log expired — see: %s)", htmlURL)
+		return
+	}
+
+	var failures []string
+	for _, a := range annotations {
+		if strings.EqualFold(a.Level, "failure") {
+			msg := a.Message
+			if a.Title != "" {
+				msg = a.Title + ": " + msg
+			}
+			failures = append(failures, msg)
+		}
+	}
+
+	if len(failures) == 0 {
+		snippet = "(log expired — no failure annotations found)"
+		raw = fmt.Sprintf("(log expired — see: %s)", htmlURL)
+		return
+	}
+
+	snippet = strings.Join(failures, "\n")
+	raw = fmt.Sprintf("(log expired — annotations only)\n\n%s\n\nSee: %s",
+		snippet, htmlURL)
+	return
+}
+
+// fetchJobsAndEnrich makes ONE jobs API call per run.
+// It replaces the previous two separate functions (fetchJobSummaries +
+// enrichWithLogs) that made the same GET /runs/{id}/jobs call twice.
+//
+// For each job it:
+//   - always populates run.Jobs (job summaries for the dashboard)
+//   - for failed jobs: collects ALL failed steps, fetches the flat log,
+//     applies timestamp slicing, and populates run.FailedJobs
+//
+// Parallel jobs are handled correctly — each job gets its own
+// GET /jobs/{id}/logs call returning a completely separate flat file.
+// There is no cross-contamination between parallel job logs.
+func (c *Client) fetchJobsAndEnrich(run *Run) {
+	url := fmt.Sprintf(
+		"https://api.github.com/repos/%s/actions/runs/%d/jobs",
+		c.repo, run.ID)
 	var resp JobsResponse
 	if err := c.get(url, &resp); err != nil {
 		log.Printf("warn: could not fetch jobs for run %d: %v", run.ID, err)
 		return
 	}
+
 	for _, job := range resp.Jobs {
+		// Always populate job summary for the dashboard UI.
 		dur := job.CompletedAt.Sub(job.StartedAt).Seconds()
 		if dur < 0 {
 			dur = 0
@@ -349,84 +550,53 @@ func (c *Client) fetchJobSummaries(run *Run) {
 			DurationSec: dur,
 			HTMLURL:     job.HTMLURL,
 		})
-	}
-}
 
-// enrichWithLogs fetches logs for every failed job in a run concurrently,
-// bounded by the client's semaphore.
-func (c *Client) enrichWithLogs(run *Run) {
-	url := fmt.Sprintf("https://api.github.com/repos/%s/actions/runs/%d/jobs", c.repo, run.ID)
-	var resp JobsResponse
-	if err := c.get(url, &resp); err != nil {
-		log.Printf("warn: could not fetch jobs for run %d: %v", run.ID, err)
-		return
-	}
-
-	type result struct {
-		job     Job
-		snippet string
-		raw     string
-		err     error
-	}
-
-	var failedJobs []Job
-	for _, job := range resp.Jobs {
-		if job.Conclusion == "failure" {
-			failedJobs = append(failedJobs, job)
+		// Only fetch logs for failed jobs.
+		if job.Conclusion != "failure" {
+			continue
 		}
-	}
-	if len(failedJobs) == 0 {
-		return
-	}
 
-	results := make([]result, len(failedJobs))
-	var wg sync.WaitGroup
-	for i, job := range failedJobs {
-		wg.Add(1)
-		go func(i int, job Job) {
-			defer wg.Done()
-			logURL := fmt.Sprintf("https://api.github.com/repos/%s/actions/jobs/%d/logs", c.repo, job.ID)
-			log.Printf("fetching logs for failed job %d (%s)...", job.ID, job.Name)
-			snippet, raw, err := c.fetchAndAnalyseLog(logURL)
-			results[i] = result{job: job, snippet: snippet, raw: raw, err: err}
-		}(i, job)
-	}
-	wg.Wait()
-
-	for _, r := range results {
-		snippet := r.snippet
-		raw := r.raw
-		if r.err != nil {
-			log.Printf("warn: could not fetch logs for job %d: %v", r.job.ID, r.err)
-			snippet = "(log fetch failed)"
-			raw = ""
+		// Collect ALL failed steps — not just the first one.
+		// A job can have multiple failed steps (e.g. a setup step fails
+		// then a test step also fails). We build a window that covers all
+		// of them so nothing is missed.
+		var failedSteps []Step
+		for _, step := range job.Steps {
+			if step.Conclusion == "failure" {
+				failedSteps = append(failedSteps, step)
+				log.Printf("  failed step #%d %q | %s → %s",
+					step.Number, step.Name,
+					step.StartedAt.Format(time.RFC3339),
+					step.CompletedAt.Format(time.RFC3339))
+			}
 		}
+
+		if len(failedSteps) == 0 {
+			log.Printf("  job %d (%s): no step-level data — will capture full job log",
+				job.ID, job.Name)
+		}
+
+		logURL := fmt.Sprintf(
+			"https://api.github.com/repos/%s/actions/jobs/%d/logs",
+			c.repo, job.ID)
+		log.Printf("fetching logs for failed job %d (%s)...", job.ID, job.Name)
+
+		snippet, raw, fetchErr := c.fetchAndAnalyseLog(logURL, failedSteps)
+		if fetchErr != nil {
+			log.Printf("warn: log fetch failed for job %d: %v", job.ID, fetchErr)
+			// Annotation fallback — works even when log is expired (404).
+			snippet, raw = c.fetchAnnotationFallback(job.ID, job.HTMLURL)
+		}
+
 		run.FailedJobs = append(run.FailedJobs, FailedJob{
-			ID:         r.job.ID,
-			Name:       r.job.Name,
-			Conclusion: r.job.Conclusion,
-			HTMLURL:    r.job.HTMLURL,
+			ID:         job.ID,
+			Name:       job.Name,
+			Conclusion: job.Conclusion,
+			HTMLURL:    job.HTMLURL,
 			LogSnippet: snippet,
 			RawLog:     raw,
 		})
 	}
-}
-
-func (c *Client) listWorkflows() ([]Workflow, error) {
-	url := fmt.Sprintf("https://api.github.com/repos/%s/actions/workflows", c.repo)
-	var resp WorkflowsListResponse
-	err := c.get(url, &resp)
-	return resp.Workflows, err
-}
-
-func (c *Client) fetchRuns(workflowID int, limit int) ([]Run, error) {
-	url := fmt.Sprintf(
-		"https://api.github.com/repos/%s/actions/workflows/%d/runs?per_page=%d",
-		c.repo, workflowID, limit,
-	)
-	var resp WorkflowsResponse
-	err := c.get(url, &resp)
-	return resp.WorkflowRuns, err
 }
 
 func stripGHTimestamp(line string) string {
@@ -484,6 +654,8 @@ func buildWeatherHistory(runs []Run) []string {
 	if len(take) > slots {
 		take = runs[:slots]
 	}
+
+	offset := slots - len(take)
 	for i, r := range take {
 		idx := len(take) - 1 - i
 		c := r.Conclusion
@@ -495,7 +667,7 @@ func buildWeatherHistory(runs []Run) []string {
 		default:
 			c = "unknown"
 		}
-		history[slots-len(take)+idx] = c
+		history[offset+idx] = c
 	}
 	return history
 }
@@ -539,12 +711,6 @@ func buildSummary(runs []Run, name, desc string, critical, required bool) Workfl
 	}
 }
 
-type workflowResult struct {
-	summary WorkflowSummary
-	health  float64
-	index   int // preserves config order in output
-}
-
 func main() {
 	cfgBytes, err := os.ReadFile("config.yaml")
 	if err != nil {
@@ -560,17 +726,27 @@ func main() {
 		recentLimit = cfg.Settings.MaxRunsPerWorkflow
 	}
 
-	client := NewClient(
-		os.Getenv("GITHUB_TOKEN"),
-		cfg.Settings.SourceRepo,
-		cfg.LogAnalysis,
-		cfg.Settings.MaxLogConcurrency,
-	)
-
-	workflows, err := client.listWorkflows()
+	workflowsBytes, err := os.ReadFile("workflows_raw.json")
 	if err != nil {
-		log.Fatal(err)
+		log.Fatalf("cannot read workflows_raw.json: %v", err)
 	}
+	var workflowsResp WorkflowsListResponse
+	if err := json.Unmarshal(workflowsBytes, &workflowsResp); err != nil {
+		log.Fatalf("cannot parse workflows_raw.json: %v", err)
+	}
+
+	runsBytes, err := os.ReadFile("runs_raw.json")
+	if err != nil {
+		log.Fatalf("cannot read runs_raw.json: %v", err)
+	}
+	var allRuns map[string]WorkflowsResponse
+	if err := json.Unmarshal(runsBytes, &allRuns); err != nil {
+		log.Fatalf("cannot parse runs_raw.json: %v", err)
+	}
+
+	// GH_PAT is used for cross-repo access to urunc-dev/urunc logs.
+	// GITHUB_TOKEN is used by the notifier for issue creation on your repo.
+	client := NewClient(os.Getenv("GH_PAT"), cfg.Settings.SourceRepo, cfg.LogAnalysis)
 
 	var notifier *Notifier
 	if cfg.Notify.Enabled {
@@ -578,79 +754,60 @@ func main() {
 			log.Println("warn: notify.enabled=true but GITHUB_TOKEN not set — skipping notifications")
 		} else {
 			notifier = NewNotifier(os.Getenv("GITHUB_TOKEN"), cfg.Settings.SourceRepo, cfg.Notify)
-			log.Printf("Notifier enabled -> target: %s, threshold: %d consecutive failures",
-				notifier.targetRepo, notifier.threshold)
+			log.Printf("Notifier enabled -> target: %s, label: %s",
+				notifier.targetRepo, notifier.label)
 		}
 	}
-	results := make([]workflowResult, len(cfg.Workflows))
-	var wg sync.WaitGroup
 
-	for i, w := range cfg.Workflows {
-		wf := findWorkflow(workflows, w.Name)
+	var summaries []WorkflowSummary
+	var totalHealth float64
+
+	for _, w := range cfg.Workflows {
+		wf := findWorkflow(workflowsResp.Workflows, w.Name)
 		if wf == nil {
 			log.Println("Not found:", w.Name)
 			continue
 		}
 		log.Printf("Matched: %s -> %s", w.Name, wf.Name)
 
-		wg.Add(1)
-		go func(i int, w struct {
-			Name        string `yaml:"name"`
-			Description string `yaml:"description"`
-			Critical    bool   `yaml:"critical"`
-			Required    bool   `yaml:"required"`
-		}, wf *Workflow) {
-			defer wg.Done()
-
-			runs, _ := client.fetchRuns(wf.ID, cfg.Settings.MaxRunsPerWorkflow)
-			sort.Slice(runs, func(a, b int) bool {
-				return runs[a].CreatedAt.After(runs[b].CreatedAt)
-			})
-
-			recent := runs
-			if len(recent) > recentLimit {
-				recent = runs[:recentLimit]
-			}
-
-			// Fetch job summaries and logs concurrently across runs.
-			log.Printf("fetching jobs/logs for %s…", w.Name)
-			var runWg sync.WaitGroup
-			for j := range recent {
-				runWg.Add(1)
-				go func(j int) {
-					defer runWg.Done()
-					client.fetchJobSummaries(&recent[j])
-					if recent[j].Conclusion == "failure" {
-						client.enrichWithLogs(&recent[j])
-					}
-				}(j)
-			}
-			runWg.Wait()
-
-			summary := buildSummary(runs, w.Name, w.Description, w.Critical, w.Required)
-			summary.RecentRuns = recent
-
-			results[i] = workflowResult{
-				summary: summary,
-				health:  100 - summary.FailureRate,
-				index:   i,
-			}
-		}(i, w, wf)
-	}
-
-	wg.Wait()
-
-	// Collect in config order; run notifier sequentially (low-volume writes).
-	var summaries []WorkflowSummary
-	var totalHealth float64
-	for _, r := range results {
-		if r.summary.Name == "" {
-			continue // workflow was not found
+		runsData, ok := allRuns[fmt.Sprintf("%d", wf.ID)]
+		if !ok {
+			log.Printf("warn: no runs found for workflow %s", w.Name)
+			continue
 		}
-		summaries = append(summaries, r.summary)
-		totalHealth += r.health
+		runs := runsData.WorkflowRuns
+
+		sort.Slice(runs, func(i, j int) bool {
+			return runs[i].CreatedAt.After(runs[j].CreatedAt)
+		})
+
+		recent := runs
+		if len(recent) > recentLimit {
+			recent = runs[:recentLimit]
+		}
+
+		// Single call replaces the previous fetchJobSummaries + enrichWithLogs
+		// which made the same GET /runs/{id}/jobs request twice.
+		log.Printf("fetching jobs and logs for %s...", w.Name)
+		for i := range recent {
+			client.fetchJobsAndEnrich(&recent[i])
+		}
+
+		summary := buildSummary(runs, w.Name, w.Description, w.Critical, w.Required)
+		summary.RecentRuns = recent
+
+		// Sync LastRun from recent[0] so the notifier sees enriched FailedJobs.
+		// buildSummary copies runs[0] before enrichment runs, so FailedJobs
+		// on LastRun would otherwise always be empty.
+		if len(recent) > 0 && summary.LastRun != nil && recent[0].ID == summary.LastRun.ID {
+			r := recent[0]
+			summary.LastRun = &r
+		}
+
+		summaries = append(summaries, summary)
+		totalHealth += (100 - summary.FailureRate)
 		if notifier != nil {
-			notifier.Process(r.summary)
+			notifier.Process(summary)
 		}
 	}
 

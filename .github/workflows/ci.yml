@@ -17,17 +17,52 @@ jobs:
 
     steps:
       - name: Checkout repository
-        uses: actions/checkout@de0fac2e4500dabe0009e67214ff5f5447ce83dd # v6.0.2
+        uses: actions/checkout@de0fac2e4500dabe0009e67214ff5f5447ce83dd
 
       - name: Setup Go
-        uses: actions/setup-go@4b73464bb391d4059bd26b0524d20df3927bd417 # v6.3.0
+        uses: actions/setup-go@4b73464bb391d4059bd26b0524d20df3927bd417
         with:
           go-version: "1.25"
+
+      - name: Fetch workflow data
+        env:
+          GH_TOKEN: ${{ secrets.GH_PAT }}
+        run: |
+          gh api repos/urunc-dev/urunc/actions/workflows \
+            --paginate > workflows_raw.json
+
+          echo "{}" > runs_raw.json
+
+          jq -r '.workflows[] | "\(.id) \(.name)"' workflows_raw.json | while read wf_id wf_name; do
+          echo "Processing workflow: $wf_name (ID: $wf_id)"
+        
+          gh api "repos/urunc-dev/urunc/actions/workflows/${wf_id}/runs?per_page=20" \
+            > runs_tmp.json
+        
+          jq --arg id "$wf_id" \
+             --arg name "$wf_name" \
+             --slurpfile runs runs_tmp.json \
+             '. + {($id): ($runs[0] + {name: $name})}' \
+             runs_raw.json > tmp.json
+        
+          mv tmp.json runs_raw.json
+          done
+          echo "===== FINAL workflows_raw.json ====="
+          cat workflows_raw.json
+
+          echo "===== FINAL runs_raw.json ====="
+          cat runs_raw.json
+
+          rm -f runs_tmp.json
 
       - name: Generate stats
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          GH_PAT: ${{ secrets.GH_PAT }}
         run: go run .
+
+      - name: Cleanup temp files
+        run: rm -f workflows_raw.json runs_raw.json tmp.json
 
       - name: Commit changes if needed
         run: |
