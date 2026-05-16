@@ -2,8 +2,8 @@ settings:
   source_repo: "urunc-dev/urunc"
   history_days: 20
   refresh_interval: 60
-  max_runs_per_workflow: 20
-  recent_runs_in_output: 20
+  max_runs_per_workflow: 40 
+  recent_runs_in_output: 40
   max_log_concurrency: 5
 
 notify:
