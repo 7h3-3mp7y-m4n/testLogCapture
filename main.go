@@ -7,7 +7,6 @@ import (
 	"log"
 	"net/http"
 	"os"
-	"regexp"
 	"sort"
 	"strings"
 	"time"
@@ -293,19 +292,6 @@ func matchesAny(lower string, patterns []string) bool {
 	return false
 }
 
-var (
-	ansiRegex = regexp.MustCompile(
-		`\x1b(?:[@-Z\\-_]|\[[0-9;?]*[ -/]*[@-~]|\][^\x07]*\x07)`)
-	crRegex = regexp.MustCompile(`\r[^\n]`)
-)
-
-func cleanLogLine(line string) string {
-	line = stripGHTimestamp(line)
-	line = ansiRegex.ReplaceAllString(line, "")
-	line = crRegex.ReplaceAllString(line, "")
-	return strings.TrimSpace(line)
-}
-
 // fetchAndAnalyseLog fetches the flat job log, slices it to the failed
 // step(s) using nanosecond timestamp precision, then returns:
 //   - snippet: signal summary from analyseLog (for issue header)
@@ -321,121 +307,98 @@ func cleanLogLine(line string) string {
 // timestamp in the log and cuts there — prevents post-failure steps like
 // "Dump urunc logs on failure" from leaking into the capture. Proved on
 // real urunc data: 237ms gap between ##[error] and step 27's first line.
-func (c *Client) fetchAndAnalyseLog(
-	logURL string,
-	failedSteps []Step,
-	jobName string,
-) (snippet, raw string, err error) {
+func (c *Client) fetchAndAnalyseLog(logURL string, failedSteps []Step) (snippet, raw string, err error) {
 	var resp *http.Response
-
 	for attempt := 0; attempt < 2; attempt++ {
 		req, _ := http.NewRequest("GET", logURL, nil)
-
 		if c.token != "" {
 			req.Header.Set("Authorization", "Bearer "+c.token)
 		}
-
 		req.Header.Set("Accept", "application/vnd.github+json")
-
 		resp, err = c.logClient.Do(req)
 		if err == nil {
 			break
 		}
-
 		if attempt == 0 {
 			log.Printf("  log fetch attempt 1 failed (%v), retrying...", err)
 			time.Sleep(3 * time.Second)
 		}
 	}
-
 	if err != nil {
 		return "", "", err
 	}
-
 	defer resp.Body.Close()
 
 	if resp.StatusCode == http.StatusNotFound {
 		return "", "", fmt.Errorf("log expired (404)")
 	}
-
 	if resp.StatusCode < 200 || resp.StatusCode >= 300 {
 		return "", "", fmt.Errorf("log fetch returned HTTP %d", resp.StatusCode)
 	}
 
 	// Build timestamp window spanning all failed steps.
-	// API timestamps are second-precision while logs are nanosecond-precision,
-	// so we slightly widen the window to avoid clipping.
+	// API gives second-precision timestamps; log lines have nanoseconds.
+	// We use -1s on start (handles rounding) and +5s on end as initial buffer
+	// before the precise-end pass narrows it further.
 	var windowStart, windowEnd time.Time
 	hasWindow := false
-
 	for _, step := range failedSteps {
 		if step.StartedAt.IsZero() {
 			continue
 		}
-
-		start := step.StartedAt.Add(-time.Second)
-		end := step.CompletedAt.Add(5 * time.Second)
-
+		s := step.StartedAt.Add(-time.Second)
+		e := step.CompletedAt.Add(5 * time.Second)
 		if !hasWindow {
-			windowStart = start
-			windowEnd = end
+			windowStart, windowEnd = s, e
 			hasWindow = true
-			continue
-		}
-
-		if start.Before(windowStart) {
-			windowStart = start
-		}
-
-		if end.After(windowEnd) {
-			windowEnd = end
+		} else {
+			if s.Before(windowStart) {
+				windowStart = s
+			}
+			if e.After(windowEnd) {
+				windowEnd = e
+			}
 		}
 	}
 
 	if hasWindow {
-		log.Printf(
-			"  window: %s → %s (%d failed step(s))",
+		log.Printf("  window: %s → %s (%d failed step(s))",
 			windowStart.Format(time.RFC3339),
 			windowEnd.Format(time.RFC3339),
-			len(failedSteps),
-		)
+			len(failedSteps))
 	} else {
 		log.Printf("  no step timestamps — capturing full job log")
 	}
 
-	// Stream log line-by-line and slice using the timestamp window.
-	// Keep raw lines intact because later passes still need timestamps.
+	// Stream log line by line — slice by timestamp window.
+	// Log is chronological so we break early when past the window end.
 	scanner := bufio.NewScanner(resp.Body)
 	scanner.Buffer(make([]byte, 256*1024), 256*1024)
 
 	var sliced []string
-
 	for scanner.Scan() {
 		line := scanner.Text()
-
 		if hasWindow {
 			ts, parseErr := parseGHTimestamp(line)
 			if parseErr != nil || ts.Before(windowStart) {
 				continue
 			}
-
 			if ts.After(windowEnd) {
-				break // logs are chronological
+				break // chronological — safe to stop
 			}
 		}
-
 		sliced = append(sliced, line)
 	}
-
 	if scanErr := scanner.Err(); scanErr != nil {
 		return "", "", scanErr
 	}
 
 	log.Printf("  sliced: %d lines", len(sliced))
 
-	// Precise end detection.
-	// Detect the last actual failure signal and cut the capture there,
-	// preventing unrelated cleanup/debug steps from polluting the output.
+	// Precise end detection — find the last failure signal's exact nanosecond
+	// timestamp and cut there. This is the key step that prevents step 27
+	// ("Dump urunc logs on failure") from polluting the capture.
+	// The +5s buffer above is intentionally generous; this pass tightens it.
 	if hasWindow && len(sliced) > 0 {
 		preciseSignals := []string{
 			"##[error]",
@@ -446,114 +409,66 @@ func (c *Client) fetchAndAnalyseLog(
 			"✖",
 			"timed out after",
 		}
-
 		var preciseEnd time.Time
-
 		for _, line := range sliced {
 			lower := strings.ToLower(stripGHTimestamp(line))
-
 			for _, sig := range preciseSignals {
 				if strings.Contains(lower, sig) {
-					ts, parseErr := parseGHTimestamp(line)
-					if parseErr == nil {
+					if ts, parseErr := parseGHTimestamp(line); parseErr == nil {
 						preciseEnd = ts
 					}
 					break
 				}
 			}
 		}
-
 		if !preciseEnd.IsZero() {
-			log.Printf(
-				"  precise end: %s",
-				preciseEnd.Format("2006-01-02T15:04:05.9999999Z"),
-			)
-
+			log.Printf("  precise end: %s",
+				preciseEnd.Format("2006-01-02T15:04:05.9999999Z"))
 			var precise []string
-
 			for _, line := range sliced {
 				ts, parseErr := parseGHTimestamp(line)
-
 				if parseErr != nil {
 					precise = append(precise, line)
 					continue
 				}
-
 				if ts.After(preciseEnd) {
 					break
 				}
-
 				precise = append(precise, line)
 			}
-
 			sliced = precise
 		}
 	}
 
-	// Clean and filter captured lines.
-	// cleanLogLine removes timestamps, GitHub prefixes,
-	// ANSI escape codes, and other formatting noise.
+	// Strip timestamps and apply noise filter from config.yaml.
 	var captured []string
-
 	for _, line := range sliced {
-		clean := cleanLogLine(line)
-
+		clean := stripGHTimestamp(line)
 		if clean == "" {
 			continue
 		}
-
 		if matchesAny(strings.ToLower(clean), c.logAnalysis.NoisePatterns) {
 			continue
 		}
-
 		captured = append(captured, clean)
 	}
 
 	log.Printf("  captured: %d lines after noise filter", len(captured))
 
-	// LogSnippet — extract high-signal summary for issue body/header.
+	// LogSnippet — signal extraction for the issue header.
 	lineReader := strings.NewReader(strings.Join(captured, "\n"))
-
-	summary := analyseLog(
-		bufio.NewScanner(lineReader),
-		c.logAnalysis,
-	)
-
+	summary := analyseLog(bufio.NewScanner(lineReader), c.logAnalysis)
 	snippet = renderSummary(summary)
 
-	// RawLog — formatted full captured output for debugging.
-	raw = formatCapturedLog(captured, jobName)
-
-	// GitHub issue bodies have practical size limits.
+	// RawLog — the full captured step output for debugging.
+	// Senior confirmed: full log is needed, long files are not a concern.
+	// Cap at 50KB to stay within GitHub issue body limit (~65KB total).
+	raw = strings.Join(captured, "\n")
 	if len(raw) > 50000 {
-		raw = raw[:50000] + "\n\n[truncated at 50KB]"
+		raw = raw[:50000] + "\n\n[truncated at 50KB — see full log at: " + logURL + "]"
 	}
 
 	return snippet, raw, nil
-}
-func formatCapturedLog(lines []string, jobName string) string {
-	if len(lines) == 0 {
-		return fmt.Sprintf(
-			"### Job: %s\n\n(no captured log output)",
-			jobName,
-		)
-	}
-
-	var b strings.Builder
-
-	// Header
-	b.WriteString(fmt.Sprintf("### Job: %s\n\n", jobName))
-	b.WriteString("```text\n")
-
-	// Log body
-	for _, line := range lines {
-		b.WriteString(line)
-		b.WriteByte('\n')
-	}
-
-	b.WriteString("```")
-
-	return b.String()
 }
 
 // fetchAnnotationFallback is used when the flat log is expired (404).
@@ -666,7 +581,7 @@ func (c *Client) fetchJobsAndEnrich(run *Run) {
 			c.repo, job.ID)
 		log.Printf("fetching logs for failed job %d (%s)...", job.ID, job.Name)
 
-		snippet, raw, fetchErr := c.fetchAndAnalyseLog(logURL, failedSteps, job.Name)
+		snippet, raw, fetchErr := c.fetchAndAnalyseLog(logURL, failedSteps)
 		if fetchErr != nil {
 			log.Printf("warn: log fetch failed for job %d: %v", job.ID, fetchErr)
 			// Annotation fallback — works even when log is expired (404).

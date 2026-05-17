@@ -309,7 +309,7 @@ func buildSnippetSection(job FailedJob) string {
 
 func buildFailedJobsSection(jobs []FailedJob) string {
 	if len(jobs) == 0 {
-		return "> _No individual job failure data captured — check the run link above._\n\n"
+		return ">No individual job failure data captured — check the run link above.\n\n"
 	}
 	var sb strings.Builder
 	for _, job := range jobs {
@@ -345,7 +345,7 @@ func buildIssueBody(summary WorkflowSummary, repr *Run, sourceRepo string) strin
 	sb.WriteString(buildFailedJobsSection(repr.FailedJobs))
 
 	sb.WriteString("---\n")
-	sb.WriteString("_This issue was opened automatically by the CI dashboard. ")
+	sb.WriteString("This issue was opened automatically by the CI dashboard. ")
 	sb.WriteString("Please close it manually once the issue is resolved._\n")
 
 	return sb.String()
