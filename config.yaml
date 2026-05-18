@@ -1,6 +1,5 @@
 settings:
   source_repo: "urunc-dev/urunc"
-  refresh_interval: 60
 
 notify:
   enabled: true
