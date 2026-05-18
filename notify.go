@@ -53,8 +53,6 @@ func NewNotifier(token, sourceRepo string, cfg NotifyConfig) *Notifier {
 	}
 }
 
-// anyFailed returns the most recent failed run from the slice, or nil if none.
-// Runs are expected newest-first.
 func anyFailed(runs []Run) *Run {
 	for i := range runs {
 		if runs[i].Conclusion == "failure" {
@@ -64,12 +62,6 @@ func anyFailed(runs []Run) *Run {
 	return nil
 }
 
-// Process implements the notification logic:
-//
-//	any failure in RecentRuns → open issue if none exists
-//	issue exists + failure in RecentRuns + 24h since last update → add comment
-//	issue exists + failure in RecentRuns + within 24h → skip (cooldown)
-//	no failure in RecentRuns → skip
 func (n *Notifier) Process(summary WorkflowSummary) {
 	if !summary.Critical {
 		return
@@ -245,20 +237,13 @@ func buildSparkline(history []string) string {
 	return strings.TrimSpace(sb.String())
 }
 
-// buildRawLogBlock renders the full captured step log into a collapsible
-// <details> block for the GitHub issue body. The 30KB cap leaves room for
-// the rest of the issue body within GitHub's ~65KB total limit.
 func buildRawLogBlock(job FailedJob) string {
 	raw := job.RawLog
-
-	// Skip if empty or just a fallback message (expired/failed log)
 	if raw == "" ||
 		strings.HasPrefix(raw, "(log expired") ||
 		strings.HasPrefix(raw, "(log fetch") {
 		return ""
 	}
-
-	// Cap at 30KB — leaves room for the rest of the issue body
 	const maxBytes = 30000
 	truncated := false
 	if len(raw) > maxBytes {
@@ -281,14 +266,8 @@ func buildRawLogBlock(job FailedJob) string {
 	return sb.String()
 }
 
-// buildSnippetSection renders the signal summary and full log block
-// for one failed job. The signal summary appears directly in the issue
-// body for quick scanning. The full log is in a collapsible block for
-// deeper debugging — kept because your senior confirmed full logs are needed.
 func buildSnippetSection(job FailedJob) string {
 	var sb strings.Builder
-
-	// Signal summary — quick at-a-glance failure reason
 	switch job.LogSnippet {
 	case "", "(no actionable failure signal found in log)", "(log fetch failed)":
 		if job.LogSnippet != "" {
@@ -300,8 +279,6 @@ func buildSnippetSection(job FailedJob) string {
 		sb.WriteString(strings.TrimSpace(job.LogSnippet))
 		sb.WriteString("\n```\n\n")
 	}
-
-	// Full log — collapsible, for debugging
 	sb.WriteString(buildRawLogBlock(job))
 
 	return sb.String()
@@ -313,7 +290,7 @@ func buildFailedJobsSection(jobs []FailedJob) string {
 	}
 	var sb strings.Builder
 	for _, job := range jobs {
-		sb.WriteString(fmt.Sprintf("#### ✗ [%s](%s)\n\n", job.Name, job.HTMLURL))
+		sb.WriteString(fmt.Sprintf("#### x [%s](%s)\n\n", job.Name, job.HTMLURL))
 		sb.WriteString(buildSnippetSection(job))
 	}
 	return sb.String()

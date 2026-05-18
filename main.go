@@ -71,8 +71,6 @@ type WorkflowsResponse struct {
 	WorkflowRuns []Run `json:"workflow_runs"`
 }
 
-// Step represents one step inside a GitHub Actions job.
-// StartedAt and CompletedAt are used for timestamp-based log slicing.
 type Step struct {
 	Name        string    `json:"name"`
 	Conclusion  string    `json:"conclusion"`
@@ -188,11 +186,6 @@ func (c *Client) get(url string, v interface{}) error {
 	return json.NewDecoder(resp.Body).Decode(v)
 }
 
-// parseGHTimestamp parses the 28-char nanosecond timestamp GitHub Actions
-// prepends to every log line. Format: "2026-05-04T09:43:27.8606742Z"
-// This gives us sub-millisecond precision for step boundary detection —
-// proved necessary on real urunc data where the gap between the failure
-// signal and the next step's first line was only 237ms.
 func parseGHTimestamp(line string) (time.Time, error) {
 	if len(line) < 28 {
 		return time.Time{}, fmt.Errorf("line too short")
@@ -291,22 +284,6 @@ func matchesAny(lower string, patterns []string) bool {
 	}
 	return false
 }
-
-// fetchAndAnalyseLog fetches the flat job log, slices it to the failed
-// step(s) using nanosecond timestamp precision, then returns:
-//   - snippet: signal summary from analyseLog (for issue header)
-//   - raw:     full captured step output (for debugging in issue body)
-//
-// Parallel jobs: each job has its own flat log file fetched by job ID —
-// no cross-contamination possible between parallel jobs.
-//
-// Multiple failed steps: window spans all failed steps so all failures
-// are captured in a single pass.
-//
-// Precise end detection: finds the last failure signal's exact nanosecond
-// timestamp in the log and cuts there — prevents post-failure steps like
-// "Dump urunc logs on failure" from leaking into the capture. Proved on
-// real urunc data: 237ms gap between ##[error] and step 27's first line.
 func (c *Client) fetchAndAnalyseLog(logURL string, failedSteps []Step) (snippet, raw string, err error) {
 	var resp *http.Response
 	for attempt := 0; attempt < 2; attempt++ {
@@ -336,10 +313,6 @@ func (c *Client) fetchAndAnalyseLog(logURL string, failedSteps []Step) (snippet,
 		return "", "", fmt.Errorf("log fetch returned HTTP %d", resp.StatusCode)
 	}
 
-	// Build timestamp window spanning all failed steps.
-	// API gives second-precision timestamps; log lines have nanoseconds.
-	// We use -1s on start (handles rounding) and +5s on end as initial buffer
-	// before the precise-end pass narrows it further.
 	var windowStart, windowEnd time.Time
 	hasWindow := false
 	for _, step := range failedSteps {
@@ -369,9 +342,6 @@ func (c *Client) fetchAndAnalyseLog(logURL string, failedSteps []Step) (snippet,
 	} else {
 		log.Printf("  no step timestamps — capturing full job log")
 	}
-
-	// Stream log line by line — slice by timestamp window.
-	// Log is chronological so we break early when past the window end.
 	scanner := bufio.NewScanner(resp.Body)
 	scanner.Buffer(make([]byte, 256*1024), 256*1024)
 
@@ -384,7 +354,7 @@ func (c *Client) fetchAndAnalyseLog(logURL string, failedSteps []Step) (snippet,
 				continue
 			}
 			if ts.After(windowEnd) {
-				break // chronological — safe to stop
+				break
 			}
 		}
 		sliced = append(sliced, line)
@@ -394,11 +364,6 @@ func (c *Client) fetchAndAnalyseLog(logURL string, failedSteps []Step) (snippet,
 	}
 
 	log.Printf("  sliced: %d lines", len(sliced))
-
-	// Precise end detection — find the last failure signal's exact nanosecond
-	// timestamp and cut there. This is the key step that prevents step 27
-	// ("Dump urunc logs on failure") from polluting the capture.
-	// The +5s buffer above is intentionally generous; this pass tightens it.
 	if hasWindow && len(sliced) > 0 {
 		preciseSignals := []string{
 			"##[error]",
@@ -439,8 +404,6 @@ func (c *Client) fetchAndAnalyseLog(logURL string, failedSteps []Step) (snippet,
 			sliced = precise
 		}
 	}
-
-	// Strip timestamps and apply noise filter from config.yaml.
 	var captured []string
 	for _, line := range sliced {
 		clean := stripGHTimestamp(line)
@@ -452,29 +415,17 @@ func (c *Client) fetchAndAnalyseLog(logURL string, failedSteps []Step) (snippet,
 		}
 		captured = append(captured, clean)
 	}
-
 	log.Printf("  captured: %d lines after noise filter", len(captured))
-
-	// LogSnippet — signal extraction for the issue header.
 	lineReader := strings.NewReader(strings.Join(captured, "\n"))
 	summary := analyseLog(bufio.NewScanner(lineReader), c.logAnalysis)
 	snippet = renderSummary(summary)
-
-	// RawLog — the full captured step output for debugging.
-	// Senior confirmed: full log is needed, long files are not a concern.
-	// Cap at 50KB to stay within GitHub issue body limit (~65KB total).
 	raw = strings.Join(captured, "\n")
 	if len(raw) > 50000 {
 		raw = raw[:50000] + "\n\n[truncated at 50KB — see full log at: " + logURL + "]"
 	}
-
 	return snippet, raw, nil
 }
 
-// fetchAnnotationFallback is used when the flat log is expired (404).
-// Annotations live in the Checks API permanently and never expire.
-// For urunc this typically returns "Process completed with exit code N"
-// which is minimal but better than nothing and always available.
 func (c *Client) fetchAnnotationFallback(jobID int, htmlURL string) (snippet, raw string) {
 	url := fmt.Sprintf(
 		"https://api.github.com/repos/%s/check-runs/%d/annotations",
@@ -516,18 +467,6 @@ func (c *Client) fetchAnnotationFallback(jobID int, htmlURL string) (snippet, ra
 	return
 }
 
-// fetchJobsAndEnrich makes ONE jobs API call per run.
-// It replaces the previous two separate functions (fetchJobSummaries +
-// enrichWithLogs) that made the same GET /runs/{id}/jobs call twice.
-//
-// For each job it:
-//   - always populates run.Jobs (job summaries for the dashboard)
-//   - for failed jobs: collects ALL failed steps, fetches the flat log,
-//     applies timestamp slicing, and populates run.FailedJobs
-//
-// Parallel jobs are handled correctly — each job gets its own
-// GET /jobs/{id}/logs call returning a completely separate flat file.
-// There is no cross-contamination between parallel job logs.
 func (c *Client) fetchJobsAndEnrich(run *Run) {
 	url := fmt.Sprintf(
 		"https://api.github.com/repos/%s/actions/runs/%d/jobs",
@@ -539,7 +478,6 @@ func (c *Client) fetchJobsAndEnrich(run *Run) {
 	}
 
 	for _, job := range resp.Jobs {
-		// Always populate job summary for the dashboard UI.
 		dur := job.CompletedAt.Sub(job.StartedAt).Seconds()
 		if dur < 0 {
 			dur = 0
@@ -551,15 +489,10 @@ func (c *Client) fetchJobsAndEnrich(run *Run) {
 			HTMLURL:     job.HTMLURL,
 		})
 
-		// Only fetch logs for failed jobs.
 		if job.Conclusion != "failure" {
 			continue
 		}
 
-		// Collect ALL failed steps — not just the first one.
-		// A job can have multiple failed steps (e.g. a setup step fails
-		// then a test step also fails). We build a window that covers all
-		// of them so nothing is missed.
 		var failedSteps []Step
 		for _, step := range job.Steps {
 			if step.Conclusion == "failure" {
@@ -744,8 +677,6 @@ func main() {
 		log.Fatalf("cannot parse runs_raw.json: %v", err)
 	}
 
-	// GH_PAT is used for cross-repo access to urunc-dev/urunc logs.
-	// GITHUB_TOKEN is used by the notifier for issue creation on your repo.
 	client := NewClient(os.Getenv("GH_PAT"), cfg.Settings.SourceRepo, cfg.LogAnalysis)
 
 	var notifier *Notifier
@@ -786,8 +717,6 @@ func main() {
 			recent = runs[:recentLimit]
 		}
 
-		// Single call replaces the previous fetchJobSummaries + enrichWithLogs
-		// which made the same GET /runs/{id}/jobs request twice.
 		log.Printf("fetching jobs and logs for %s...", w.Name)
 		for i := range recent {
 			client.fetchJobsAndEnrich(&recent[i])
@@ -796,9 +725,6 @@ func main() {
 		summary := buildSummary(runs, w.Name, w.Description, w.Critical, w.Required)
 		summary.RecentRuns = recent
 
-		// Sync LastRun from recent[0] so the notifier sees enriched FailedJobs.
-		// buildSummary copies runs[0] before enrichment runs, so FailedJobs
-		// on LastRun would otherwise always be empty.
 		if len(recent) > 0 && summary.LastRun != nil && recent[0].ID == summary.LastRun.ID {
 			r := recent[0]
 			summary.LastRun = &r
