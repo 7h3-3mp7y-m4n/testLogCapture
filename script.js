@@ -220,14 +220,12 @@
   }
   
   // State
-  
   var allWorkflows = [];
   var activeFilter = 'all';
   var searchQuery  = '';
   var chartsBuilt  = false;
   
   // Global charts
-  
   function buildCharts(workflows) {
     if (chartsBuilt) return;
     chartsBuilt = true;
@@ -266,17 +264,6 @@
             boxWidth: 12,
             fontSize: 11,
             fontColor: mutedColor(),
-            // generateLabels: function (chart) {
-            //   return chart.data.labels.map(function (label, i) {
-            //     return {
-            //       text: label,
-            //       fillStyle: chart.data.datasets[0].backgroundColor[i],
-            //       strokeStyle: 'transparent',
-            //       lineWidth: 0,
-            //       index: i
-            //     };
-            //   });
-            // }
           }
         },
         tooltips: {
@@ -402,7 +389,6 @@
   }
   
   // Filter helpers
-  
   function hasRecentRun(wf) {
     if (!wf.last_run) return false;
     return (Date.now() - new Date(wf.last_run.run_started_at || wf.last_run.created_at).getTime()) < 7 * 24 * 60 * 60 * 1000;
@@ -465,7 +451,6 @@
   }
   
   // Table renderer
-  
   function renderTable(list) {
     var tbody = document.getElementById('wfBody');
     tbody.innerHTML = '';
@@ -473,7 +458,6 @@
       tbody.innerHTML = '<tr class="empty-row"><td colspan="6">No workflows match this filter.</td></tr>';
       return;
     }
-  
     list.forEach(function (wf, idx) {
       var safeId   = wf.name.replace(/\W+/g, '-');
       var drawerId = 'drawer-' + safeId;
@@ -514,7 +498,6 @@
         + '</td>';
   
       tbody.appendChild(tr);
-  
       var drawerTr  = document.createElement('tr');
       drawerTr.className     = 'drawer-row';
       drawerTr.style.display = 'none';
@@ -545,7 +528,6 @@
   }
   
   // Chip and search listeners
-  
   document.querySelectorAll('.chip').forEach(function (chip) {
     chip.addEventListener('click', function () {
       document.querySelectorAll('.chip').forEach(function (c) { c.classList.remove('active'); });
@@ -594,7 +576,6 @@
   });
   
   // Drawer renderer
-  
   function renderDrawer(wf, drawerEl) {
     var runs = wf.recent_runs || [];
   

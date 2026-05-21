@@ -280,17 +280,16 @@ func buildSnippetSection(job FailedJob) string {
 		sb.WriteString("\n```\n\n")
 	}
 	sb.WriteString(buildRawLogBlock(job))
-
 	return sb.String()
 }
 
 func buildFailedJobsSection(jobs []FailedJob) string {
 	if len(jobs) == 0 {
-		return ">No individual job failure data captured — check the run link above.\n\n"
+		return "> No individual job failure data captured — check the run link above.\n\n"
 	}
 	var sb strings.Builder
 	for _, job := range jobs {
-		sb.WriteString(fmt.Sprintf("#### x [%s](%s)\n\n", job.Name, job.HTMLURL))
+		sb.WriteString(fmt.Sprintf("#### ❌ [%s](%s)\n\n", job.Name, job.HTMLURL))
 		sb.WriteString(buildSnippetSection(job))
 	}
 	return sb.String()
@@ -322,7 +321,7 @@ func buildIssueBody(summary WorkflowSummary, repr *Run, sourceRepo string) strin
 	sb.WriteString(buildFailedJobsSection(repr.FailedJobs))
 
 	sb.WriteString("---\n")
-	sb.WriteString("This issue was opened automatically by the CI dashboard. ")
+	sb.WriteString("This issue was opened automatically by the CI dashboard.")
 	sb.WriteString("Please close it manually once the issue is resolved._\n")
 
 	return sb.String()

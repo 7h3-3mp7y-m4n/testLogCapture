@@ -7,12 +7,17 @@ import (
 	"log"
 	"net/http"
 	"os"
+	"regexp"
 	"sort"
 	"strings"
 	"time"
 
 	"go.yaml.in/yaml/v3"
 )
+
+// ansiEscape matches ANSI/VT100 escape sequences that GitHub logs sometimes
+// embed (e.g. colour codes, cursor moves).  Strip them before any analysis.
+var ansiEscape = regexp.MustCompile(`\x1b(?:[@-Z\\-_]|\[[0-?]*[ -/]*[@-~])`)
 
 type Config struct {
 	Settings struct {
@@ -164,15 +169,21 @@ func NewClient(token, repo string, la LogAnalysisConfig) *Client {
 	}
 }
 
+// setAuthHeaders applies the standard GitHub API auth/accept headers to req.
+// Centralises the two places this was previously duplicated inline.
+func (c *Client) setAuthHeaders(req *http.Request) {
+	if c.token != "" {
+		req.Header.Set("Authorization", "Bearer "+c.token)
+	}
+	req.Header.Set("Accept", "application/vnd.github+json")
+}
+
 func (c *Client) get(url string, v interface{}) error {
 	req, err := http.NewRequest("GET", url, nil)
 	if err != nil {
 		return err
 	}
-	if c.token != "" {
-		req.Header.Set("Authorization", "Bearer "+c.token)
-	}
-	req.Header.Set("Accept", "application/vnd.github+json")
+	c.setAuthHeaders(req)
 
 	resp, err := c.httpClient.Do(req)
 	if err != nil {
@@ -191,6 +202,16 @@ func parseGHTimestamp(line string) (time.Time, error) {
 		return time.Time{}, fmt.Errorf("line too short")
 	}
 	return time.Parse("2006-01-02T15:04:05.9999999Z", line[:28])
+}
+
+// stripGHTimestamp removes the leading GitHub log timestamp (first 29 chars)
+// and then strips any ANSI escape sequences before trimming whitespace.
+func stripGHTimestamp(line string) string {
+	if len(line) > 29 && line[10] == 'T' {
+		line = line[29:]
+	}
+	line = ansiEscape.ReplaceAllString(line, "")
+	return strings.TrimSpace(line)
 }
 
 func analyseLog(scanner *bufio.Scanner, cfg LogAnalysisConfig) LogSummary {
@@ -284,14 +305,12 @@ func matchesAny(lower string, patterns []string) bool {
 	}
 	return false
 }
+
 func (c *Client) fetchAndAnalyseLog(logURL string, failedSteps []Step) (snippet, raw string, err error) {
 	var resp *http.Response
 	for attempt := 0; attempt < 2; attempt++ {
 		req, _ := http.NewRequest("GET", logURL, nil)
-		if c.token != "" {
-			req.Header.Set("Authorization", "Bearer "+c.token)
-		}
-		req.Header.Set("Accept", "application/vnd.github+json")
+		c.setAuthHeaders(req)
 		resp, err = c.logClient.Do(req)
 		if err == nil {
 			break
@@ -342,6 +361,7 @@ func (c *Client) fetchAndAnalyseLog(logURL string, failedSteps []Step) (snippet,
 	} else {
 		log.Printf("  no step timestamps — capturing full job log")
 	}
+
 	scanner := bufio.NewScanner(resp.Body)
 	scanner.Buffer(make([]byte, 256*1024), 256*1024)
 
@@ -364,6 +384,7 @@ func (c *Client) fetchAndAnalyseLog(logURL string, failedSteps []Step) (snippet,
 	}
 
 	log.Printf("  sliced: %d lines", len(sliced))
+
 	if hasWindow && len(sliced) > 0 {
 		preciseSignals := []string{
 			"##[error]",
@@ -387,8 +408,7 @@ func (c *Client) fetchAndAnalyseLog(logURL string, failedSteps []Step) (snippet,
 			}
 		}
 		if !preciseEnd.IsZero() {
-			log.Printf("  precise end: %s",
-				preciseEnd.Format("2006-01-02T15:04:05.9999999Z"))
+			log.Printf("  precise end: %s", preciseEnd.Format("2006-01-02T15:04:05.9999999Z"))
 			var precise []string
 			for _, line := range sliced {
 				ts, parseErr := parseGHTimestamp(line)
@@ -404,6 +424,7 @@ func (c *Client) fetchAndAnalyseLog(logURL string, failedSteps []Step) (snippet,
 			sliced = precise
 		}
 	}
+
 	var captured []string
 	for _, line := range sliced {
 		clean := stripGHTimestamp(line)
@@ -416,6 +437,7 @@ func (c *Client) fetchAndAnalyseLog(logURL string, failedSteps []Step) (snippet,
 		captured = append(captured, clean)
 	}
 	log.Printf("  captured: %d lines after noise filter", len(captured))
+
 	lineReader := strings.NewReader(strings.Join(captured, "\n"))
 	summary := analyseLog(bufio.NewScanner(lineReader), c.logAnalysis)
 	snippet = renderSummary(summary)
@@ -517,7 +539,6 @@ func (c *Client) fetchJobsAndEnrich(run *Run) {
 		snippet, raw, fetchErr := c.fetchAndAnalyseLog(logURL, failedSteps)
 		if fetchErr != nil {
 			log.Printf("warn: log fetch failed for job %d: %v", job.ID, fetchErr)
-			// Annotation fallback — works even when log is expired (404).
 			snippet, raw = c.fetchAnnotationFallback(job.ID, job.HTMLURL)
 		}
 
@@ -530,13 +551,6 @@ func (c *Client) fetchJobsAndEnrich(run *Run) {
 			RawLog:     raw,
 		})
 	}
-}
-
-func stripGHTimestamp(line string) string {
-	if len(line) > 29 && line[10] == 'T' {
-		line = line[29:]
-	}
-	return strings.TrimSpace(line)
 }
 
 func normalize(s string) string {
