@@ -161,21 +161,21 @@ func (n *Notifier) findOpenIssue(workflowName string) *Issue {
 	return nil
 }
 
-func (n *Notifier) ensureLabel() {
-	rawURL := n.apiURL("/labels")
-	resp, err := n.do("POST", rawURL, map[string]string{
-		"name":        n.label,
-		"color":       "d73a49",
-		"description": "Automated CI failure notification",
-	})
-	if err != nil || resp == nil {
-		return
-	}
-	resp.Body.Close()
-}
+// func (n *Notifier) ensureLabel() {
+// 	rawURL := n.apiURL("/labels")
+// 	resp, err := n.do("POST", rawURL, map[string]string{
+// 		"name":        n.label,
+// 		"color":       "d73a49",
+// 		"description": "Automated CI failure notification",
+// 	})
+// 	if err != nil || resp == nil {
+// 		return
+// 	}
+// 	resp.Body.Close()
+// }
 
 func (n *Notifier) createIssue(summary WorkflowSummary, repr *Run) {
-	n.ensureLabel()
+	// n.ensureLabel()
 
 	resp, err := n.do("POST", n.apiURL("/issues"), map[string]interface{}{
 		"title":  issueTitle(summary.Name),
