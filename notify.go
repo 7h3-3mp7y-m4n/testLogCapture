@@ -82,13 +82,14 @@ func (n *Notifier) Process(summary WorkflowSummary) {
 		return
 	}
 
-	if time.Since(existingIssue.UpdatedAt) >= 24*time.Hour {
-		log.Printf("notify: adding update to issue #%d for %q", existingIssue.Number, summary.Name)
-		n.addComment(existingIssue.Number, summary, repr)
-	} else {
-		log.Printf("notify: issue #%d for %q updated within 24h — skipping comment",
-			existingIssue.Number, summary.Name)
-	}
+	// if time.Since(existingIssue.UpdatedAt) >= 24*time.Hour {
+	// 	log.Printf("notify: adding update to issue #%d for %q", existingIssue.Number, summary.Name)
+	// 	n.addComment(existingIssue.Number, summary, repr)
+	// } else {
+	// 	log.Printf("notify: issue #%d for %q updated within 24h — skipping comment",
+	// 		existingIssue.Number, summary.Name)
+	// }
+	n.addComment(existingIssue.Number, summary, repr)
 }
 
 func (n *Notifier) apiURL(path string) string {
