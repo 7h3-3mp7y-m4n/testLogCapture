@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-05-22T17:12:40.767455256Z",
+  "generated_at": "2026-05-22T19:47:54.115925866Z",
   "repo": "urunc-dev/urunc",
   "overall_health": 87.85714285714286,
   "workflows": [
@@ -10599,22 +10599,34 @@
         "success",
         "success",
         "success",
-        "success",
+        "action_required",
         "action_required"
       ],
       "last_run": {
-        "id": 26299156809,
+        "id": 26303118053,
         "name": "urunc CI",
         "status": "completed",
         "conclusion": "action_required",
-        "run_number": 1967,
-        "created_at": "2026-05-22T16:18:44Z",
-        "updated_at": "2026-05-22T16:18:44Z",
-        "run_started_at": "2026-05-22T16:18:44Z",
-        "html_url": "https://github.com/urunc-dev/urunc/actions/runs/26299156809",
+        "run_number": 1968,
+        "created_at": "2026-05-22T17:44:46Z",
+        "updated_at": "2026-05-22T17:44:46Z",
+        "run_started_at": "2026-05-22T17:44:46Z",
+        "html_url": "https://github.com/urunc-dev/urunc/actions/runs/26303118053",
         "run_attempt": 1
       },
       "recent_runs": [
+        {
+          "id": 26303118053,
+          "name": "urunc CI",
+          "status": "completed",
+          "conclusion": "action_required",
+          "run_number": 1968,
+          "created_at": "2026-05-22T17:44:46Z",
+          "updated_at": "2026-05-22T17:44:46Z",
+          "run_started_at": "2026-05-22T17:44:46Z",
+          "html_url": "https://github.com/urunc-dev/urunc/actions/runs/26303118053",
+          "run_attempt": 1
+        },
         {
           "id": 26299156809,
           "name": "urunc CI",
@@ -12626,18 +12638,6 @@
           "run_started_at": "2026-05-20T17:03:32Z",
           "html_url": "https://github.com/urunc-dev/urunc/actions/runs/26177643179",
           "run_attempt": 1
-        },
-        {
-          "id": 26167924453,
-          "name": "urunc CI",
-          "status": "completed",
-          "conclusion": "action_required",
-          "run_number": 1928,
-          "created_at": "2026-05-20T14:07:23Z",
-          "updated_at": "2026-05-20T14:07:23Z",
-          "run_started_at": "2026-05-20T14:07:23Z",
-          "html_url": "https://github.com/urunc-dev/urunc/actions/runs/26167924453",
-          "run_attempt": 1
         }
       ]
     },
@@ -12656,22 +12656,34 @@
         "success",
         "success",
         "success",
-        "success",
+        "action_required",
         "action_required"
       ],
       "last_run": {
-        "id": 26299156649,
+        "id": 26303118186,
         "name": "CodeQL",
         "status": "completed",
         "conclusion": "action_required",
-        "run_number": 1288,
-        "created_at": "2026-05-22T16:18:43Z",
-        "updated_at": "2026-05-22T16:18:43Z",
-        "run_started_at": "2026-05-22T16:18:43Z",
-        "html_url": "https://github.com/urunc-dev/urunc/actions/runs/26299156649",
+        "run_number": 1289,
+        "created_at": "2026-05-22T17:44:46Z",
+        "updated_at": "2026-05-22T17:44:46Z",
+        "run_started_at": "2026-05-22T17:44:46Z",
+        "html_url": "https://github.com/urunc-dev/urunc/actions/runs/26303118186",
         "run_attempt": 1
       },
       "recent_runs": [
+        {
+          "id": 26303118186,
+          "name": "CodeQL",
+          "status": "completed",
+          "conclusion": "action_required",
+          "run_number": 1289,
+          "created_at": "2026-05-22T17:44:46Z",
+          "updated_at": "2026-05-22T17:44:46Z",
+          "run_started_at": "2026-05-22T17:44:46Z",
+          "html_url": "https://github.com/urunc-dev/urunc/actions/runs/26303118186",
+          "run_attempt": 1
+        },
         {
           "id": 26299156649,
           "name": "CodeQL",
@@ -13433,18 +13445,6 @@
           "run_started_at": "2026-05-20T14:00:04Z",
           "html_url": "https://github.com/urunc-dev/urunc/actions/runs/26167499409",
           "run_attempt": 1
-        },
-        {
-          "id": 26167349067,
-          "name": "CodeQL",
-          "status": "completed",
-          "conclusion": "action_required",
-          "run_number": 1249,
-          "created_at": "2026-05-20T13:57:30Z",
-          "updated_at": "2026-05-20T13:57:30Z",
-          "run_started_at": "2026-05-20T13:57:30Z",
-          "html_url": "https://github.com/urunc-dev/urunc/actions/runs/26167349067",
-          "run_attempt": 1
         }
       ]
     },
@@ -13458,27 +13458,39 @@
       "failure_rate": 0,
       "avg_duration_secs": 9.15,
       "weather_history": [
+        "success",
+        "success",
+        "success",
+        "success",
+        "success",
         "action_required",
-        "success",
-        "success",
-        "success",
-        "success",
-        "success",
         "action_required"
       ],
       "last_run": {
-        "id": 26299156623,
+        "id": 26303118107,
         "name": "Dependency Review",
         "status": "completed",
         "conclusion": "action_required",
-        "run_number": 1081,
-        "created_at": "2026-05-22T16:18:43Z",
-        "updated_at": "2026-05-22T16:18:43Z",
-        "run_started_at": "2026-05-22T16:18:43Z",
-        "html_url": "https://github.com/urunc-dev/urunc/actions/runs/26299156623",
+        "run_number": 1082,
+        "created_at": "2026-05-22T17:44:46Z",
+        "updated_at": "2026-05-22T17:44:46Z",
+        "run_started_at": "2026-05-22T17:44:46Z",
+        "html_url": "https://github.com/urunc-dev/urunc/actions/runs/26303118107",
         "run_attempt": 1
       },
       "recent_runs": [
+        {
+          "id": 26303118107,
+          "name": "Dependency Review",
+          "status": "completed",
+          "conclusion": "action_required",
+          "run_number": 1082,
+          "created_at": "2026-05-22T17:44:46Z",
+          "updated_at": "2026-05-22T17:44:46Z",
+          "run_started_at": "2026-05-22T17:44:46Z",
+          "html_url": "https://github.com/urunc-dev/urunc/actions/runs/26303118107",
+          "run_attempt": 1
+        },
         {
           "id": 26299156623,
           "name": "Dependency Review",
@@ -14098,18 +14110,6 @@
             }
           ],
           "run_attempt": 2
-        },
-        {
-          "id": 26108741419,
-          "name": "Dependency Review",
-          "status": "completed",
-          "conclusion": "action_required",
-          "run_number": 1042,
-          "created_at": "2026-05-19T15:52:52Z",
-          "updated_at": "2026-05-19T15:52:52Z",
-          "run_started_at": "2026-05-19T15:52:52Z",
-          "html_url": "https://github.com/urunc-dev/urunc/actions/runs/26108741419",
-          "run_attempt": 1
         }
       ]
     },
@@ -16977,7 +16977,7 @@
       "total_runs": 40,
       "failed_runs": 0,
       "failure_rate": 0,
-      "avg_duration_secs": 58.375,
+      "avg_duration_secs": 58.275,
       "weather_history": [
         "success",
         "success",
@@ -16988,26 +16988,46 @@
         "success"
       ],
       "last_run": {
-        "id": 26289829901,
+        "id": 26302016921,
         "name": "Scorecard supply-chain security",
         "status": "completed",
         "conclusion": "success",
-        "run_number": 237,
-        "created_at": "2026-05-22T13:12:29Z",
-        "updated_at": "2026-05-22T13:13:36Z",
-        "run_started_at": "2026-05-22T13:12:29Z",
-        "html_url": "https://github.com/urunc-dev/urunc/actions/runs/26289829901",
+        "run_number": 238,
+        "created_at": "2026-05-22T17:20:35Z",
+        "updated_at": "2026-05-22T17:21:27Z",
+        "run_started_at": "2026-05-22T17:20:35Z",
+        "html_url": "https://github.com/urunc-dev/urunc/actions/runs/26302016921",
         "jobs": [
           {
             "name": "Scorecard analysis",
             "conclusion": "success",
-            "duration_sec": 61,
-            "html_url": "https://github.com/urunc-dev/urunc/actions/runs/26289829901/job/77386806020"
+            "duration_sec": 48,
+            "html_url": "https://github.com/urunc-dev/urunc/actions/runs/26302016921/job/77429306290"
           }
         ],
         "run_attempt": 1
       },
       "recent_runs": [
+        {
+          "id": 26302016921,
+          "name": "Scorecard supply-chain security",
+          "status": "completed",
+          "conclusion": "success",
+          "run_number": 238,
+          "created_at": "2026-05-22T17:20:35Z",
+          "updated_at": "2026-05-22T17:21:27Z",
+          "run_started_at": "2026-05-22T17:20:35Z",
+          "html_url": "https://github.com/urunc-dev/urunc/actions/runs/26302016921",
+          "jobs": [
+            {
+              "name": "Scorecard analysis",
+              "conclusion": "success",
+              "duration_sec": 48,
+              "html_url": "https://github.com/urunc-dev/urunc/actions/runs/26302016921/job/77429306290"
+            }
+          ],
+          "run_attempt": 1
+        },
         {
           "id": 26289829901,
           "name": "Scorecard supply-chain security",
@@ -17784,26 +17804,6 @@
               "conclusion": "success",
               "duration_sec": 96,
               "html_url": "https://github.com/urunc-dev/urunc/actions/runs/24138838499/job/70434228429"
-            }
-          ],
-          "run_attempt": 1
-        },
-        {
-          "id": 24069271516,
-          "name": "Scorecard supply-chain security",
-          "status": "completed",
-          "conclusion": "success",
-          "run_number": 198,
-          "created_at": "2026-04-07T07:15:09Z",
-          "updated_at": "2026-04-07T07:16:05Z",
-          "run_started_at": "2026-04-07T07:15:09Z",
-          "html_url": "https://github.com/urunc-dev/urunc/actions/runs/24069271516",
-          "jobs": [
-            {
-              "name": "Scorecard analysis",
-              "conclusion": "success",
-              "duration_sec": 52,
-              "html_url": "https://github.com/urunc-dev/urunc/actions/runs/24069271516/job/70202132827"
             }
           ],
           "run_attempt": 1
