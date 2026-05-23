@@ -1,7 +1,7 @@
 {
-  "generated_at": "2026-05-23T13:27:49.581493475Z",
+  "generated_at": "2026-05-23T15:04:01.720368473Z",
   "repo": "urunc-dev/urunc",
-  "overall_health": 87.97619047619048,
+  "overall_health": 88.0952380952381,
   "workflows": [
     {
       "name": "add-git-trailers",
@@ -10570,11 +10570,11 @@
       "critical": true,
       "required": false,
       "total_runs": 40,
-      "failed_runs": 3,
-      "failure_rate": 7.5,
-      "avg_duration_secs": 304.225,
+      "failed_runs": 2,
+      "failure_rate": 5,
+      "avg_duration_secs": 269.4,
       "weather_history": [
-        "success",
+        "action_required",
         "action_required",
         "action_required",
         "action_required",
@@ -10583,18 +10583,30 @@
         "action_required"
       ],
       "last_run": {
-        "id": 26331772098,
+        "id": 26334039365,
         "name": "urunc CI",
         "status": "completed",
         "conclusion": "action_required",
-        "run_number": 1972,
-        "created_at": "2026-05-23T11:43:28Z",
-        "updated_at": "2026-05-23T11:43:28Z",
-        "run_started_at": "2026-05-23T11:43:28Z",
-        "html_url": "https://github.com/urunc-dev/urunc/actions/runs/26331772098",
+        "run_number": 1973,
+        "created_at": "2026-05-23T13:32:24Z",
+        "updated_at": "2026-05-23T13:32:24Z",
+        "run_started_at": "2026-05-23T13:32:24Z",
+        "html_url": "https://github.com/urunc-dev/urunc/actions/runs/26334039365",
         "run_attempt": 1
       },
       "recent_runs": [
+        {
+          "id": 26334039365,
+          "name": "urunc CI",
+          "status": "completed",
+          "conclusion": "action_required",
+          "run_number": 1973,
+          "created_at": "2026-05-23T13:32:24Z",
+          "updated_at": "2026-05-23T13:32:24Z",
+          "run_started_at": "2026-05-23T13:32:24Z",
+          "html_url": "https://github.com/urunc-dev/urunc/actions/runs/26334039365",
+          "run_attempt": 1
+        },
         {
           "id": 26331772098,
           "name": "urunc CI",
@@ -12356,152 +12368,6 @@
           "run_started_at": "2026-05-21T03:03:17Z",
           "html_url": "https://github.com/urunc-dev/urunc/actions/runs/26202910091",
           "run_attempt": 1
-        },
-        {
-          "id": 26193954251,
-          "name": "urunc CI",
-          "status": "completed",
-          "conclusion": "failure",
-          "run_number": 1933,
-          "created_at": "2026-05-20T22:35:50Z",
-          "updated_at": "2026-05-21T07:26:17Z",
-          "run_started_at": "2026-05-21T07:03:04Z",
-          "html_url": "https://github.com/urunc-dev/urunc/actions/runs/26193954251",
-          "jobs": [
-            {
-              "name": "check-labels",
-              "conclusion": "success",
-              "duration_sec": 12,
-              "html_url": "https://github.com/urunc-dev/urunc/actions/runs/26193954251/job/77121160846"
-            },
-            {
-              "name": "ci-on-push / Build / build (arm64, ubuntu-22.04-arm)",
-              "conclusion": "success",
-              "duration_sec": 52,
-              "html_url": "https://github.com/urunc-dev/urunc/actions/runs/26193954251/job/77121196347"
-            },
-            {
-              "name": "ci-on-push / Build / build (amd64, ubuntu-22.04)",
-              "conclusion": "success",
-              "duration_sec": 61,
-              "html_url": "https://github.com/urunc-dev/urunc/actions/runs/26193954251/job/77121196349"
-            },
-            {
-              "name": "ci-on-push / Lint code / lint (amd64, ubuntu-22.04)",
-              "conclusion": "success",
-              "duration_sec": 69,
-              "html_url": "https://github.com/urunc-dev/urunc/actions/runs/26193954251/job/77121196356"
-            },
-            {
-              "name": "ci-on-push / Unit tests / unit-test (arm64, ubuntu-22.04-arm)",
-              "conclusion": "success",
-              "duration_sec": 29,
-              "html_url": "https://github.com/urunc-dev/urunc/actions/runs/26193954251/job/77121196358"
-            },
-            {
-              "name": "ci-on-push / Lint Files \u0026 commits / Check License Headers (amd64, ubuntu-22.04)",
-              "conclusion": "success",
-              "duration_sec": 42,
-              "html_url": "https://github.com/urunc-dev/urunc/actions/runs/26193954251/job/77121196370"
-            },
-            {
-              "name": "ci-on-push / Lint Files \u0026 commits / Lint Commit Messages (amd64, ubuntu-22.04)",
-              "conclusion": "success",
-              "duration_sec": 26,
-              "html_url": "https://github.com/urunc-dev/urunc/actions/runs/26193954251/job/77121196372"
-            },
-            {
-              "name": "ci-on-push / Lint Files \u0026 commits / Spell Check Repo (amd64, ubuntu-22.04)",
-              "conclusion": "failure",
-              "duration_sec": 23,
-              "html_url": "https://github.com/urunc-dev/urunc/actions/runs/26193954251/job/77121196378"
-            },
-            {
-              "name": "ci-on-push / Unit tests / unit-test (amd64, ubuntu-22.04)",
-              "conclusion": "success",
-              "duration_sec": 38,
-              "html_url": "https://github.com/urunc-dev/urunc/actions/runs/26193954251/job/77121196512"
-            },
-            {
-              "name": "ci-on-push / Kubernetes test / Kubernetes test (amd64, ubuntu-22.04)",
-              "conclusion": "success",
-              "duration_sec": 321,
-              "html_url": "https://github.com/urunc-dev/urunc/actions/runs/26193954251/job/77121342826"
-            },
-            {
-              "name": "ci-on-push / Kubernetes test / Kubernetes test (arm64, ubuntu-22.04-arm)",
-              "conclusion": "success",
-              "duration_sec": 300,
-              "html_url": "https://github.com/urunc-dev/urunc/actions/runs/26193954251/job/77121342832"
-            },
-            {
-              "name": "ci-on-push / E2E test / VM test (amd64, test_nerdctl)",
-              "conclusion": "failure",
-              "duration_sec": 1299,
-              "html_url": "https://github.com/urunc-dev/urunc/actions/runs/26193954251/job/77121342908"
-            },
-            {
-              "name": "ci-on-push / E2E test / VM test (amd64, test_crictl)",
-              "conclusion": "success",
-              "duration_sec": 973,
-              "html_url": "https://github.com/urunc-dev/urunc/actions/runs/26193954251/job/77121342918"
-            },
-            {
-              "name": "ci-on-push / E2E test / VM test (amd64, test_ctr)",
-              "conclusion": "success",
-              "duration_sec": 1171,
-              "html_url": "https://github.com/urunc-dev/urunc/actions/runs/26193954251/job/77121342920"
-            },
-            {
-              "name": "ci-on-push / E2E test / VM test (amd64, test_docker)",
-              "conclusion": "success",
-              "duration_sec": 453,
-              "html_url": "https://github.com/urunc-dev/urunc/actions/runs/26193954251/job/77121342923"
-            },
-            {
-              "name": "ci-on-push / E2E test / VM test (arm64, test_ctr)",
-              "conclusion": "cancelled",
-              "duration_sec": 1309,
-              "html_url": "https://github.com/urunc-dev/urunc/actions/runs/26193954251/job/77121342956"
-            },
-            {
-              "name": "ci-on-push / E2E test / VM test (arm64, test_docker)",
-              "conclusion": "success",
-              "duration_sec": 373,
-              "html_url": "https://github.com/urunc-dev/urunc/actions/runs/26193954251/job/77121342969"
-            },
-            {
-              "name": "ci-on-push / E2E test / VM test (arm64, test_crictl)",
-              "conclusion": "success",
-              "duration_sec": 612,
-              "html_url": "https://github.com/urunc-dev/urunc/actions/runs/26193954251/job/77121342970"
-            },
-            {
-              "name": "ci-on-push / E2E test / VM test (arm64, test_nerdctl)",
-              "conclusion": "cancelled",
-              "duration_sec": 1307,
-              "html_url": "https://github.com/urunc-dev/urunc/actions/runs/26193954251/job/77121343023"
-            }
-          ],
-          "failed_jobs": [
-            {
-              "id": 77121196378,
-              "name": "ci-on-push / Lint Files \u0026 commits / Spell Check Repo (amd64, ubuntu-22.04)",
-              "conclusion": "failure",
-              "html_url": "https://github.com/urunc-dev/urunc/actions/runs/26193954251/job/77121196378",
-              "log_snippet": "[Build Failure] — 1 signal(s) found\n────────────────────────────────────────────────\n-\u003e Build Failure\n  ##[error]Process completed with exit code 1.",
-              "raw_log": "2026-05-21T07:03:41.3593838Z\nadded 113 packages in 5s\n2026-05-21T07:03:41.3601525Z\n15 packages are looking for funding\nrun `npm fund` for details\n##[group]Run cspell --config .github/linters/.cspell.json\ncspell --config .github/linters/.cspell.json\nshell: /usr/bin/bash -e {0}\n##[endgroup]\n1/154 .github/linters/actionlint.yml 769.66ms\n2/154 .github/linters/licenserc.yml 8.93ms\n3/154 .github/linters/package.json 116.90ms\n4/154 CHANGELOG.md 81.13ms\n5/154 cmd/containerd-shim-urunc-v2/main.go 60.81ms\n6/154 cmd/urunc/create.go 27.49ms\n7/154 cmd/urunc/delete.go 5.35ms\n8/154 cmd/urunc/kill.go 5.65ms\n9/154 cmd/urunc/log_forward.go 7.49ms\n10/154 cmd/urunc/main.go 11.37ms\n11/154 cmd/urunc/ps.go 5.72ms\n12/154 cmd/urunc/run.go 5.01ms\n13/154 cmd/urunc/start.go 6.93ms\n14/154 cmd/urunc/utils.go 9.25ms\n15/154 CODE_OF_CONDUCT.md 1.58ms\n16/154 CONTRIBUTING.md 1.70ms\n17/154 deployment/urunc-deploy/config.toml 2.36ms\n18/154 deployment/urunc-deploy/Dockerfile 7.94ms\n19/154 deployment/urunc-deploy/runtimeclasses/runtimeclass.yaml 1.84ms\n20/154 deployment/urunc-deploy/scripts/install.sh 16.02ms\n21/154 deployment/urunc-deploy/urunc-cleanup/base/kustomization.yaml 2.05ms\n22/154 deployment/urunc-deploy/urunc-cleanup/base/urunc-cleanup.yaml 2.81ms\n23/154 deployment/urunc-deploy/urunc-cleanup/overlays/k3s/kustomization.yaml 1.90ms\n24/154 deployment/urunc-deploy/urunc-cleanup/overlays/k3s/mount_k3s_conf.yaml 1.90ms\n25/154 deployment/urunc-deploy/urunc-deploy/base/kustomization.yaml 1.63ms\n26/154 deployment/urunc-deploy/urunc-deploy/base/urunc-deploy.yaml 2.51ms\n27/154 deployment/urunc-deploy/urunc-deploy/overlays/k3s/kustomization.yaml 1.68ms\n28/154 deployment/urunc-deploy/urunc-deploy/overlays/k3s/mount_k3s_conf.yaml 1.71ms\n29/154 deployment/urunc-deploy/urunc-rbac/kustomization.yaml 1.89ms\n30/154 deployment/urunc-deploy/urunc-rbac/urunc-rbac.yaml 3.14ms\n31/154 docs/assets/javascripts/console-copy.js 36.34ms\n32/154 docs/assets/stylesheets/theme.css 27.59ms\n33/154 docs/CNAME 1.79ms\n34/154 docs/configuration.md 6.27ms\n35/154 docs/design/index.md 4.57ms\n36/154 docs/design/seccomp.md 3.61ms\n37/154 docs/developer-guide/Code-of-Conduct.md 1.21ms\n38/154 docs/developer-guide/contribute.md 10.40ms\n39/154 docs/developer-guide/debugging.md 3.59ms\n40/154 docs/developer-guide/development.md 3.34ms\n41/154 docs/developer-guide/governance.md 7.15ms\n42/154 docs/developer-guide/index.md 1.91ms\n43/154 docs/developer-guide/llm-policy.md 6.48ms\n44/154 docs/developer-guide/maintainers.md 2.40ms\n45/154 docs/developer-guide/security.md 3.27ms\n46/154 docs/developer-guide/timestamps.md 5.29ms\n47/154 docs/hooks/copyright.py 193.52ms\n48/154 docs/hypervisor-support.md 20.84ms\n49/154 docs/index.md 17.84ms\n50/154 docs/installation.md 9.98ms\n51/154 docs/overrides/main.html 14.49ms\n52/154 docs/overrides/partials/breadcrumb.html 2.59ms\n53/154 docs/overrides/partials/copyright.html 2.17ms\n54/154 docs/overrides/partials/logo.html 1.50ms\n55/154 docs/package/index.md 8.47ms\n56/154 docs/package/pre-built.md 3.22ms\n57/154 docs/package/reuse.md 3.25ms\n58/154 docs/package/rootfs.md 5.39ms\n59/154 docs/quickstart.md 4.43ms\n60/154 docs/Sample-images.md 2.89ms\n61/154 docs/tutorials/eks-tutorial.md 10.37ms\n62/154 docs/tutorials/existing-container-linux.md 11.15ms\n63/154 docs/tutorials/How-to-urunc-on-k8s.md 4.16ms\n64/154 docs/tutorials/index.md 2.02ms\n65/154 docs/tutorials/knative.md 4.10ms\n66/154 docs/tutorials/Non-root-monitor-execution.md 3.11ms\n67/154 docs/tutorials/Running-urunc-with-kind.md 2.89ms\n68/154 docs/tutorials/Running-vaccel-with-urunc.md 2.13ms\n69/154 docs/unikernel-support.md 6.11ms\n70/154 docs/variables/versions.yml 2.26ms\n71/154 GOVERNANCE.md 1.81ms\n72/154 internal/constants/constants.go 4.49ms\n73/154 internal/constants/network_constants.go 2.21ms\n74/154 internal/metrics/metrics_test.go 3.86ms\n75/154 internal/metrics/metrics.go 5.75ms\n76/154 internal/metrics/schema_test.go 3.04ms\n77/154 internal/metrics/schema.go 4.51ms\n78/154 LICENSE 6.93ms\n79/154 MAINTAINERS.md 1.16ms\n80/154 Makefile 18.85ms\n81/154 mkdocs.yml 6.78ms\n82/154 netlify.toml 2.24ms\n83/154 NOTICE 1.70ms\n84/154 pkg/containerd-shim/containerd/annotations.go 8.34ms\n85/154 pkg/containerd-shim/containerd/session.go 7.44ms\n86/154 pkg/containerd-shim/task_plugin.go 2.45ms\n87/154 pkg/containerd-shim/task_service.go 4.41ms\n88/154 pkg/network/network_dynamic.go 5.54ms\n89/154 pkg/network/network_static.go 6.81ms\n90/154 pkg/network/network_test.go 2.07ms\n91/154 pkg/network/network.go 10.42ms\n92/154 pkg/unikontainers/block_test.go 2.93ms\n93/154 pkg/unikontainers/block.go 11.76ms\n94/154 pkg/unikontainers/config_test.go 9.39ms\n95/154 pkg/unikontainers/config.go 7.95ms X\npkg/unikontainers/config.go:82:81 - Unknown word (endcoded) fix: (encoded)\n96/154 pkg/unikontainers/hypervisors/cloud_hypervisor.go 4.77ms\n97/154 pkg/unikontainers/hypervisors/firecracker.go 9.59ms\n98/154 pkg/unikontainers/hypervisors/hedge.go 2.53ms\n99/154 pkg/unikontainers/hypervisors/hvt.go 8.66ms\n100/154 pkg/unikontainers/hypervisors/qemu.go 5.96ms\n101/154 pkg/unikontainers/hypervisors/spt.go 3.43ms\n102/154 pkg/unikontainers/hypervisors/utils_test.go 3.47ms\n103/154 pkg/unikontainers/hypervisors/utils.go 4.61ms\n104/154 pkg/unikontainers/hypervisors/vmm_test.go 4.19ms\n105/154 pkg/unikontainers/hypervisors/vmm.go 5.50ms\n106/154 pkg/unikontainers/initrd_rootfs.go 4.54ms\n107/154 pkg/unikontainers/initrd/initrd.go 5.67ms\n108/154 pkg/unikontainers/ipc_message.go 8.42ms\n109/154 pkg/unikontainers/ipc_test.go 5.35ms\n110/154 pkg/unikontainers/ipc.go 4.95ms\n111/154 pkg/unikontainers/mount.go 10.88ms\n112/154 pkg/unikontainers/rootfs_test.go 4.32ms\n113/154 pkg/unikontainers/rootfs.go 8.74ms\n114/154 pkg/unikontainers/shared_fs.go 4.02ms\n115/154 pkg/unikontainers/types/types.go 6.70ms\n116/154 pkg/unikontainers/unikernels/hermit_rs.go 3.01ms\n117/154 pkg/unikontainers/unikernels/linux.go 6.92ms\n118/154 pkg/unikontainers/unikernels/mewz.go 2.87ms\n119/154 pkg/unikontainers/unikernels/mirage.go 3.43ms\n120/154 pkg/unikontainers/unikernels/rumprun.go 4.99ms\n121/154 pkg/unikontainers/unikernels/unikernel.go 2.49ms\n122/154 pkg/unikontainers/unikernels/unikraft.go 5.15ms\n123/154 pkg/unikontainers/unikernels/utils.go 3.08ms\n124/154 pkg/unikontainers/unikontainers.go 29.53ms\n125/154 pkg/unikontainers/urunc_config_test.go 8.22ms\n126/154 pkg/unikontainers/urunc_config.go 4.55ms\n127/154 pkg/unikontainers/utils_test.go 4.84ms\n128/154 pkg/unikontainers/utils.go 8.98ms\n129/154 pkg/unikontainers/vaccel_test.go 3.02ms\n130/154 pkg/unikontainers/vaccel.go 3.46ms\n131/154 README.md 6.14ms\n132/154 requirements.txt 1.77ms\n133/154 script/dm_create.sh 7.83ms\n134/154 script/dm_reload.service 2.34ms\n135/154 script/dm_reload.sh 3.48ms\n136/154 script/performance/__modules__.py 7.16ms\n137/154 script/performance/measure_single.py 2.57ms\n138/154 script/performance/measure_to_json.py 3.40ms\n139/154 script/performance/measure.py 2.85ms\n140/154 SECURITY.md 1.24ms\n141/154 tests/e2e/common.go 7.85ms\n142/154 tests/e2e/crictl_test.go 5.79ms\n143/154 tests/e2e/crictl.go 11.10ms\n144/154 tests/e2e/ctr_test.go 2.57ms\n145/154 tests/e2e/ctr.go 4.02ms\n146/154 tests/e2e/docker_test.go 2.63ms\n147/154 tests/e2e/docker.go 3.40ms\n148/154 tests/e2e/nerdctl_test.go 2.85ms\n149/154 tests/e2e/nerdctl.go 3.29ms\n150/154 tests/e2e/suite_test.go 4.46ms\n151/154 tests/e2e/test_cases.go 9.62ms\n152/154 tests/e2e/test_functions.go 8.06ms\n153/154 tests/e2e/utils.go 5.06ms\n154/154 VERSION 0.82ms\nCSpell: Files checked: 154, Issues found: 1 in 1 file.\n##[error]Process completed with exit code 1."
-            },
-            {
-              "id": 77121342908,
-              "name": "ci-on-push / E2E test / VM test (amd64, test_nerdctl)",
-              "conclusion": "failure",
-              "html_url": "https://github.com/urunc-dev/urunc/actions/runs/26193954251/job/77121342908",
-              "log_snippet": "[Crash / Timeout] — 4 signal(s) found\n────────────────────────────────────────────────\n-\u003e Crash / Timeout\n  panic: test timed out after 20m0s\n-\u003e Test Failure\n  FAIL\tgithub.com/urunc-dev/urunc/tests/e2e\t1200.015s\n-\u003e Build Failure\n  make: *** [Makefile:270: test_nerdctl] Error 1\n  ##[error]Process completed with exit code 2.",
-              "raw_log": "go mod verify\nall modules verified\n##[group]Run # Set up Go environment properly\n# Set up Go environment properly\nexport GOROOT=$(go env GOROOT)\nexport PATH=\"$GOROOT/bin:$PATH\"\ngo version\ngo env GOROOT\nif [ \"amd64\" = \"arm64\" ]; then\nsudo -E env \"PATH=$PATH\" \"GOROOT=$GOROOT\" make test_nerdctl_Spt\nelse\nsudo -E env \"PATH=$PATH\" \"GOROOT=$GOROOT\" make test_nerdctl\nfi\nshell: /usr/bin/bash -e {0}\nenv:\nGOTOOLCHAIN: local\n##[endgroup]\ngo version go1.25.4 linux/amd64\nTesting nerdctl\n=== RUN   TestE2E\nRunning Suite: E2E Suite - /home/runner/work/urunc/urunc/tests/e2e\n==================================================================\nRandom Seed: 1779347162\n2026-05-21T07:06:02.5906910Z\nWill run 27 of 72 specs\nSSSSSSSSSSSSSSS\n------------------------------\nNerdctl foreground containers unikernel containers Hvt-rumprun-capture-hello\n/home/runner/work/urunc/urunc/tests/e2e/suite_test.go:56\n2026/05/21 07:06:02 Pulling image: harbor.nbfc.io/nubificus/urunc/nginx-firecracker-unikraft-initrd:latest\n2026/05/21 07:06:07 Pulling image: harbor.nbfc.io/nubificus/urunc/redis-hvt-rumprun-block:latest\n2026/05/21 07:06:23 Pulling image: harbor.nbfc.io/nubificus/urunc/net-qemu-mirage:latest\n2026/05/21 07:06:31 Pulling image: harbor.nbfc.io/nubificus/urunc/nginx-qemu-linux-raw:latest\n2026/05/21 07:07:33 Pulling image: harbor.nbfc.io/nubificus/urunc/hello-server-qemu-mewz:latest\n2026/05/21 07:07:43 Pulling image: harbor.nbfc.io/nubificus/urunc/nginx-cloud-hypervisor-linux-raw:latest\n2026/05/21 07:12:49 Pulling image: harbor.nbfc.io/nubificus/urunc/hello-hvt-rumprun:latest\n2026/05/21 07:13:15 Pulling image: harbor.nbfc.io/nubificus/urunc/redis-hvt-rumprun-raw:latest\n2026/05/21 07:13:18 Pulling image: harbor.nbfc.io/nubificus/urunc/net-spt-mirage:latest\n2026/05/21 07:13:26 Pulling image: harbor.nbfc.io/nubificus/urunc/nginx-firecracker-linux-raw:latest\n2026/05/21 07:13:37 Pulling image: harbor.nbfc.io/nubificus/urunc/busybox-qemu-linux-raw:latest\n2026/05/21 07:13:54 Pulling image: harbor.nbfc.io/nubificus/urunc/busybox-cloud-hypervisor-linux-raw:latest\n2026/05/21 07:23:32 Pulling image: harbor.nbfc.io/nubificus/urunc/net-hvt-mirage:latest\n2026/05/21 07:23:45 Pulling image: harbor.nbfc.io/nubificus/urunc/redis-spt-rumprun-raw:latest\n2026/05/21 07:24:35 Pulling image: harbor.nbfc.io/nubificus/urunc/redis-qemu-unikraft-initrd:latest\n2026/05/21 07:24:46 Pulling image: harbor.nbfc.io/nubificus/urunc/busybox-firecracker-linux-raw:latest\npanic: test timed out after 20m0s\nrunning tests:\nTestE2E (20m0s)\n2026-05-21T07:26:02.5908344Z\ngoroutine 29 [running]:\ntesting.(*M).startAlarm.func1()\ncreated by time.goFunc\n2026-05-21T07:26:02.5911031Z\ngoroutine 1 [chan receive, 20 minutes]:\ntesting.(*T).Run(0xc0000ba700, {0xdb2606?, 0xc00035bb30?}, 0xdff408)\ntesting.runTests.func1(0xc0000ba700)\ntesting.tRunner(0xc0000ba700, 0xc00035bc70)\ntesting.runTests(0xc000012e28, {0x153cfd0, 0x1, 0x1}, {0xf?, 0xc000237940?, 0x1578ba0?})\ntesting.(*M).Run(0xc000339720)\nmain.main()\n_testmain.go:45 +0x9b\n2026-05-21T07:26:02.5927250Z\ngoroutine 8 [select, 20 minutes]:\ngithub.com/onsi/ginkgo/v2/internal.(*Suite).runNode(_, {0x3e, 0x80, {0x0, 0x0}, 0xc0003bf730, {{0x10772d6, 0x37}, 0x19, {0x0, ...}, ...}, ...}, ...)\n/home/runner/work/urunc/urunc/vendor/github.com/onsi/ginkgo/v2/internal/suite.go:969 +0xfa5\ngithub.com/onsi/ginkgo/v2/internal.(*group).attemptSpec(0xc0003eb720, 0x1, {{0xc000427008?, 0xc00057a0b0?, 0x3?}, 0x0?})\n/home/runner/work/urunc/urunc/vendor/github.com/onsi/ginkgo/v2/internal/group.go:234 +0xd47\ngithub.com/onsi/ginkgo/v2/internal.(*group).run(0xc0003eb720, {0xc000560708?, 0xc0002f9a90?, 0x1?})\n/home/runner/work/urunc/urunc/vendor/github.com/onsi/ginkgo/v2/internal/group.go:384 +0x9a5\ngithub.com/onsi/ginkgo/v2/internal.(*Suite).runSpecs(0xc000392008, {0xdb4ee0, 0x9}, {0x159c3e0, 0x0, 0x0}, {0x159c3e0, 0x0, 0x0}, 0xc0003a2240, ...)\n/home/runner/work/urunc/urunc/vendor/github.com/onsi/ginkgo/v2/internal/suite.go:519 +0xadb\ngithub.com/onsi/ginkgo/v2/internal.(*Suite).Run(_, {_, _}, {_, _, _}, {_, _, _}, 0xc0003a2240, ...)\n/home/runner/work/urunc/urunc/vendor/github.com/onsi/ginkgo/v2/internal/suite.go:136 +0x4b1\ngithub.com/onsi/ginkgo/v2.RunSpecs({0xef3b20, 0xc0000ba8c0}, {0xdb4ee0, 0x9}, {0x0, 0x0, 0x0})\n/home/runner/work/urunc/urunc/vendor/github.com/onsi/ginkgo/v2/core_dsl.go:315 +0x905\ngithub.com/urunc-dev/urunc/tests/e2e.TestE2E(0xc0000ba8c0)\n/home/runner/work/urunc/urunc/tests/e2e/suite_test.go:37 +0x4f\ntesting.tRunner(0xc0000ba8c0, 0xdff408)\ncreated by testing.(*T).Run in goroutine 1\n2026-05-21T07:26:02.5944993Z\ngoroutine 18 [syscall, 20 minutes]:\nos/signal.signal_recv()\nos/signal.loop()\ncreated by os/signal.Notify.func1.1 in goroutine 8\n2026-05-21T07:26:02.5949508Z\ngoroutine 34 [select, 20 minutes]:\ngithub.com/onsi/ginkgo/v2/internal/interrupt_handler.(*InterruptHandler).registerForInterrupts.func2(0x0?)\n/home/runner/work/urunc/urunc/vendor/github.com/onsi/ginkgo/v2/internal/interrupt_handler/interrupt_handler.go:131 +0x7d\ncreated by github.com/onsi/ginkgo/v2/internal/interrupt_handler.(*InterruptHandler).registerForInterrupts in goroutine 8\n/home/runner/work/urunc/urunc/vendor/github.com/onsi/ginkgo/v2/internal/interrupt_handler/interrupt_handler.go:128 +0x165\n2026-05-21T07:26:02.5955620Z\ngoroutine 39 [select, 20 minutes]:\ngithub.com/onsi/ginkgo/v2/internal.RegisterForProgressSignal.func1()\n/home/runner/work/urunc/urunc/vendor/github.com/onsi/ginkgo/v2/internal/progress_report.go:32 +0x8b\ncreated by github.com/onsi/ginkgo/v2/internal.RegisterForProgressSignal in goroutine 8\n/home/runner/work/urunc/urunc/vendor/github.com/onsi/ginkgo/v2/internal/progress_report.go:30 +0xd9\n2026-05-21T07:26:02.5959896Z\ngoroutine 69 [IO wait, 1 minutes]:\ninternal/poll.runtime_pollWait(0x7f34edc38000, 0x72)\ninternal/poll.(*pollDesc).wait(0xc00007f1a0?, 0xc00052ea00?, 0x1)\ninternal/poll.(*pollDesc).waitRead(...)\ninternal/poll.(*FD).Read(0xc00007f1a0, {0xc00052ea00, 0x200, 0x200})\nos.(*File).read(...)\nos.(*File).Read(0xc000070168, {0xc00052ea00?, 0x41b93f?, 0xc99720?})\nbytes.(*Buffer).ReadFrom(0xc00056c060, {0xef3960, 0xc000566000})\nio.copyBuffer({0xef3b40, 0xc00056c060}, {0xef3960, 0xc000566000}, {0x0, 0x0, 0x0})\nio.Copy(...)\nos.genericWriteTo(0xc000070168?, {0xef3b40, 0xc00056c060})\nos.(*File).WriteTo(0xc000070168, {0xef3b40, 0xc00056c060})\nio.copyBuffer({0xef3b40, 0xc00056c060}, {0xef39e0, 0xc000070168}, {0x0, 0x0, 0x0})\nio.Copy(...)\nos/exec.(*Cmd).writerDescriptor.func1()\nos/exec.(*Cmd).Start.func2(0x0?)\ncreated by os/exec.(*Cmd).Start in goroutine 55\n2026-05-21T07:26:02.5980319Z\ngoroutine 55 [syscall, 1 minutes]:\nsyscall.Syscall6(0xf7, 0x3, 0xd, 0xc000417700, 0x4, 0xc0001e6000, 0x0)\ninternal/syscall/unix.Waitid(0x598835?, 0xc0001c0198?, 0x1?, 0xc0003c60c0?, 0x4?)\nos.(*Process).pidfdWait.func1(...)\nos.ignoringEINTR(...)\nos.(*Process).pidfdWait(0xc0003c61c0)\nos.(*Process).wait(0x598b60?)\nos.(*Process).Wait(...)\nos/exec.(*Cmd).Wait(0xc000322000)\nos/exec.(*Cmd).Run(0xc000322000)\nos/exec.(*Cmd).Output(0xc000322000)\ngithub.com/urunc-dev/urunc/tests/e2e.commonCmdExec({0xc000046240, 0x56})\n/home/runner/work/urunc/urunc/tests/e2e/common.go:115 +0xaf\ngithub.com/urunc-dev/urunc/tests/e2e.commonPull({0xdb2699?, 0x0?}, {0xde845e?, 0xc27bcaafa64c0991?})\n/home/runner/work/urunc/urunc/tests/e2e/common.go:128 +0x45\ngithub.com/urunc-dev/urunc/tests/e2e.pullImageForTest({0xdb6d5c?, 0xc000417a20?}, {0xde845e?, 0x159e000?})\n/home/runner/work/urunc/urunc/tests/e2e/utils.go:91 +0x148\ngithub.com/urunc-dev/urunc/tests/e2e.pullImageWithRetry({0xdb6d5c, 0xb}, {0xde845e, 0x43})\n/home/runner/work/urunc/urunc/tests/e2e/utils.go:70 +0xf4\ngithub.com/urunc-dev/urunc/tests/e2e.pullAllImages({0xdb6d5c, 0xb}, {0xc0002ae480?, 0x46?, 0x0?})\n/home/runner/work/urunc/urunc/tests/e2e/utils.go:51 +0x147\ngithub.com/urunc-dev/urunc/tests/e2e.init.func4.1()\n/home/runner/work/urunc/urunc/tests/e2e/nerdctl_test.go:28 +0x29d\ngithub.com/onsi/ginkgo/v2/internal.extractBodyFunction.func3({0xf01d10?, 0xc00056d200?})\n/home/runner/work/urunc/urunc/vendor/github.com/onsi/ginkgo/v2/internal/node.go:585 +0x13\ngithub.com/onsi/ginkgo/v2/internal.(*Suite).runNode.func3()\n/home/runner/work/urunc/urunc/vendor/github.com/onsi/ginkgo/v2/internal/suite.go:946 +0x393\ncreated by github.com/onsi/ginkgo/v2/internal.(*Suite).runNode in goroutine 8\n/home/runner/work/urunc/urunc/vendor/github.com/onsi/ginkgo/v2/internal/suite.go:911 +0xd90\n2026-05-21T07:26:02.6007193Z\ngoroutine 68 [IO wait]:\ninternal/poll.runtime_pollWait(0x7f34edc37e00, 0x72)\ninternal/poll.(*pollDesc).wait(0xc00007efc0?, 0xc0006c42f4?, 0x1)\ninternal/poll.(*pollDesc).waitRead(...)\ninternal/poll.(*FD).Read(0xc00007efc0, {0xc0006c42f4, 0x5bd0c, 0x5bd0c})\nos.(*File).read(...)\nos.(*File).Read(0xc000070058, {0xc0006c42f4?, 0x41b93f?, 0xc99720?})\nbytes.(*Buffer).ReadFrom(0xc00056c840, {0xef3960, 0xc0000f4008})\nio.copyBuffer({0xef3b40, 0xc00056c840}, {0xef3960, 0xc0000f4008}, {0x0, 0x0, 0x0})\nio.Copy(...)\nos.genericWriteTo(0xc000070058?, {0xef3b40, 0xc00056c840})\nos.(*File).WriteTo(0xc000070058, {0xef3b40, 0xc00056c840})\nio.copyBuffer({0xef3b40, 0xc00056c840}, {0xef39e0, 0xc000070058}, {0x0, 0x0, 0x0})\nio.Copy(...)\nos/exec.(*Cmd).writerDescriptor.func1()\nos/exec.(*Cmd).Start.func2(0x0?)\ncreated by os/exec.(*Cmd).Start in goroutine 55\nFAIL\tgithub.com/urunc-dev/urunc/tests/e2e\t1200.015s\nFAIL\nmake: *** [Makefile:270: test_nerdctl] Error 1\n##[error]Process completed with exit code 2."
-            }
-          ],
-          "run_attempt": 2
         }
       ]
     },
@@ -12515,7 +12381,7 @@
       "failure_rate": 0,
       "avg_duration_secs": 65.3,
       "weather_history": [
-        "success",
+        "action_required",
         "action_required",
         "action_required",
         "action_required",
@@ -12524,18 +12390,30 @@
         "action_required"
       ],
       "last_run": {
-        "id": 26331772022,
+        "id": 26334039298,
         "name": "CodeQL",
         "status": "completed",
         "conclusion": "action_required",
-        "run_number": 1293,
-        "created_at": "2026-05-23T11:43:28Z",
-        "updated_at": "2026-05-23T11:43:28Z",
-        "run_started_at": "2026-05-23T11:43:28Z",
-        "html_url": "https://github.com/urunc-dev/urunc/actions/runs/26331772022",
+        "run_number": 1294,
+        "created_at": "2026-05-23T13:32:24Z",
+        "updated_at": "2026-05-23T13:32:24Z",
+        "run_started_at": "2026-05-23T13:32:24Z",
+        "html_url": "https://github.com/urunc-dev/urunc/actions/runs/26334039298",
         "run_attempt": 1
       },
       "recent_runs": [
+        {
+          "id": 26334039298,
+          "name": "CodeQL",
+          "status": "completed",
+          "conclusion": "action_required",
+          "run_number": 1294,
+          "created_at": "2026-05-23T13:32:24Z",
+          "updated_at": "2026-05-23T13:32:24Z",
+          "run_started_at": "2026-05-23T13:32:24Z",
+          "html_url": "https://github.com/urunc-dev/urunc/actions/runs/26334039298",
+          "run_attempt": 1
+        },
         {
           "id": 26331772022,
           "name": "CodeQL",
@@ -13297,18 +13175,6 @@
             }
           ],
           "run_attempt": 2
-        },
-        {
-          "id": 26180816258,
-          "name": "CodeQL",
-          "status": "completed",
-          "conclusion": "action_required",
-          "run_number": 1254,
-          "created_at": "2026-05-20T18:05:45Z",
-          "updated_at": "2026-05-20T18:05:45Z",
-          "run_started_at": "2026-05-20T18:05:45Z",
-          "html_url": "https://github.com/urunc-dev/urunc/actions/runs/26180816258",
-          "run_attempt": 1
         }
       ]
     },
@@ -13322,7 +13188,7 @@
       "failure_rate": 0,
       "avg_duration_secs": 7.375,
       "weather_history": [
-        "success",
+        "action_required",
         "action_required",
         "action_required",
         "action_required",
@@ -13331,18 +13197,30 @@
         "action_required"
       ],
       "last_run": {
-        "id": 26331772039,
+        "id": 26334039297,
         "name": "Dependency Review",
         "status": "completed",
         "conclusion": "action_required",
-        "run_number": 1086,
-        "created_at": "2026-05-23T11:43:28Z",
-        "updated_at": "2026-05-23T11:43:28Z",
-        "run_started_at": "2026-05-23T11:43:28Z",
-        "html_url": "https://github.com/urunc-dev/urunc/actions/runs/26331772039",
+        "run_number": 1087,
+        "created_at": "2026-05-23T13:32:24Z",
+        "updated_at": "2026-05-23T13:32:24Z",
+        "run_started_at": "2026-05-23T13:32:24Z",
+        "html_url": "https://github.com/urunc-dev/urunc/actions/runs/26334039297",
         "run_attempt": 1
       },
       "recent_runs": [
+        {
+          "id": 26334039297,
+          "name": "Dependency Review",
+          "status": "completed",
+          "conclusion": "action_required",
+          "run_number": 1087,
+          "created_at": "2026-05-23T13:32:24Z",
+          "updated_at": "2026-05-23T13:32:24Z",
+          "run_started_at": "2026-05-23T13:32:24Z",
+          "html_url": "https://github.com/urunc-dev/urunc/actions/runs/26334039297",
+          "run_attempt": 1
+        },
         {
           "id": 26331772039,
           "name": "Dependency Review",
@@ -13937,18 +13815,6 @@
           "updated_at": "2026-05-20T14:00:05Z",
           "run_started_at": "2026-05-20T14:00:05Z",
           "html_url": "https://github.com/urunc-dev/urunc/actions/runs/26167499912",
-          "run_attempt": 1
-        },
-        {
-          "id": 26167348892,
-          "name": "Dependency Review",
-          "status": "completed",
-          "conclusion": "action_required",
-          "run_number": 1047,
-          "created_at": "2026-05-20T13:57:30Z",
-          "updated_at": "2026-05-20T13:57:30Z",
-          "run_started_at": "2026-05-20T13:57:30Z",
-          "html_url": "https://github.com/urunc-dev/urunc/actions/runs/26167348892",
           "run_attempt": 1
         }
       ]
