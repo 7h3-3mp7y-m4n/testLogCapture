@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-05-24T20:09:03.879596686Z",
+  "generated_at": "2026-05-24T22:00:04.104223075Z",
   "repo": "urunc-dev/urunc",
   "overall_health": 88.33333333333333,
   "workflows": [
@@ -10563,18 +10563,30 @@
         "action_required"
       ],
       "last_run": {
-        "id": 26364720929,
+        "id": 26372796204,
         "name": "urunc CI",
         "status": "completed",
         "conclusion": "action_required",
-        "run_number": 1981,
-        "created_at": "2026-05-24T15:04:50Z",
-        "updated_at": "2026-05-24T15:04:50Z",
-        "run_started_at": "2026-05-24T15:04:50Z",
-        "html_url": "https://github.com/urunc-dev/urunc/actions/runs/26364720929",
+        "run_number": 1982,
+        "created_at": "2026-05-24T21:07:39Z",
+        "updated_at": "2026-05-24T21:07:39Z",
+        "run_started_at": "2026-05-24T21:07:39Z",
+        "html_url": "https://github.com/urunc-dev/urunc/actions/runs/26372796204",
         "run_attempt": 1
       },
       "recent_runs": [
+        {
+          "id": 26372796204,
+          "name": "urunc CI",
+          "status": "completed",
+          "conclusion": "action_required",
+          "run_number": 1982,
+          "created_at": "2026-05-24T21:07:39Z",
+          "updated_at": "2026-05-24T21:07:39Z",
+          "run_started_at": "2026-05-24T21:07:39Z",
+          "html_url": "https://github.com/urunc-dev/urunc/actions/runs/26372796204",
+          "run_attempt": 1
+        },
         {
           "id": 26364720929,
           "name": "urunc CI",
@@ -12192,18 +12204,6 @@
           "run_started_at": "2026-05-21T09:31:06Z",
           "html_url": "https://github.com/urunc-dev/urunc/actions/runs/26217750526",
           "run_attempt": 1
-        },
-        {
-          "id": 26216201829,
-          "name": "urunc CI",
-          "status": "completed",
-          "conclusion": "action_required",
-          "run_number": 1942,
-          "created_at": "2026-05-21T08:59:29Z",
-          "updated_at": "2026-05-21T08:59:29Z",
-          "run_started_at": "2026-05-21T08:59:29Z",
-          "html_url": "https://github.com/urunc-dev/urunc/actions/runs/26216201829",
-          "run_attempt": 1
         }
       ]
     },
@@ -12226,18 +12226,30 @@
         "action_required"
       ],
       "last_run": {
-        "id": 26364720828,
+        "id": 26372796162,
         "name": "CodeQL",
         "status": "completed",
         "conclusion": "action_required",
-        "run_number": 1302,
-        "created_at": "2026-05-24T15:04:50Z",
-        "updated_at": "2026-05-24T15:04:50Z",
-        "run_started_at": "2026-05-24T15:04:50Z",
-        "html_url": "https://github.com/urunc-dev/urunc/actions/runs/26364720828",
+        "run_number": 1303,
+        "created_at": "2026-05-24T21:07:39Z",
+        "updated_at": "2026-05-24T21:07:39Z",
+        "run_started_at": "2026-05-24T21:07:39Z",
+        "html_url": "https://github.com/urunc-dev/urunc/actions/runs/26372796162",
         "run_attempt": 1
       },
       "recent_runs": [
+        {
+          "id": 26372796162,
+          "name": "CodeQL",
+          "status": "completed",
+          "conclusion": "action_required",
+          "run_number": 1303,
+          "created_at": "2026-05-24T21:07:39Z",
+          "updated_at": "2026-05-24T21:07:39Z",
+          "run_started_at": "2026-05-24T21:07:39Z",
+          "html_url": "https://github.com/urunc-dev/urunc/actions/runs/26372796162",
+          "run_attempt": 1
+        },
         {
           "id": 26364720828,
           "name": "CodeQL",
@@ -12929,18 +12941,6 @@
           "run_started_at": "2026-05-21T08:37:57Z",
           "html_url": "https://github.com/urunc-dev/urunc/actions/runs/26215157581",
           "run_attempt": 1
-        },
-        {
-          "id": 26214993807,
-          "name": "CodeQL",
-          "status": "completed",
-          "conclusion": "action_required",
-          "run_number": 1263,
-          "created_at": "2026-05-21T08:34:30Z",
-          "updated_at": "2026-05-21T08:34:30Z",
-          "run_started_at": "2026-05-21T08:34:30Z",
-          "html_url": "https://github.com/urunc-dev/urunc/actions/runs/26214993807",
-          "run_attempt": 1
         }
       ]
     },
@@ -12963,18 +12963,30 @@
         "action_required"
       ],
       "last_run": {
-        "id": 26364720933,
+        "id": 26372796175,
         "name": "Dependency Review",
         "status": "completed",
         "conclusion": "action_required",
-        "run_number": 1095,
-        "created_at": "2026-05-24T15:04:50Z",
-        "updated_at": "2026-05-24T15:04:50Z",
-        "run_started_at": "2026-05-24T15:04:50Z",
-        "html_url": "https://github.com/urunc-dev/urunc/actions/runs/26364720933",
+        "run_number": 1096,
+        "created_at": "2026-05-24T21:07:39Z",
+        "updated_at": "2026-05-24T21:07:39Z",
+        "run_started_at": "2026-05-24T21:07:39Z",
+        "html_url": "https://github.com/urunc-dev/urunc/actions/runs/26372796175",
         "run_attempt": 1
       },
       "recent_runs": [
+        {
+          "id": 26372796175,
+          "name": "Dependency Review",
+          "status": "completed",
+          "conclusion": "action_required",
+          "run_number": 1096,
+          "created_at": "2026-05-24T21:07:39Z",
+          "updated_at": "2026-05-24T21:07:39Z",
+          "run_started_at": "2026-05-24T21:07:39Z",
+          "html_url": "https://github.com/urunc-dev/urunc/actions/runs/26372796175",
+          "run_attempt": 1
+        },
         {
           "id": 26364720933,
           "name": "Dependency Review",
@@ -13554,18 +13566,6 @@
             }
           ],
           "run_attempt": 2
-        },
-        {
-          "id": 26203949014,
-          "name": "Dependency Review",
-          "status": "completed",
-          "conclusion": "action_required",
-          "run_number": 1056,
-          "created_at": "2026-05-21T03:37:57Z",
-          "updated_at": "2026-05-21T03:37:57Z",
-          "run_started_at": "2026-05-21T03:37:57Z",
-          "html_url": "https://github.com/urunc-dev/urunc/actions/runs/26203949014",
-          "run_attempt": 1
         }
       ]
     },
