@@ -1,7 +1,7 @@
 {
-  "generated_at": "2026-05-27T23:21:02.27284187Z",
+  "generated_at": "2026-05-28T03:36:40.620730115Z",
   "repo": "urunc-dev/urunc",
-  "overall_health": 88.57142857142857,
+  "overall_health": 88.69047619047619,
   "workflows": [
     {
       "name": "add-git-trailers",
@@ -6043,139 +6043,239 @@
       "critical": true,
       "required": false,
       "total_runs": 40,
-      "failed_runs": 8,
-      "failure_rate": 20,
-      "avg_duration_secs": 1514.575,
+      "failed_runs": 7,
+      "failure_rate": 17.5,
+      "avg_duration_secs": 1519.65,
       "weather_history": [
-        "success",
         "success",
         "success",
         "success",
         "failure",
         "success",
-        "failure"
+        "failure",
+        "success"
       ],
       "last_run": {
-        "id": 26484553162,
+        "id": 26548127709,
         "name": "urunc CI (nightly)",
         "status": "completed",
-        "conclusion": "failure",
-        "run_number": 221,
-        "created_at": "2026-05-27T01:08:50Z",
-        "updated_at": "2026-05-27T01:30:29Z",
-        "run_started_at": "2026-05-27T01:08:50Z",
-        "html_url": "https://github.com/urunc-dev/urunc/actions/runs/26484553162",
+        "conclusion": "success",
+        "run_number": 222,
+        "created_at": "2026-05-28T01:01:37Z",
+        "updated_at": "2026-05-28T01:23:06Z",
+        "run_started_at": "2026-05-28T01:01:37Z",
+        "html_url": "https://github.com/urunc-dev/urunc/actions/runs/26548127709",
         "jobs": [
           {
-            "name": "Build / build (arm64, ubuntu-22.04-arm)",
+            "name": "Unit tests / unit-test (amd64, ubuntu-22.04)",
             "conclusion": "success",
-            "duration_sec": 50,
-            "html_url": "https://github.com/urunc-dev/urunc/actions/runs/26484553162/job/77989069477"
+            "duration_sec": 42,
+            "html_url": "https://github.com/urunc-dev/urunc/actions/runs/26548127709/job/78204346251"
           },
           {
             "name": "Build / build (amd64, ubuntu-22.04)",
             "conclusion": "success",
-            "duration_sec": 57,
-            "html_url": "https://github.com/urunc-dev/urunc/actions/runs/26484553162/job/77989069496"
+            "duration_sec": 63,
+            "html_url": "https://github.com/urunc-dev/urunc/actions/runs/26548127709/job/78204346269"
           },
           {
             "name": "Unit tests / unit-test (arm64, ubuntu-22.04-arm)",
             "conclusion": "success",
-            "duration_sec": 30,
-            "html_url": "https://github.com/urunc-dev/urunc/actions/runs/26484553162/job/77989069515"
+            "duration_sec": 28,
+            "html_url": "https://github.com/urunc-dev/urunc/actions/runs/26548127709/job/78204346292"
           },
           {
-            "name": "Unit tests / unit-test (amd64, ubuntu-22.04)",
+            "name": "Build / build (arm64, ubuntu-22.04-arm)",
             "conclusion": "success",
-            "duration_sec": 38,
-            "html_url": "https://github.com/urunc-dev/urunc/actions/runs/26484553162/job/77989069543"
-          },
-          {
-            "name": "Kubernetes test / Kubernetes test (arm64, ubuntu-22.04-arm)",
-            "conclusion": "success",
-            "duration_sec": 297,
-            "html_url": "https://github.com/urunc-dev/urunc/actions/runs/26484553162/job/77989166902"
-          },
-          {
-            "name": "urunc-deploy test / urunc-deploy (arm64, ubuntu-22.04-arm)",
-            "conclusion": "success",
-            "duration_sec": 107,
-            "html_url": "https://github.com/urunc-dev/urunc/actions/runs/26484553162/job/77989166906"
+            "duration_sec": 45,
+            "html_url": "https://github.com/urunc-dev/urunc/actions/runs/26548127709/job/78204346354"
           },
           {
             "name": "Kubernetes test / Kubernetes test (amd64, ubuntu-22.04)",
             "conclusion": "success",
-            "duration_sec": 314,
-            "html_url": "https://github.com/urunc-dev/urunc/actions/runs/26484553162/job/77989166921"
+            "duration_sec": 312,
+            "html_url": "https://github.com/urunc-dev/urunc/actions/runs/26548127709/job/78204460883"
+          },
+          {
+            "name": "Kubernetes test / Kubernetes test (arm64, ubuntu-22.04-arm)",
+            "conclusion": "success",
+            "duration_sec": 303,
+            "html_url": "https://github.com/urunc-dev/urunc/actions/runs/26548127709/job/78204460903"
           },
           {
             "name": "urunc-deploy test / urunc-deploy (amd64, ubuntu-22.04)",
             "conclusion": "success",
-            "duration_sec": 110,
-            "html_url": "https://github.com/urunc-dev/urunc/actions/runs/26484553162/job/77989166938"
+            "duration_sec": 75,
+            "html_url": "https://github.com/urunc-dev/urunc/actions/runs/26548127709/job/78204460910"
           },
           {
-            "name": "E2E test / VM test (arm64, test_nerdctl)",
+            "name": "urunc-deploy test / urunc-deploy (arm64, ubuntu-22.04-arm)",
             "conclusion": "success",
-            "duration_sec": 1215,
-            "html_url": "https://github.com/urunc-dev/urunc/actions/runs/26484553162/job/77989166990"
-          },
-          {
-            "name": "E2E test / VM test (amd64, test_ctr)",
-            "conclusion": "success",
-            "duration_sec": 1027,
-            "html_url": "https://github.com/urunc-dev/urunc/actions/runs/26484553162/job/77989166991"
-          },
-          {
-            "name": "E2E test / VM test (amd64, test_nerdctl)",
-            "conclusion": "failure",
-            "duration_sec": 1237,
-            "html_url": "https://github.com/urunc-dev/urunc/actions/runs/26484553162/job/77989167017"
+            "duration_sec": 133,
+            "html_url": "https://github.com/urunc-dev/urunc/actions/runs/26548127709/job/78204460914"
           },
           {
             "name": "E2E test / VM test (arm64, test_docker)",
             "conclusion": "success",
-            "duration_sec": 419,
-            "html_url": "https://github.com/urunc-dev/urunc/actions/runs/26484553162/job/77989167030"
+            "duration_sec": 465,
+            "html_url": "https://github.com/urunc-dev/urunc/actions/runs/26548127709/job/78204460976"
+          },
+          {
+            "name": "E2E test / VM test (arm64, test_crictl)",
+            "conclusion": "success",
+            "duration_sec": 421,
+            "html_url": "https://github.com/urunc-dev/urunc/actions/runs/26548127709/job/78204460979"
+          },
+          {
+            "name": "E2E test / VM test (amd64, test_docker)",
+            "conclusion": "success",
+            "duration_sec": 481,
+            "html_url": "https://github.com/urunc-dev/urunc/actions/runs/26548127709/job/78204460983"
+          },
+          {
+            "name": "E2E test / VM test (amd64, test_ctr)",
+            "conclusion": "success",
+            "duration_sec": 919,
+            "html_url": "https://github.com/urunc-dev/urunc/actions/runs/26548127709/job/78204460985"
           },
           {
             "name": "E2E test / VM test (amd64, test_crictl)",
             "conclusion": "success",
             "duration_sec": 501,
-            "html_url": "https://github.com/urunc-dev/urunc/actions/runs/26484553162/job/77989167058"
+            "html_url": "https://github.com/urunc-dev/urunc/actions/runs/26548127709/job/78204460988"
           },
           {
-            "name": "E2E test / VM test (amd64, test_docker)",
+            "name": "E2E test / VM test (amd64, test_nerdctl)",
             "conclusion": "success",
-            "duration_sec": 520,
-            "html_url": "https://github.com/urunc-dev/urunc/actions/runs/26484553162/job/77989167079"
+            "duration_sec": 1221,
+            "html_url": "https://github.com/urunc-dev/urunc/actions/runs/26548127709/job/78204460994"
           },
           {
             "name": "E2E test / VM test (arm64, test_ctr)",
             "conclusion": "success",
-            "duration_sec": 1030,
-            "html_url": "https://github.com/urunc-dev/urunc/actions/runs/26484553162/job/77989167094"
+            "duration_sec": 914,
+            "html_url": "https://github.com/urunc-dev/urunc/actions/runs/26548127709/job/78204461005"
           },
           {
-            "name": "E2E test / VM test (arm64, test_crictl)",
+            "name": "E2E test / VM test (arm64, test_nerdctl)",
             "conclusion": "success",
-            "duration_sec": 484,
-            "html_url": "https://github.com/urunc-dev/urunc/actions/runs/26484553162/job/77989167125"
-          }
-        ],
-        "failed_jobs": [
-          {
-            "id": 77989167017,
-            "name": "E2E test / VM test (amd64, test_nerdctl)",
-            "conclusion": "failure",
-            "html_url": "https://github.com/urunc-dev/urunc/actions/runs/26484553162/job/77989167017",
-            "log_snippet": "[Test Failure] — 5 signal(s) found\n────────────────────────────────────────────────\n-\u003e Test Failure\n  Expected success, but got an error:\n  --- FAIL: TestE2E (1132.98s)\n  FAIL\tgithub.com/urunc-dev/urunc/tests/e2e\t1132.992s\n-\u003e Build Failure\n  make: *** [Makefile:276: test_nerdctl] Error 1\n  ##[error]Process completed with exit code 2.",
-            "raw_log": "all modules verified\n##[group]Run # Set up Go environment properly\n# Set up Go environment properly\nexport GOROOT=$(go env GOROOT)\nexport PATH=\"$GOROOT/bin:$PATH\"\ngo version\ngo env GOROOT\nif [ \"amd64\" = \"arm64\" ]; then\nsudo -E env \"PATH=$PATH\" \"GOROOT=$GOROOT\" make test_nerdctl_Spt\nelse\nsudo -E env \"PATH=$PATH\" \"GOROOT=$GOROOT\" make test_nerdctl\nfi\nshell: /usr/bin/bash -e {0}\nenv:\nGOTOOLCHAIN: local\n##[endgroup]\ngo version go1.25.4 linux/amd64\nTesting nerdctl\n=== RUN   TestE2E\nRunning Suite: E2E Suite - /home/runner/work/urunc/urunc/tests/e2e\n==================================================================\nRandom Seed: 1779844292\n2026-05-27T01:11:32.9457451Z\nWill run 27 of 72 specs\nSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSS\n------------------------------\nNerdctl foreground containers unikernel containers Hvt-rumprun-capture-hello\n/home/runner/work/urunc/urunc/tests/e2e/suite_test.go:56\n2026/05/27 01:11:32 Pulling image: harbor.nbfc.io/nubificus/urunc/net-hvt-mirage:latest\n2026/05/27 01:11:39 Pulling image: harbor.nbfc.io/nubificus/urunc/redis-qemu-unikraft-initrd:latest\n2026/05/27 01:11:44 Pulling image: harbor.nbfc.io/nubificus/urunc/net-qemu-mirage:latest\n2026/05/27 01:11:51 Pulling image: harbor.nbfc.io/nubificus/urunc/busybox-qemu-linux-raw:latest\n2026/05/27 01:12:22 Pulling image: harbor.nbfc.io/nubificus/urunc/hello-hvt-rumprun:latest\n2026/05/27 01:13:00 Pulling image: harbor.nbfc.io/nubificus/urunc/redis-hvt-rumprun-block:latest\n2026/05/27 01:13:35 Pulling image: harbor.nbfc.io/nubificus/urunc/redis-spt-rumprun-raw:latest\n2026/05/27 01:15:23 Pulling image: harbor.nbfc.io/nubificus/urunc/net-spt-mirage:latest\n2026/05/27 01:15:32 Pulling image: harbor.nbfc.io/nubificus/urunc/hello-spt-rumprun:latest\n2026/05/27 01:16:06 Pulling image: harbor.nbfc.io/nubificus/urunc/redis-hvt-rumprun-raw:latest\n2026/05/27 01:16:09 Pulling image: harbor.nbfc.io/nubificus/urunc/hello-server-qemu-mewz:latest\n2026/05/27 01:16:24 Pulling image: harbor.nbfc.io/nubificus/urunc/nginx-firecracker-linux-raw:latest\n2026/05/27 01:17:08 Pulling image: harbor.nbfc.io/nubificus/urunc/busybox-firecracker-linux-raw:latest\n2026/05/27 01:20:30 Pulling image: harbor.nbfc.io/nubificus/urunc/nginx-cloud-hypervisor-linux-raw:latest\n2026/05/27 01:23:47 Pulling image: harbor.nbfc.io/nubificus/urunc/nginx-qemu-linux-raw:latest\n2026/05/27 01:24:04 Pulling image: harbor.nbfc.io/nubificus/urunc/nginx-firecracker-unikraft-initrd:latest\n2026/05/27 01:24:18 Pulling image: harbor.nbfc.io/nubificus/urunc/busybox-cloud-hypervisor-linux-raw:latest\nSTEP: Running container @ 05/27/26 01:27:36.344\nSTEP: Verifying container output @ 05/27/26 01:27:37.754\nSTEP: Cleaning up container @ 05/27/26 01:27:37.754\n• [965.007 seconds]\n------------------------------\nNerdctl foreground containers unikernel containers Spt-rumprun-capture-hello\n/home/runner/work/urunc/urunc/tests/e2e/suite_test.go:56\nSTEP: Running container @ 05/27/26 01:27:37.953\nSTEP: Verifying container output @ 05/27/26 01:27:39.108\nSTEP: Cleaning up container @ 05/27/26 01:27:39.108\n• [1.369 seconds]\n------------------------------\nNerdctl detached containers unikernel containers Hvt-rumprun-ping-redis\n/home/runner/work/urunc/urunc/tests/e2e/suite_test.go:56\nSTEP: Creating container @ 05/27/26 01:27:39.321\nSTEP: Starting container @ 05/27/26 01:27:40.448\nSTEP: Running test function @ 05/27/26 01:27:40.704\nSTEP: Stopping container @ 05/27/26 01:27:42.823\nSTEP: Removing container @ 05/27/26 01:27:42.909\nSTEP: Verifying container removal @ 05/27/26 01:27:43.04\n• [3.740 seconds]\n------------------------------\nNerdctl detached containers unikernel containers Hvt-rumprun-ping-redis-with-block\n/home/runner/work/urunc/urunc/tests/e2e/suite_test.go:56\nSTEP: Creating container @ 05/27/26 01:27:43.061\nSTEP: Starting container @ 05/27/26 01:27:43.481\nSTEP: Running test function @ 05/27/26 01:27:43.715\nSTEP: Stopping container @ 05/27/26 01:27:45.847\nSTEP: Removing container @ 05/27/26 01:27:45.926\nSTEP: Verifying container removal @ 05/27/26 01:27:46.063\n• [3.018 seconds]\n------------------------------\nNerdctl detached containers unikernel containers Hvt-mirage-net\n/home/runner/work/urunc/urunc/tests/e2e/suite_test.go:56\nSTEP: Creating container @ 05/27/26 01:27:46.08\nSTEP: Starting container @ 05/27/26 01:27:46.127\nSTEP: Running test function @ 05/27/26 01:27:46.341\nSTEP: Stopping container @ 05/27/26 01:27:48.451\nSTEP: Removing container @ 05/27/26 01:27:48.533\nSTEP: Verifying container removal @ 05/27/26 01:27:48.661\n• [2.602 seconds]\n------------------------------\nNerdctl detached containers unikernel containers Hvt-rumprun-with-seccomp\n/home/runner/work/urunc/urunc/tests/e2e/suite_test.go:56\nSTEP: Creating container @ 05/27/26 01:27:48.682\nSTEP: Starting container @ 05/27/26 01:27:48.85\nSTEP: Running test function @ 05/27/26 01:27:49.113\nSTEP: Stopping container @ 05/27/26 01:27:49.144\nSTEP: Removing container @ 05/27/26 01:27:49.229\nSTEP: Verifying container removal @ 05/27/26 01:27:49.38\n• [0.725 seconds]\n------------------------------\nNerdctl detached containers unikernel containers Hvt-rumprun-without-seccomp\n/home/runner/work/urunc/urunc/tests/e2e/suite_test.go:56\nSTEP: Creating container @ 05/27/26 01:27:49.407\nSTEP: Starting container @ 05/27/26 01:27:49.59\nSTEP: Running test function @ 05/27/26 01:27:49.856\nSTEP: Stopping container @ 05/27/26 01:27:49.882\nSTEP: Removing container @ 05/27/26 01:27:49.959\nSTEP: Verifying container removal @ 05/27/26 01:27:50.087\n• [0.701 seconds]\n------------------------------\nNerdctl detached containers unikernel containers Hvt-rumprun-UserGroup\n/home/runner/work/urunc/urunc/tests/e2e/suite_test.go:56\nSTEP: Creating container @ 05/27/26 01:27:50.108\nSTEP: Starting container @ 05/27/26 01:27:50.152\nSTEP: Running test function @ 05/27/26 01:27:50.379\n[FAILED] in [It] - /home/runner/work/urunc/urunc/tests/e2e/suite_test.go:132 @ 05/27/26 01:28:00.379\nSTEP: Stopping container @ 05/27/26 01:28:00.403\nSTEP: Removing container @ 05/27/26 01:28:00.465\nSTEP: Verifying container removal @ 05/27/26 01:28:00.581\ntest-args - /home/runner/work/urunc/urunc/tests/e2e/nerdctl_test.go:42 @ 05/27/26 01:28:00.599\n{Name:Hvt-rumprun-UserGroup Image:harbor.nbfc.io/nubificus/urunc/redis-hvt-rumprun-block:latest Devmapper:false Seccomp:true UID:65534 GID:65534 Groups:[] Memory: Cli: Volumes:[] StaticNet:false SideContainers:[] Skippable:false TestFunc:0xb6f840 ExpectOut:}\n• [FAILED] [10.491 seconds]\nNerdctl detached containers unikernel containers [It] Hvt-rumprun-UserGroup\n/home/runner/work/urunc/urunc/tests/e2e/suite_test.go:56\n2026-05-27T01:28:00.6002610Z\n[FAILED] Timed out after 10.000s.\nExpected success, but got an error:\n\u003c*errors.errorString | 0xc000291d30\u003e:\nFailed to open /proc/16987/status: open /proc/16987/status: no such file or directory\n{\ns: \"Failed to open /proc/16987/status: open /proc/16987/status: no such file or directory\",\n}\nIn [It] at: /home/runner/work/urunc/urunc/tests/e2e/suite_test.go:132 @ 05/27/26 01:28:00.379\n------------------------------\nNerdctl detached containers unikernel containers Spt-rumprun-ping-redis\n/home/runner/work/urunc/urunc/tests/e2e/suite_test.go:56\nSTEP: Creating container @ 05/27/26 01:28:00.599\nSTEP: Starting container @ 05/27/26 01:28:01.667\nSTEP: Running test function @ 05/27/26 01:28:01.928\nSTEP: Stopping container @ 05/27/26 01:28:04.05\nSTEP: Removing container @ 05/27/26 01:28:14.137\nSTEP: Verifying container removal @ 05/27/26 01:28:14.267\n• [13.686 seconds]\n------------------------------\nNerdctl detached containers unikernel containers Spt-mirage-net\n/home/runner/work/urunc/urunc/tests/e2e/suite_test.go:56\nSTEP: Creating container @ 05/27/26 01:28:14.286\nSTEP: Starting container @ 05/27/26 01:28:14.333\nSTEP: Running test function @ 05/27/26 01:28:14.56\nSTEP: Stopping container @ 05/27/26 01:28:16.6\nSTEP: Removing container @ 05/27/26 01:28:26.676\nSTEP: Verifying container removal @ 05/27/26 01:28:26.81\n• [12.543 seconds]\n------------------------------\nNerdctl detached containers unikernel containers Spt-mirage-UserGroup\n/home/runner/work/urunc/urunc/tests/e2e/suite_test.go:56\nSTEP: Creating container @ 05/27/26 01:28:26.829\nSTEP: Starting container @ 05/27/26 01:28:26.883\nSTEP: Running test function @ 05/27/26 01:28:27.098\nSTEP: Stopping container @ 05/27/26 01:28:27.123\nSTEP: Removing container @ 05/27/26 01:28:37.198\nSTEP: Verifying container removal @ 05/27/26 01:28:37.339\n• [10.531 seconds]\n------------------------------\nNerdctl detached containers unikernel containers Qemu-unikraft-ping-redis\n/home/runner/work/urunc/urunc/tests/e2e/suite_test.go:56\nSTEP: Creating container @ 05/27/26 01:28:37.36\nSTEP: Starting container @ 05/27/26 01:28:37.406\nSTEP: Running test function @ 05/27/26 01:28:37.619\nSTEP: Stopping container @ 05/27/26 01:28:45.863\nSTEP: Removing container @ 05/27/26 01:28:45.952\nSTEP: Verifying container removal @ 05/27/26 01:28:46.082\n• [8.741 seconds]\n------------------------------\nNerdctl detached containers unikernel containers Qemu-mirage-net\n/home/runner/work/urunc/urunc/tests/e2e/suite_test.go:56\nSTEP: Creating container @ 05/27/26 01:28:46.101\nSTEP: Starting container @ 05/27/26 01:28:46.152\nSTEP: Running test function @ 05/27/26 01:28:46.367\nSTEP: Stopping container @ 05/27/26 01:28:54.53\nSTEP: Removing container @ 05/27/26 01:28:54.612\nSTEP: Verifying container removal @ 05/27/26 01:28:54.743\n• [8.663 seconds]\n------------------------------\nNerdctl detached containers unikernel containers Qemu-linux-nginx\n/home/runner/work/urunc/urunc/tests/e2e/suite_test.go:56\nSTEP: Creating container @ 05/27/26 01:28:54.764\nSTEP: Starting container @ 05/27/26 01:28:56.979\nSTEP: Running test function @ 05/27/26 01:28:57.207\nSTEP: Stopping container @ 05/27/26 01:28:59.331\nSTEP: Removing container @ 05/27/26 01:28:59.43\nSTEP: Verifying container removal @ 05/27/26 01:28:59.542\n• [4.799 seconds]\n------------------------------\nNerdctl detached containers unikernel containers Qemu-mewz-hello-server\n/home/runner/work/urunc/urunc/tests/e2e/suite_test.go:56\nSTEP: Creating container @ 05/27/26 01:28:59.563\nSTEP: Starting container @ 05/27/26 01:28:59.61\nSTEP: Running test function @ 05/27/26 01:28:59.836\nSTEP: Stopping container @ 05/27/26 01:29:01.925\nSTEP: Removing container @ 05/27/26 01:29:02.028\nSTEP: Verifying container removal @ 05/27/26 01:29:02.161\n• [2.616 seconds]\n------------------------------\nNerdctl detached containers unikernel containers Qemu-unikraft-with-seccomp\n/home/runner/work/urunc/urunc/tests/e2e/suite_test.go:56\nSTEP: Creating container @ 05/27/26 01:29:02.179\nSTEP: Starting container @ 05/27/26 01:29:02.231\nSTEP: Running test function @ 05/27/26 01:29:02.451\nSTEP: Stopping container @ 05/27/26 01:29:02.479\nSTEP: Removing container @ 05/27/26 01:29:02.567\nSTEP: Verifying container removal @ 05/27/26 01:29:02.689\n• [0.526 seconds]\n------------------------------\nNerdctl detached containers unikernel containers Qemu-unikraft-without-seccomp\n/home/runner/work/urunc/urunc/tests/e2e/suite_test.go:56\nSTEP: Creating container @ 05/27/26 01:29:02.706\nSTEP: Starting container @ 05/27/26 01:29:02.753\nSTEP: Running test function @ 05/27/26 01:29:02.968\nSTEP: Stopping container @ 05/27/26 01:29:02.991\nSTEP: Removing container @ 05/27/26 01:29:03.083\nSTEP: Verifying container removal @ 05/27/26 01:29:03.207\n• [0.522 seconds]\n------------------------------\nNerdctl detached containers unikernel containers Firecracker-unikraft-ping-nginx\n/home/runner/work/urunc/urunc/tests/e2e/suite_test.go:56\nSTEP: Creating container @ 05/27/26 01:29:03.228\nSTEP: Starting container @ 05/27/26 01:29:03.274\nSTEP: Running test function @ 05/27/26 01:29:03.492\nSTEP: Stopping container @ 05/27/26 01:29:05.619\nSTEP: Removing container @ 05/27/26 01:29:15.715\nSTEP: Verifying container removal @ 05/27/26 01:29:15.857\n• [12.647 seconds]\n------------------------------\nNerdctl detached containers unikernel containers Firecracker-linux-nginx\n/home/runner/work/urunc/urunc/tests/e2e/suite_test.go:56\nSTEP: Creating container @ 05/27/26 01:29:15.875\nSTEP: Starting container @ 05/27/26 01:29:16.332\nSTEP: Running test function @ 05/27/26 01:29:16.629\nSTEP: Stopping container @ 05/27/26 01:29:18.745\nSTEP: Removing container @ 05/27/26 01:29:28.851\nSTEP: Verifying container removal @ 05/27/26 01:29:28.982\n• [13.127 seconds]\n------------------------------\nNerdctl detached containers unikernel containers Firecracker-unikraft-with-seccomp\n/home/runner/work/urunc/urunc/tests/e2e/suite_test.go:56\nSTEP: Creating container @ 05/27/26 01:29:29.003\nSTEP: Starting container @ 05/27/26 01:29:29.047\nSTEP: Running test function @ 05/27/26 01:29:29.421\nSTEP: Stopping container @ 05/27/26 01:29:29.458\nSTEP: Removing container @ 05/27/26 01:29:39.584\nSTEP: Verifying container removal @ 05/27/26 01:29:39.729\n• [10.747 seconds]\n------------------------------\nNerdctl detached containers unikernel containers Firecracker-unikraft-without-seccomp\n/home/runner/work/urunc/urunc/tests/e2e/suite_test.go:56\nSTEP: Creating container @ 05/27/26 01:29:39.75\nSTEP: Starting container @ 05/27/26 01:29:39.801\nSTEP: Running test function @ 05/27/26 01:29:40.015\nSTEP: Stopping container @ 05/27/26 01:29:40.039\nSTEP: Removing container @ 05/27/26 01:29:50.145\nSTEP: Verifying container removal @ 05/27/26 01:29:50.275\n• [10.545 seconds]\n------------------------------\nNerdctl detached containers unikernel containers Firecracker-unikraft-namespaces\n/home/runner/work/urunc/urunc/tests/e2e/suite_test.go:56\nSTEP: Creating container @ 05/27/26 01:29:50.295\nSTEP: Starting container @ 05/27/26 01:29:50.351\nSTEP: Running test function @ 05/27/26 01:29:50.573\nSTEP: Stopping container @ 05/27/26 01:29:50.607\nSTEP: Removing container @ 05/27/26 01:30:00.72\nSTEP: Verifying container removal @ 05/27/26 01:30:00.862\n• [10.584 seconds]\n------------------------------\nNerdctl detached containers unikernel containers Qemu-linux-block-mounts\n/home/runner/work/urunc/urunc/tests/e2e/suite_test.go:56\nSTEP: Creating container @ 05/27/26 01:30:00.879\nSTEP: Starting container @ 05/27/26 01:30:01.915\nSTEP: Running test function @ 05/27/26 01:30:02.297\nSTEP: Stopping container @ 05/27/26 01:30:04.379\nSTEP: Removing container @ 05/27/26 01:30:04.444\nSTEP: Verifying container removal @ 05/27/26 01:30:04.56\n• [3.697 seconds]\n------------------------------\nNerdctl detached containers unikernel containers Firecracker-linux-block-mounts\n/home/runner/work/urunc/urunc/tests/e2e/suite_test.go:56\nSTEP: Creating container @ 05/27/26 01:30:04.577\nSTEP: Starting container @ 05/27/26 01:30:07.258\nSTEP: Running test function @ 05/27/26 01:30:07.908\nSTEP: Stopping container @ 05/27/26 01:30:08.956\nSTEP: Removing container @ 05/27/26 01:30:09.015\nSTEP: Verifying container removal @ 05/27/26 01:30:09.169\n• [4.612 seconds]\n------------------------------\nNerdctl detached containers unikernel containers CloudHypervisor-linux-ping\n/home/runner/work/urunc/urunc/tests/e2e/suite_test.go:56\nSTEP: Creating container @ 05/27/26 01:30:09.189\nSTEP: Starting container @ 05/27/26 01:30:09.256\nSTEP: Running test function @ 05/27/26 01:30:09.525\nSTEP: Stopping container @ 05/27/26 01:30:11.656\nSTEP: Removing container @ 05/27/26 01:30:11.74\nSTEP: Verifying container removal @ 05/27/26 01:30:11.877\n• [2.705 seconds]\n------------------------------\nNerdctl detached containers unikernel containers CloudHypervisor-linux-seccomp\n/home/runner/work/urunc/urunc/tests/e2e/suite_test.go:56\nSTEP: Creating container @ 05/27/26 01:30:11.893\nSTEP: Starting container @ 05/27/26 01:30:11.944\nSTEP: Running test function @ 05/27/26 01:30:12.155\nSTEP: Stopping container @ 05/27/26 01:30:12.181\nSTEP: Removing container @ 05/27/26 01:30:12.272\nSTEP: Verifying container removal @ 05/27/26 01:30:12.408\n• [0.531 seconds]\n------------------------------\nNerdctl detached containers unikernel containers CloudHypervisor-linux-nginx\n/home/runner/work/urunc/urunc/tests/e2e/suite_test.go:56\nSTEP: Creating container @ 05/27/26 01:30:12.425\nSTEP: Starting container @ 05/27/26 01:30:12.474\nSTEP: Running test function @ 05/27/26 01:30:12.69\nSTEP: Stopping container @ 05/27/26 01:30:14.808\nSTEP: Removing container @ 05/27/26 01:30:24.908\nSTEP: Verifying container removal @ 05/27/26 01:30:25.046\n2026/05/27 01:30:25 Removing image: harbor.nbfc.io/nubificus/urunc/net-hvt-mirage:latest\n2026/05/27 01:30:25 Removing image: harbor.nbfc.io/nubificus/urunc/redis-qemu-unikraft-initrd:latest\n2026/05/27 01:30:25 Removing image: harbor.nbfc.io/nubificus/urunc/net-qemu-mirage:latest\n2026/05/27 01:30:25 Removing image: harbor.nbfc.io/nubificus/urunc/busybox-qemu-linux-raw:latest\n2026/05/27 01:30:25 Removing image: harbor.nbfc.io/nubificus/urunc/hello-hvt-rumprun:latest\n2026/05/27 01:30:25 Removing image: harbor.nbfc.io/nubificus/urunc/redis-hvt-rumprun-block:latest\n2026/05/27 01:30:25 Removing image: harbor.nbfc.io/nubificus/urunc/redis-spt-rumprun-raw:latest\n2026/05/27 01:30:25 Removing image: harbor.nbfc.io/nubificus/urunc/net-spt-mirage:latest\n2026/05/27 01:30:25 Removing image: harbor.nbfc.io/nubificus/urunc/hello-spt-rumprun:latest\n2026/05/27 01:30:25 Removing image: harbor.nbfc.io/nubificus/urunc/redis-hvt-rumprun-raw:latest\n2026/05/27 01:30:25 Removing image: harbor.nbfc.io/nubificus/urunc/hello-server-qemu-mewz:latest\n2026/05/27 01:30:25 Removing image: harbor.nbfc.io/nubificus/urunc/nginx-firecracker-linux-raw:latest\n2026/05/27 01:30:25 Removing image: harbor.nbfc.io/nubificus/urunc/busybox-firecracker-linux-raw:latest\n2026/05/27 01:30:25 Removing image: harbor.nbfc.io/nubificus/urunc/nginx-cloud-hypervisor-linux-raw:latest\n2026/05/27 01:30:25 Removing image: harbor.nbfc.io/nubificus/urunc/nginx-qemu-linux-raw:latest\n2026/05/27 01:30:25 Removing image: harbor.nbfc.io/nubificus/urunc/nginx-firecracker-unikraft-initrd:latest\n2026/05/27 01:30:25 Removing image: harbor.nbfc.io/nubificus/urunc/busybox-cloud-hypervisor-linux-raw:latest\n• [13.500 seconds]\n------------------------------\nSSSSSSSSSSSSS\n2026-05-27T01:30:25.9257627Z\nSummarizing 1 Failure:\n[FAIL] Nerdctl detached containers unikernel containers [It] Hvt-rumprun-UserGroup\n/home/runner/work/urunc/urunc/tests/e2e/suite_test.go:132\n2026-05-27T01:30:25.9259969Z\nRan 27 of 72 Specs in 1132.981 seconds\nFAIL! -- 26 Passed | 1 Failed | 0 Pending | 45 Skipped\n--- FAIL: TestE2E (1132.98s)\nFAIL\nFAIL\tgithub.com/urunc-dev/urunc/tests/e2e\t1132.992s\nFAIL\nmake: *** [Makefile:276: test_nerdctl] Error 1\n##[error]Process completed with exit code 2."
+            "duration_sec": 1119,
+            "html_url": "https://github.com/urunc-dev/urunc/actions/runs/26548127709/job/78204461010"
           }
         ],
         "run_attempt": 1
       },
       "recent_runs": [
+        {
+          "id": 26548127709,
+          "name": "urunc CI (nightly)",
+          "status": "completed",
+          "conclusion": "success",
+          "run_number": 222,
+          "created_at": "2026-05-28T01:01:37Z",
+          "updated_at": "2026-05-28T01:23:06Z",
+          "run_started_at": "2026-05-28T01:01:37Z",
+          "html_url": "https://github.com/urunc-dev/urunc/actions/runs/26548127709",
+          "jobs": [
+            {
+              "name": "Unit tests / unit-test (amd64, ubuntu-22.04)",
+              "conclusion": "success",
+              "duration_sec": 42,
+              "html_url": "https://github.com/urunc-dev/urunc/actions/runs/26548127709/job/78204346251"
+            },
+            {
+              "name": "Build / build (amd64, ubuntu-22.04)",
+              "conclusion": "success",
+              "duration_sec": 63,
+              "html_url": "https://github.com/urunc-dev/urunc/actions/runs/26548127709/job/78204346269"
+            },
+            {
+              "name": "Unit tests / unit-test (arm64, ubuntu-22.04-arm)",
+              "conclusion": "success",
+              "duration_sec": 28,
+              "html_url": "https://github.com/urunc-dev/urunc/actions/runs/26548127709/job/78204346292"
+            },
+            {
+              "name": "Build / build (arm64, ubuntu-22.04-arm)",
+              "conclusion": "success",
+              "duration_sec": 45,
+              "html_url": "https://github.com/urunc-dev/urunc/actions/runs/26548127709/job/78204346354"
+            },
+            {
+              "name": "Kubernetes test / Kubernetes test (amd64, ubuntu-22.04)",
+              "conclusion": "success",
+              "duration_sec": 312,
+              "html_url": "https://github.com/urunc-dev/urunc/actions/runs/26548127709/job/78204460883"
+            },
+            {
+              "name": "Kubernetes test / Kubernetes test (arm64, ubuntu-22.04-arm)",
+              "conclusion": "success",
+              "duration_sec": 303,
+              "html_url": "https://github.com/urunc-dev/urunc/actions/runs/26548127709/job/78204460903"
+            },
+            {
+              "name": "urunc-deploy test / urunc-deploy (amd64, ubuntu-22.04)",
+              "conclusion": "success",
+              "duration_sec": 75,
+              "html_url": "https://github.com/urunc-dev/urunc/actions/runs/26548127709/job/78204460910"
+            },
+            {
+              "name": "urunc-deploy test / urunc-deploy (arm64, ubuntu-22.04-arm)",
+              "conclusion": "success",
+              "duration_sec": 133,
+              "html_url": "https://github.com/urunc-dev/urunc/actions/runs/26548127709/job/78204460914"
+            },
+            {
+              "name": "E2E test / VM test (arm64, test_docker)",
+              "conclusion": "success",
+              "duration_sec": 465,
+              "html_url": "https://github.com/urunc-dev/urunc/actions/runs/26548127709/job/78204460976"
+            },
+            {
+              "name": "E2E test / VM test (arm64, test_crictl)",
+              "conclusion": "success",
+              "duration_sec": 421,
+              "html_url": "https://github.com/urunc-dev/urunc/actions/runs/26548127709/job/78204460979"
+            },
+            {
+              "name": "E2E test / VM test (amd64, test_docker)",
+              "conclusion": "success",
+              "duration_sec": 481,
+              "html_url": "https://github.com/urunc-dev/urunc/actions/runs/26548127709/job/78204460983"
+            },
+            {
+              "name": "E2E test / VM test (amd64, test_ctr)",
+              "conclusion": "success",
+              "duration_sec": 919,
+              "html_url": "https://github.com/urunc-dev/urunc/actions/runs/26548127709/job/78204460985"
+            },
+            {
+              "name": "E2E test / VM test (amd64, test_crictl)",
+              "conclusion": "success",
+              "duration_sec": 501,
+              "html_url": "https://github.com/urunc-dev/urunc/actions/runs/26548127709/job/78204460988"
+            },
+            {
+              "name": "E2E test / VM test (amd64, test_nerdctl)",
+              "conclusion": "success",
+              "duration_sec": 1221,
+              "html_url": "https://github.com/urunc-dev/urunc/actions/runs/26548127709/job/78204460994"
+            },
+            {
+              "name": "E2E test / VM test (arm64, test_ctr)",
+              "conclusion": "success",
+              "duration_sec": 914,
+              "html_url": "https://github.com/urunc-dev/urunc/actions/runs/26548127709/job/78204461005"
+            },
+            {
+              "name": "E2E test / VM test (arm64, test_nerdctl)",
+              "conclusion": "success",
+              "duration_sec": 1119,
+              "html_url": "https://github.com/urunc-dev/urunc/actions/runs/26548127709/job/78204461010"
+            }
+          ],
+          "run_attempt": 1
+        },
         {
           "id": 26484553162,
           "name": "urunc CI (nightly)",
@@ -10434,126 +10534,6 @@
               "html_url": "https://github.com/urunc-dev/urunc/actions/runs/24754290894/job/72424160803",
               "log_snippet": "[Crash / Timeout] — 4 signal(s) found\n────────────────────────────────────────────────\n-\u003e Crash / Timeout\n  panic: test timed out after 15m0s\n-\u003e Test Failure\n  FAIL\tgithub.com/urunc-dev/urunc/tests/e2e\t900.012s\n-\u003e Build Failure\n  make: *** [Makefile:268: test_nerdctl] Error 1\n  ##[error]Process completed with exit code 2.",
               "raw_log": "go mod verify\nall modules verified\n##[group]Run # Set up Go environment properly\n# Set up Go environment properly\nexport GOROOT=$(go env GOROOT)\nexport PATH=\"$GOROOT/bin:$PATH\"\ngo version\ngo env GOROOT\nif [ \"amd64\" = \"arm64\" ]; then\nsudo -E env \"PATH=$PATH\" \"GOROOT=$GOROOT\" make test_nerdctl_Spt\nelse\nsudo -E env \"PATH=$PATH\" \"GOROOT=$GOROOT\" make test_nerdctl\nfi\nshell: /usr/bin/bash -e {0}\nenv:\nGOTOOLCHAIN: local\n##[endgroup]\ngo version go1.25.4 linux/amd64\nTesting nerdctl\n=== RUN   TestE2E\nRunning Suite: E2E Suite - /home/runner/work/urunc/urunc/tests/e2e\n==================================================================\nRandom Seed: 1776819207\n2026-04-22T00:53:27.4846545Z\nWill run 27 of 72 specs\n------------------------------\nNerdctl foreground containers unikernel containers Hvt-rumprun-capture-hello\n/home/runner/work/urunc/urunc/tests/e2e/suite_test.go:56\n2026/04/22 00:53:27 Pulling image: harbor.nbfc.io/nubificus/urunc/nginx-firecracker-linux-raw:latest\n2026/04/22 00:53:47 Pulling image: harbor.nbfc.io/nubificus/urunc/busybox-qemu-linux-raw:latest\n2026/04/22 00:53:54 Pulling image: harbor.nbfc.io/nubificus/urunc/busybox-cloud-hypervisor-linux-raw:latest\n2026/04/22 00:59:21 Pulling image: harbor.nbfc.io/nubificus/urunc/nginx-cloud-hypervisor-linux-raw:latest\n2026/04/22 01:02:13 Pulling image: harbor.nbfc.io/nubificus/urunc/net-hvt-mirage:latest\n2026/04/22 01:02:20 Pulling image: harbor.nbfc.io/nubificus/urunc/net-spt-mirage:latest\n2026/04/22 01:02:30 Pulling image: harbor.nbfc.io/nubificus/urunc/hello-hvt-rumprun:latest\n2026/04/22 01:02:58 Pulling image: harbor.nbfc.io/nubificus/urunc/redis-hvt-rumprun-block:latest\n2026/04/22 01:03:23 Pulling image: harbor.nbfc.io/nubificus/urunc/redis-qemu-unikraft-initrd:latest\n2026/04/22 01:03:30 Pulling image: harbor.nbfc.io/nubificus/urunc/busybox-firecracker-linux-raw:latest\n2026/04/22 01:06:10 Pulling image: harbor.nbfc.io/nubificus/urunc/hello-spt-rumprun:latest\n2026/04/22 01:06:30 Pulling image: harbor.nbfc.io/nubificus/urunc/nginx-qemu-linux-raw:latest\n2026/04/22 01:06:46 Pulling image: harbor.nbfc.io/nubificus/urunc/hello-server-qemu-mewz:latest\n2026/04/22 01:06:57 Pulling image: harbor.nbfc.io/nubificus/urunc/nginx-firecracker-unikraft-initrd:latest\n2026/04/22 01:07:02 Pulling image: harbor.nbfc.io/nubificus/urunc/redis-hvt-rumprun-raw:latest\n2026/04/22 01:07:05 Pulling image: harbor.nbfc.io/nubificus/urunc/redis-spt-rumprun-raw:latest\n2026/04/22 01:07:29 Pulling image: harbor.nbfc.io/nubificus/urunc/net-qemu-mirage:latest\nSTEP: Running container @ 04/22/26 01:07:35.177\nSTEP: Verifying container output @ 04/22/26 01:07:36.602\nSTEP: Cleaning up container @ 04/22/26 01:07:36.603\n• [849.314 seconds]\n------------------------------\nNerdctl foreground containers unikernel containers Spt-rumprun-capture-hello\n/home/runner/work/urunc/urunc/tests/e2e/suite_test.go:56\nSTEP: Running container @ 04/22/26 01:07:36.798\nSTEP: Verifying container output @ 04/22/26 01:07:37.943\nSTEP: Cleaning up container @ 04/22/26 01:07:37.943\n• [1.335 seconds]\n------------------------------\nNerdctl detached containers unikernel containers Hvt-rumprun-ping-redis\n/home/runner/work/urunc/urunc/tests/e2e/suite_test.go:56\nSTEP: Creating container @ 04/22/26 01:07:38.133\nSTEP: Starting container @ 04/22/26 01:07:39.215\nSTEP: Running test function @ 04/22/26 01:07:39.437\nSTEP: Stopping container @ 04/22/26 01:07:41.525\nSTEP: Removing container @ 04/22/26 01:07:41.703\nSTEP: Verifying container removal @ 04/22/26 01:07:41.829\n• [3.713 seconds]\n------------------------------\nNerdctl detached containers unikernel containers Hvt-rumprun-ping-redis-with-block\n/home/runner/work/urunc/urunc/tests/e2e/suite_test.go:56\nSTEP: Creating container @ 04/22/26 01:07:41.846\nSTEP: Starting container @ 04/22/26 01:07:42.229\nSTEP: Running test function @ 04/22/26 01:07:42.431\nSTEP: Stopping container @ 04/22/26 01:07:44.556\nSTEP: Removing container @ 04/22/26 01:07:44.73\nSTEP: Verifying container removal @ 04/22/26 01:07:44.856\n• [3.026 seconds]\n------------------------------\nNerdctl detached containers unikernel containers Hvt-mirage-net\n/home/runner/work/urunc/urunc/tests/e2e/suite_test.go:56\nSTEP: Creating container @ 04/22/26 01:07:44.873\nSTEP: Starting container @ 04/22/26 01:07:44.921\nSTEP: Running test function @ 04/22/26 01:07:45.117\nSTEP: Stopping container @ 04/22/26 01:07:47.239\nSTEP: Removing container @ 04/22/26 01:07:47.414\nSTEP: Verifying container removal @ 04/22/26 01:07:47.534\n• [2.677 seconds]\n------------------------------\nNerdctl detached containers unikernel containers Hvt-rumprun-with-seccomp\n/home/runner/work/urunc/urunc/tests/e2e/suite_test.go:56\nSTEP: Creating container @ 04/22/26 01:07:47.55\nSTEP: Starting container @ 04/22/26 01:07:47.725\nSTEP: Running test function @ 04/22/26 01:07:47.959\nSTEP: Stopping container @ 04/22/26 01:07:47.992\nSTEP: Removing container @ 04/22/26 01:07:48.172\nSTEP: Verifying container removal @ 04/22/26 01:07:48.293\n• [0.760 seconds]\n------------------------------\nNerdctl detached containers unikernel containers Hvt-rumprun-without-seccomp\n/home/runner/work/urunc/urunc/tests/e2e/suite_test.go:56\nSTEP: Creating container @ 04/22/26 01:07:48.31\nSTEP: Starting container @ 04/22/26 01:07:48.489\nSTEP: Running test function @ 04/22/26 01:07:48.728\nSTEP: Stopping container @ 04/22/26 01:07:48.761\nSTEP: Removing container @ 04/22/26 01:07:48.941\nSTEP: Verifying container removal @ 04/22/26 01:07:49.071\n• [0.778 seconds]\n------------------------------\nNerdctl detached containers unikernel containers Hvt-rumprun-UserGroup\n/home/runner/work/urunc/urunc/tests/e2e/suite_test.go:56\nSTEP: Creating container @ 04/22/26 01:07:49.088\nSTEP: Starting container @ 04/22/26 01:07:49.136\nSTEP: Running test function @ 04/22/26 01:07:49.346\nSTEP: Stopping container @ 04/22/26 01:07:49.377\nSTEP: Removing container @ 04/22/26 01:07:49.572\nSTEP: Verifying container removal @ 04/22/26 01:07:49.698\n• [0.629 seconds]\n------------------------------\nNerdctl detached containers unikernel containers Spt-rumprun-ping-redis\n/home/runner/work/urunc/urunc/tests/e2e/suite_test.go:56\nSTEP: Creating container @ 04/22/26 01:07:49.717\nSTEP: Starting container @ 04/22/26 01:07:50.811\nSTEP: Running test function @ 04/22/26 01:07:51.038\nSTEP: Stopping container @ 04/22/26 01:07:53.123\nSTEP: Removing container @ 04/22/26 01:07:53.295\nSTEP: Verifying container removal @ 04/22/26 01:07:53.423\n• [3.726 seconds]\n------------------------------\nNerdctl detached containers unikernel containers Spt-mirage-net\n/home/runner/work/urunc/urunc/tests/e2e/suite_test.go:56\nSTEP: Creating container @ 04/22/26 01:07:53.443\nSTEP: Starting container @ 04/22/26 01:07:53.502\nSTEP: Running test function @ 04/22/26 01:07:53.689\nSTEP: Stopping container @ 04/22/26 01:07:55.731\nSTEP: Removing container @ 04/22/26 01:07:55.916\nSTEP: Verifying container removal @ 04/22/26 01:07:56.041\n• [2.615 seconds]\n------------------------------\nNerdctl detached containers unikernel containers Spt-mirage-UserGroup\n/home/runner/work/urunc/urunc/tests/e2e/suite_test.go:56\nSTEP: Creating container @ 04/22/26 01:07:56.058\nSTEP: Starting container @ 04/22/26 01:07:56.108\nSTEP: Running test function @ 04/22/26 01:07:56.297\nSTEP: Stopping container @ 04/22/26 01:07:56.318\nSTEP: Removing container @ 04/22/26 01:07:56.497\nSTEP: Verifying container removal @ 04/22/26 01:07:56.62\n• [0.582 seconds]\n------------------------------\nNerdctl detached containers unikernel containers Qemu-unikraft-ping-redis\n/home/runner/work/urunc/urunc/tests/e2e/suite_test.go:56\nSTEP: Creating container @ 04/22/26 01:07:56.64\nSTEP: Starting container @ 04/22/26 01:07:56.687\nSTEP: Running test function @ 04/22/26 01:07:56.878\nSTEP: Stopping container @ 04/22/26 01:07:58.971\nSTEP: Removing container @ 04/22/26 01:07:59.149\nSTEP: Verifying container removal @ 04/22/26 01:07:59.269\n• [2.649 seconds]\n------------------------------\nNerdctl detached containers unikernel containers Qemu-mirage-net\n/home/runner/work/urunc/urunc/tests/e2e/suite_test.go:56\nSTEP: Creating container @ 04/22/26 01:07:59.289\nSTEP: Starting container @ 04/22/26 01:07:59.34\nSTEP: Running test function @ 04/22/26 01:07:59.524\nSTEP: Stopping container @ 04/22/26 01:08:07.738\nSTEP: Removing container @ 04/22/26 01:08:07.919\nSTEP: Verifying container removal @ 04/22/26 01:08:08.049\n• [8.779 seconds]\n------------------------------\nNerdctl detached containers unikernel containers Qemu-linux-nginx\n/home/runner/work/urunc/urunc/tests/e2e/suite_test.go:56\nSTEP: Creating container @ 04/22/26 01:08:08.068\nSTEP: Starting container @ 04/22/26 01:08:10.217\nSTEP: Running test function @ 04/22/26 01:08:10.412\nSTEP: Stopping container @ 04/22/26 01:08:12.539\nSTEP: Removing container @ 04/22/26 01:08:12.716\nSTEP: Verifying container removal @ 04/22/26 01:08:12.844\n• [4.793 seconds]\n------------------------------\nNerdctl detached containers unikernel containers Qemu-mewz-hello-server\n/home/runner/work/urunc/urunc/tests/e2e/suite_test.go:56\nSTEP: Creating container @ 04/22/26 01:08:12.861\nSTEP: Starting container @ 04/22/26 01:08:12.911\nSTEP: Running test function @ 04/22/26 01:08:13.108\nSTEP: Stopping container @ 04/22/26 01:08:15.193\nSTEP: Removing container @ 04/22/26 01:08:15.386\nSTEP: Verifying container removal @ 04/22/26 01:08:15.523\n• [2.683 seconds]\n------------------------------\nNerdctl detached containers unikernel containers Qemu-unikraft-with-seccomp\n/home/runner/work/urunc/urunc/tests/e2e/suite_test.go:56\nSTEP: Creating container @ 04/22/26 01:08:15.543\nSTEP: Starting container @ 04/22/26 01:08:15.592\nSTEP: Running test function @ 04/22/26 01:08:15.781\nSTEP: Stopping container @ 04/22/26 01:08:15.808\nSTEP: Removing container @ 04/22/26 01:08:16.002\nSTEP: Verifying container removal @ 04/22/26 01:08:16.135\n• [0.609 seconds]\n------------------------------\nNerdctl detached containers unikernel containers Qemu-unikraft-without-seccomp\n/home/runner/work/urunc/urunc/tests/e2e/suite_test.go:56\nSTEP: Creating container @ 04/22/26 01:08:16.153\nSTEP: Starting container @ 04/22/26 01:08:16.203\nSTEP: Running test function @ 04/22/26 01:08:16.401\nSTEP: Stopping container @ 04/22/26 01:08:16.433\nSTEP: Removing container @ 04/22/26 01:08:16.623\nSTEP: Verifying container removal @ 04/22/26 01:08:16.75\n• [0.614 seconds]\n------------------------------\nNerdctl detached containers unikernel containers Firecracker-unikraft-ping-nginx\n/home/runner/work/urunc/urunc/tests/e2e/suite_test.go:56\nSTEP: Creating container @ 04/22/26 01:08:16.767\nSTEP: Starting container @ 04/22/26 01:08:16.82\nSTEP: Running test function @ 04/22/26 01:08:17.012\nSTEP: Stopping container @ 04/22/26 01:08:19.114\nSTEP: Removing container @ 04/22/26 01:08:19.287\nSTEP: Verifying container removal @ 04/22/26 01:08:19.402\n• [2.651 seconds]\n------------------------------\nNerdctl detached containers unikernel containers Firecracker-linux-nginx\n/home/runner/work/urunc/urunc/tests/e2e/suite_test.go:56\nSTEP: Creating container @ 04/22/26 01:08:19.418\nSTEP: Starting container @ 04/22/26 01:08:19.882\nSTEP: Running test function @ 04/22/26 01:08:20.094\nSTEP: Stopping container @ 04/22/26 01:08:22.221\nSTEP: Removing container @ 04/22/26 01:08:22.392\nSTEP: Verifying container removal @ 04/22/26 01:08:22.524\n• [3.127 seconds]\n------------------------------\nNerdctl detached containers unikernel containers Firecracker-unikraft-with-seccomp\n/home/runner/work/urunc/urunc/tests/e2e/suite_test.go:56\nSTEP: Creating container @ 04/22/26 01:08:22.546\nSTEP: Starting container @ 04/22/26 01:08:22.593\nSTEP: Running test function @ 04/22/26 01:08:22.897\nSTEP: Stopping container @ 04/22/26 01:08:22.934\nSTEP: Removing container @ 04/22/26 01:08:23.116\nSTEP: Verifying container removal @ 04/22/26 01:08:23.237\n• [0.709 seconds]\n------------------------------\nNerdctl detached containers unikernel containers Firecracker-unikraft-without-seccomp\n/home/runner/work/urunc/urunc/tests/e2e/suite_test.go:56\nSTEP: Creating container @ 04/22/26 01:08:23.255\nSTEP: Starting container @ 04/22/26 01:08:23.304\nSTEP: Running test function @ 04/22/26 01:08:23.495\nSTEP: Stopping container @ 04/22/26 01:08:23.525\nSTEP: Removing container @ 04/22/26 01:08:23.703\nSTEP: Verifying container removal @ 04/22/26 01:08:23.863\n• [0.627 seconds]\n------------------------------\nNerdctl detached containers unikernel containers Firecracker-unikraft-namespaces\n/home/runner/work/urunc/urunc/tests/e2e/suite_test.go:56\nSTEP: Creating container @ 04/22/26 01:08:23.882\nSTEP: Starting container @ 04/22/26 01:08:23.935\nSTEP: Running test function @ 04/22/26 01:08:24.134\nSTEP: Stopping container @ 04/22/26 01:08:24.162\nSTEP: Removing container @ 04/22/26 01:08:24.341\nSTEP: Verifying container removal @ 04/22/26 01:08:24.472\n• [0.612 seconds]\n------------------------------\nNerdctl detached containers unikernel containers Qemu-linux-block-mounts\n/home/runner/work/urunc/urunc/tests/e2e/suite_test.go:56\nSTEP: Creating container @ 04/22/26 01:08:24.493\nSTEP: Starting container @ 04/22/26 01:08:25.524\nSTEP: Running test function @ 04/22/26 01:08:25.819\npanic: test timed out after 15m0s\nrunning tests:\nTestE2E (15m0s)\n2026-04-22T01:08:27.4843518Z\ngoroutine 470 [running]:\ntesting.(*M).startAlarm.func1()\ncreated by time.goFunc\n2026-04-22T01:08:27.4845960Z\ngoroutine 1 [chan receive, 15 minutes]:\ntesting.(*T).Run(0xc0000ba700, {0xdb2606?, 0xc000359b30?}, 0xdff408)\ntesting.runTests.func1(0xc0000ba700)\ntesting.tRunner(0xc0000ba700, 0xc000359c70)\ntesting.runTests(0xc000012e28, {0x153cfd0, 0x1, 0x1}, {0xf?, 0xc000237940?, 0x1578ba0?})\ntesting.(*M).Run(0xc0003377c0)\nmain.main()\n_testmain.go:45 +0x9b\n2026-04-22T01:08:27.4856145Z\ngoroutine 8 [select]:\ngithub.com/onsi/ginkgo/v2/internal.(*Suite).runNode(_, {0x5b, 0x4, {0xdc27db, 0x17}, 0xc00040a500, {{0x10773d2, 0x35}, 0x38, {0x0, ...}, ...}, ...}, ...)\n/home/runner/work/urunc/urunc/vendor/github.com/onsi/ginkgo/v2/internal/suite.go:969 +0xfa5\ngithub.com/onsi/ginkgo/v2/internal.(*group).attemptSpec(0xc0003eb720, 0x1, {{0xc000017808?, 0xc00049a630?, 0x3?}, 0x0?})\n/home/runner/work/urunc/urunc/vendor/github.com/onsi/ginkgo/v2/internal/group.go:234 +0xd47\ngithub.com/onsi/ginkgo/v2/internal.(*group).run(0xc0003eb720, {0xc0004c8708?, 0xc0002f9a30?, 0x1?})\n/home/runner/work/urunc/urunc/vendor/github.com/onsi/ginkgo/v2/internal/group.go:384 +0x9a5\ngithub.com/onsi/ginkgo/v2/internal.(*Suite).runSpecs(0xc00038e008, {0xdb4ee0, 0x9}, {0x159c3e0, 0x0, 0x0}, {0x159c3e0, 0x0, 0x0}, 0xc0003a2240, ...)\n/home/runner/work/urunc/urunc/vendor/github.com/onsi/ginkgo/v2/internal/suite.go:519 +0xadb\ngithub.com/onsi/ginkgo/v2/internal.(*Suite).Run(_, {_, _}, {_, _, _}, {_, _, _}, 0xc0003a2240, ...)\n/home/runner/work/urunc/urunc/vendor/github.com/onsi/ginkgo/v2/internal/suite.go:136 +0x4b1\ngithub.com/onsi/ginkgo/v2.RunSpecs({0xef3b20, 0xc0000ba8c0}, {0xdb4ee0, 0x9}, {0x0, 0x0, 0x0})\n/home/runner/work/urunc/urunc/vendor/github.com/onsi/ginkgo/v2/core_dsl.go:315 +0x905\ngithub.com/urunc-dev/urunc/tests/e2e.TestE2E(0xc0000ba8c0)\n/home/runner/work/urunc/urunc/tests/e2e/suite_test.go:37 +0x4f\ntesting.tRunner(0xc0000ba8c0, 0xdff408)\ncreated by testing.(*T).Run in goroutine 1\n2026-04-22T01:08:27.4869198Z\ngoroutine 18 [syscall, 15 minutes]:\nos/signal.signal_recv()\nos/signal.loop()\ncreated by os/signal.Notify.func1.1 in goroutine 8\n2026-04-22T01:08:27.4871618Z\ngoroutine 34 [select, 15 minutes]:\ngithub.com/onsi/ginkgo/v2/internal/interrupt_handler.(*InterruptHandler).registerForInterrupts.func2(0x0?)\n/home/runner/work/urunc/urunc/vendor/github.com/onsi/ginkgo/v2/internal/interrupt_handler/interrupt_handler.go:131 +0x7d\ncreated by github.com/onsi/ginkgo/v2/internal/interrupt_handler.(*InterruptHandler).registerForInterrupts in goroutine 8\n/home/runner/work/urunc/urunc/vendor/github.com/onsi/ginkgo/v2/internal/interrupt_handler/interrupt_handler.go:128 +0x165\n2026-04-22T01:08:27.4875811Z\ngoroutine 19 [select, 15 minutes]:\ngithub.com/onsi/ginkgo/v2/internal.RegisterForProgressSignal.func1()\n/home/runner/work/urunc/urunc/vendor/github.com/onsi/ginkgo/v2/internal/progress_report.go:32 +0x8b\ncreated by github.com/onsi/ginkgo/v2/internal.RegisterForProgressSignal in goroutine 8\n/home/runner/work/urunc/urunc/vendor/github.com/onsi/ginkgo/v2/internal/progress_report.go:30 +0xd9\n2026-04-22T01:08:27.4880250Z\ngoroutine 448 [select]:\ngithub.com/onsi/gomega/internal.(*AsyncAssertion).match(0xc0003dc150, {0xefb920, 0x159c3e0}, 0x1, {0x0, 0x0, 0x0})\n/home/runner/work/urunc/urunc/vendor/github.com/onsi/gomega/internal/async_assertion.go:558 +0x734\ngithub.com/onsi/gomega/internal.(*AsyncAssertion).Should(0xc0003dc150, {0xefb920, 0x159c3e0}, {0x0, 0x0, 0x0})\n/home/runner/work/urunc/urunc/vendor/github.com/onsi/gomega/internal/async_assertion.go:145 +0x85\ngithub.com/urunc-dev/urunc/tests/e2e.runDetachedTest({0xf08258, 0xc0004bc0e0}, {{0xdc27db, 0x17}, {0xde52c1, 0x3c}, 0x1, 0x1, 0x0, 0x0, ...})\n/home/runner/work/urunc/urunc/tests/e2e/suite_test.go:132 +0x3ec\ngithub.com/urunc-dev/urunc/tests/e2e.init.func4.5.1({{0xdc27db, 0x17}, {0xde52c1, 0x3c}, 0x1, 0x1, 0x0, 0x0, {0x159c3e0, 0x0, ...}, ...})\n/home/runner/work/urunc/urunc/tests/e2e/nerdctl_test.go:62 +0x169\nreflect.Value.call({0xc4a6c0?, 0xc0003bfa50?, 0x0?}, {0xdaf9e3, 0x4}, {0xc000083e40, 0x1, 0xc000083d90?})\nreflect.Value.Call({0xc4a6c0?, 0xc0003bfa50?, 0xf0d3f0?}, {0xc000083e40?, 0xc000083e88?, 0xda13e0?})\ngithub.com/onsi/ginkgo/v2.invokeFunction({0xc4a6c0, 0xc0003bfa50}, {0xc0003bfcf0, 0x1, 0x4806df?})\n/home/runner/work/urunc/urunc/vendor/github.com/onsi/ginkgo/v2/table_dsl.go:339 +0x2c5\ngithub.com/onsi/ginkgo/v2.generateTable.func2.2()\n/home/runner/work/urunc/urunc/vendor/github.com/onsi/ginkgo/v2/table_dsl.go:303 +0x30\ngithub.com/onsi/ginkgo/v2/internal.extractBodyFunction.func3({0xc000083f20?, 0x415cbe?})\n/home/runner/work/urunc/urunc/vendor/github.com/onsi/ginkgo/v2/internal/node.go:585 +0x13\ngithub.com/onsi/ginkgo/v2/internal.(*Suite).runNode.func3()\n/home/runner/work/urunc/urunc/vendor/github.com/onsi/ginkgo/v2/internal/suite.go:946 +0x393\ncreated by github.com/onsi/ginkgo/v2/internal.(*Suite).runNode in goroutine 8\n/home/runner/work/urunc/urunc/vendor/github.com/onsi/ginkgo/v2/internal/suite.go:911 +0xd90\nFAIL\tgithub.com/urunc-dev/urunc/tests/e2e\t900.012s\nFAIL\nmake: *** [Makefile:268: test_nerdctl] Error 1\n##[error]Process completed with exit code 2."
-            }
-          ],
-          "run_attempt": 1
-        },
-        {
-          "id": 24698256413,
-          "name": "urunc CI (nightly)",
-          "status": "completed",
-          "conclusion": "failure",
-          "run_number": 182,
-          "created_at": "2026-04-21T00:53:53Z",
-          "updated_at": "2026-04-21T01:11:59Z",
-          "run_started_at": "2026-04-21T00:53:53Z",
-          "html_url": "https://github.com/urunc-dev/urunc/actions/runs/24698256413",
-          "jobs": [
-            {
-              "name": "Build / build (arm64, ubuntu-22.04-arm)",
-              "conclusion": "success",
-              "duration_sec": 46,
-              "html_url": "https://github.com/urunc-dev/urunc/actions/runs/24698256413/job/72235702274"
-            },
-            {
-              "name": "Unit tests / unit-test (amd64, ubuntu-22.04)",
-              "conclusion": "success",
-              "duration_sec": 37,
-              "html_url": "https://github.com/urunc-dev/urunc/actions/runs/24698256413/job/72235702285"
-            },
-            {
-              "name": "Unit tests / unit-test (arm64, ubuntu-22.04-arm)",
-              "conclusion": "success",
-              "duration_sec": 34,
-              "html_url": "https://github.com/urunc-dev/urunc/actions/runs/24698256413/job/72235702287"
-            },
-            {
-              "name": "Build / build (amd64, ubuntu-22.04)",
-              "conclusion": "success",
-              "duration_sec": 64,
-              "html_url": "https://github.com/urunc-dev/urunc/actions/runs/24698256413/job/72235702288"
-            },
-            {
-              "name": "urunc-deploy test / urunc-deploy (arm64, ubuntu-22.04-arm)",
-              "conclusion": "success",
-              "duration_sec": 110,
-              "html_url": "https://github.com/urunc-dev/urunc/actions/runs/24698256413/job/72235800135"
-            },
-            {
-              "name": "urunc-deploy test / urunc-deploy (amd64, ubuntu-22.04)",
-              "conclusion": "success",
-              "duration_sec": 75,
-              "html_url": "https://github.com/urunc-dev/urunc/actions/runs/24698256413/job/72235800143"
-            },
-            {
-              "name": "Kubernetes test / Kubernetes test (amd64, ubuntu-22.04)",
-              "conclusion": "success",
-              "duration_sec": 304,
-              "html_url": "https://github.com/urunc-dev/urunc/actions/runs/24698256413/job/72235800144"
-            },
-            {
-              "name": "Kubernetes test / Kubernetes test (arm64, ubuntu-22.04-arm)",
-              "conclusion": "success",
-              "duration_sec": 302,
-              "html_url": "https://github.com/urunc-dev/urunc/actions/runs/24698256413/job/72235800145"
-            },
-            {
-              "name": "E2E test / VM test (amd64, test_nerdctl)",
-              "conclusion": "failure",
-              "duration_sec": 1017,
-              "html_url": "https://github.com/urunc-dev/urunc/actions/runs/24698256413/job/72235800189"
-            },
-            {
-              "name": "E2E test / VM test (amd64, test_docker)",
-              "conclusion": "success",
-              "duration_sec": 367,
-              "html_url": "https://github.com/urunc-dev/urunc/actions/runs/24698256413/job/72235800192"
-            },
-            {
-              "name": "E2E test / VM test (amd64, test_ctr)",
-              "conclusion": "success",
-              "duration_sec": 912,
-              "html_url": "https://github.com/urunc-dev/urunc/actions/runs/24698256413/job/72235800194"
-            },
-            {
-              "name": "E2E test / VM test (arm64, test_nerdctl)",
-              "conclusion": "success",
-              "duration_sec": 926,
-              "html_url": "https://github.com/urunc-dev/urunc/actions/runs/24698256413/job/72235800197"
-            },
-            {
-              "name": "E2E test / VM test (arm64, test_ctr)",
-              "conclusion": "success",
-              "duration_sec": 811,
-              "html_url": "https://github.com/urunc-dev/urunc/actions/runs/24698256413/job/72235800202"
-            },
-            {
-              "name": "E2E test / VM test (arm64, test_docker)",
-              "conclusion": "success",
-              "duration_sec": 380,
-              "html_url": "https://github.com/urunc-dev/urunc/actions/runs/24698256413/job/72235800204"
-            },
-            {
-              "name": "E2E test / VM test (arm64, test_crictl)",
-              "conclusion": "success",
-              "duration_sec": 425,
-              "html_url": "https://github.com/urunc-dev/urunc/actions/runs/24698256413/job/72235800207"
-            },
-            {
-              "name": "E2E test / VM test (amd64, test_crictl)",
-              "conclusion": "success",
-              "duration_sec": 476,
-              "html_url": "https://github.com/urunc-dev/urunc/actions/runs/24698256413/job/72235800267"
-            }
-          ],
-          "failed_jobs": [
-            {
-              "id": 72235800189,
-              "name": "E2E test / VM test (amd64, test_nerdctl)",
-              "conclusion": "failure",
-              "html_url": "https://github.com/urunc-dev/urunc/actions/runs/24698256413/job/72235800189",
-              "log_snippet": "[Crash / Timeout] — 4 signal(s) found\n────────────────────────────────────────────────\n-\u003e Crash / Timeout\n  panic: test timed out after 15m0s\n-\u003e Test Failure\n  FAIL\tgithub.com/urunc-dev/urunc/tests/e2e\t900.016s\n-\u003e Build Failure\n  make: *** [Makefile:268: test_nerdctl] Error 1\n  ##[error]Process completed with exit code 2.",
-              "raw_log": "all modules verified\n##[group]Run # Set up Go environment properly\n# Set up Go environment properly\nexport GOROOT=$(go env GOROOT)\nexport PATH=\"$GOROOT/bin:$PATH\"\ngo version\ngo env GOROOT\nif [ \"amd64\" = \"arm64\" ]; then\nsudo -E env \"PATH=$PATH\" \"GOROOT=$GOROOT\" make test_nerdctl_Spt\nelse\nsudo -E env \"PATH=$PATH\" \"GOROOT=$GOROOT\" make test_nerdctl\nfi\nshell: /usr/bin/bash -e {0}\nenv:\nGOTOOLCHAIN: local\n##[endgroup]\ngo version go1.25.4 linux/amd64\nTesting nerdctl\n=== RUN   TestE2E\nRunning Suite: E2E Suite - /home/runner/work/urunc/urunc/tests/e2e\n==================================================================\nRandom Seed: 1776733014\n2026-04-21T00:56:54.0770781Z\nWill run 27 of 72 specs\nSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSS\n------------------------------\nNerdctl foreground containers unikernel containers Hvt-rumprun-capture-hello\n/home/runner/work/urunc/urunc/tests/e2e/suite_test.go:56\n2026/04/21 00:56:54 Pulling image: harbor.nbfc.io/nubificus/urunc/redis-qemu-unikraft-initrd:latest\n2026/04/21 00:57:02 Pulling image: harbor.nbfc.io/nubificus/urunc/nginx-firecracker-unikraft-initrd:latest\n2026/04/21 00:57:12 Pulling image: harbor.nbfc.io/nubificus/urunc/nginx-firecracker-linux-raw:latest\n2026/04/21 00:58:21 Pulling image: harbor.nbfc.io/nubificus/urunc/busybox-qemu-linux-raw:latest\n2026/04/21 00:58:54 Pulling image: harbor.nbfc.io/nubificus/urunc/busybox-firecracker-linux-raw:latest\n2026/04/21 01:03:46 Pulling image: harbor.nbfc.io/nubificus/urunc/nginx-qemu-linux-raw:latest\n2026/04/21 01:04:01 Pulling image: harbor.nbfc.io/nubificus/urunc/hello-server-qemu-mewz:latest\n2026/04/21 01:04:16 Pulling image: harbor.nbfc.io/nubificus/urunc/hello-hvt-rumprun:latest\n2026/04/21 01:04:44 Pulling image: harbor.nbfc.io/nubificus/urunc/redis-hvt-rumprun-raw:latest\n2026/04/21 01:05:17 Pulling image: harbor.nbfc.io/nubificus/urunc/net-hvt-mirage:latest\n2026/04/21 01:05:33 Pulling image: harbor.nbfc.io/nubificus/urunc/net-spt-mirage:latest\n2026/04/21 01:05:50 Pulling image: harbor.nbfc.io/nubificus/urunc/busybox-cloud-hypervisor-linux-raw:latest\n2026/04/21 01:09:18 Pulling image: harbor.nbfc.io/nubificus/urunc/hello-spt-rumprun:latest\n2026/04/21 01:09:36 Pulling image: harbor.nbfc.io/nubificus/urunc/redis-hvt-rumprun-block:latest\n2026/04/21 01:09:40 Pulling image: harbor.nbfc.io/nubificus/urunc/redis-spt-rumprun-raw:latest\n2026/04/21 01:09:57 Pulling image: harbor.nbfc.io/nubificus/urunc/net-qemu-mirage:latest\n2026/04/21 01:10:05 Pulling image: harbor.nbfc.io/nubificus/urunc/nginx-cloud-hypervisor-linux-raw:latest\nSTEP: Running container @ 04/21/26 01:11:23.771\nSTEP: Verifying container output @ 04/21/26 01:11:25.142\nSTEP: Cleaning up container @ 04/21/26 01:11:25.142\n• [871.269 seconds]\n------------------------------\nNerdctl foreground containers unikernel containers Spt-rumprun-capture-hello\n/home/runner/work/urunc/urunc/tests/e2e/suite_test.go:56\nSTEP: Running container @ 04/21/26 01:11:25.347\nSTEP: Verifying container output @ 04/21/26 01:11:26.49\nSTEP: Cleaning up container @ 04/21/26 01:11:26.49\n• [1.378 seconds]\n------------------------------\nNerdctl detached containers unikernel containers Hvt-rumprun-ping-redis\n/home/runner/work/urunc/urunc/tests/e2e/suite_test.go:56\nSTEP: Creating container @ 04/21/26 01:11:26.724\nSTEP: Starting container @ 04/21/26 01:11:27.844\nSTEP: Running test function @ 04/21/26 01:11:28.078\nSTEP: Stopping container @ 04/21/26 01:11:30.2\nSTEP: Removing container @ 04/21/26 01:11:30.386\nSTEP: Verifying container removal @ 04/21/26 01:11:30.514\n• [3.807 seconds]\n------------------------------\nNerdctl detached containers unikernel containers Hvt-rumprun-ping-redis-with-block\n/home/runner/work/urunc/urunc/tests/e2e/suite_test.go:56\nSTEP: Creating container @ 04/21/26 01:11:30.532\nSTEP: Starting container @ 04/21/26 01:11:30.957\nSTEP: Running test function @ 04/21/26 01:11:31.153\nSTEP: Stopping container @ 04/21/26 01:11:33.245\nSTEP: Removing container @ 04/21/26 01:11:33.425\nSTEP: Verifying container removal @ 04/21/26 01:11:33.557\n• [3.046 seconds]\n------------------------------\nNerdctl detached containers unikernel containers Hvt-mirage-net\n/home/runner/work/urunc/urunc/tests/e2e/suite_test.go:56\nSTEP: Creating container @ 04/21/26 01:11:33.578\nSTEP: Starting container @ 04/21/26 01:11:33.631\nSTEP: Running test function @ 04/21/26 01:11:33.829\nSTEP: Stopping container @ 04/21/26 01:11:35.87\nSTEP: Removing container @ 04/21/26 01:11:36.044\nSTEP: Verifying container removal @ 04/21/26 01:11:36.18\n• [2.621 seconds]\n------------------------------\nNerdctl detached containers unikernel containers Hvt-rumprun-with-seccomp\n/home/runner/work/urunc/urunc/tests/e2e/suite_test.go:56\nSTEP: Creating container @ 04/21/26 01:11:36.199\nSTEP: Starting container @ 04/21/26 01:11:36.378\nSTEP: Running test function @ 04/21/26 01:11:36.618\nSTEP: Stopping container @ 04/21/26 01:11:36.643\nSTEP: Removing container @ 04/21/26 01:11:36.829\nSTEP: Verifying container removal @ 04/21/26 01:11:36.95\n• [0.770 seconds]\n------------------------------\nNerdctl detached containers unikernel containers Hvt-rumprun-without-seccomp\n/home/runner/work/urunc/urunc/tests/e2e/suite_test.go:56\nSTEP: Creating container @ 04/21/26 01:11:36.969\nSTEP: Starting container @ 04/21/26 01:11:37.172\nSTEP: Running test function @ 04/21/26 01:11:37.413\nSTEP: Stopping container @ 04/21/26 01:11:37.44\nSTEP: Removing container @ 04/21/26 01:11:37.615\nSTEP: Verifying container removal @ 04/21/26 01:11:37.762\n• [0.810 seconds]\n------------------------------\nNerdctl detached containers unikernel containers Hvt-rumprun-UserGroup\n/home/runner/work/urunc/urunc/tests/e2e/suite_test.go:56\nSTEP: Creating container @ 04/21/26 01:11:37.78\nSTEP: Starting container @ 04/21/26 01:11:37.831\nSTEP: Running test function @ 04/21/26 01:11:38.027\nSTEP: Stopping container @ 04/21/26 01:11:38.054\nSTEP: Removing container @ 04/21/26 01:11:38.24\nSTEP: Verifying container removal @ 04/21/26 01:11:38.366\n• [0.606 seconds]\n------------------------------\nNerdctl detached containers unikernel containers Spt-rumprun-ping-redis\n/home/runner/work/urunc/urunc/tests/e2e/suite_test.go:56\nSTEP: Creating container @ 04/21/26 01:11:38.386\nSTEP: Starting container @ 04/21/26 01:11:39.47\nSTEP: Running test function @ 04/21/26 01:11:39.694\nSTEP: Stopping container @ 04/21/26 01:11:41.762\nSTEP: Removing container @ 04/21/26 01:11:41.93\nSTEP: Verifying container removal @ 04/21/26 01:11:42.063\n• [3.696 seconds]\n------------------------------\nNerdctl detached containers unikernel containers Spt-mirage-net\n/home/runner/work/urunc/urunc/tests/e2e/suite_test.go:56\nSTEP: Creating container @ 04/21/26 01:11:42.082\nSTEP: Starting container @ 04/21/26 01:11:42.141\nSTEP: Running test function @ 04/21/26 01:11:42.343\nSTEP: Stopping container @ 04/21/26 01:11:44.43\nSTEP: Removing container @ 04/21/26 01:11:44.617\nSTEP: Verifying container removal @ 04/21/26 01:11:44.748\n• [2.683 seconds]\n------------------------------\nNerdctl detached containers unikernel containers Spt-mirage-UserGroup\n/home/runner/work/urunc/urunc/tests/e2e/suite_test.go:56\nSTEP: Creating container @ 04/21/26 01:11:44.766\nSTEP: Starting container @ 04/21/26 01:11:44.823\nSTEP: Running test function @ 04/21/26 01:11:45.009\nSTEP: Stopping container @ 04/21/26 01:11:45.032\nSTEP: Removing container @ 04/21/26 01:11:45.214\nSTEP: Verifying container removal @ 04/21/26 01:11:45.343\n• [0.595 seconds]\n------------------------------\nNerdctl detached containers unikernel containers Qemu-unikraft-ping-redis\n/home/runner/work/urunc/urunc/tests/e2e/suite_test.go:56\nSTEP: Creating container @ 04/21/26 01:11:45.361\nSTEP: Starting container @ 04/21/26 01:11:45.413\nSTEP: Running test function @ 04/21/26 01:11:45.616\nSTEP: Stopping container @ 04/21/26 01:11:53.825\nSTEP: Removing container @ 04/21/26 01:11:54.005\npanic: test timed out after 15m0s\nrunning tests:\nTestE2E (15m0s)\n2026-04-21T01:11:54.0780462Z\ngoroutine 326 [running]:\ntesting.(*M).startAlarm.func1()\ncreated by time.goFunc\n2026-04-21T01:11:54.0783369Z\ngoroutine 1 [chan receive, 15 minutes]:\ntesting.(*T).Run(0xc0000ba700, {0xdb2606?, 0xc000359b30?}, 0xdff408)\ntesting.runTests.func1(0xc0000ba700)\ntesting.tRunner(0xc0000ba700, 0xc000359c70)\ntesting.runTests(0xc000012e28, {0x153cfd0, 0x1, 0x1}, {0xf?, 0xc000237940?, 0x1578ba0?})\ntesting.(*M).Run(0xc000337900)\nmain.main()\n_testmain.go:45 +0x9b\n2026-04-21T01:11:54.0793506Z\ngoroutine 8 [select]:\ngithub.com/onsi/ginkgo/v2/internal.(*Suite).runNode(_, {0x84, 0x40000, {0x0, 0x0}, 0xc0001523b0, {{0x10773d2, 0x35}, 0x69, {0x0, ...}, ...}, ...}, ...)\n/home/runner/work/urunc/urunc/vendor/github.com/onsi/ginkgo/v2/internal/suite.go:969 +0xfa5\ngithub.com/onsi/ginkgo/v2/internal.(*group).attemptSpec(0xc0003eb720, 0x1, {{0xc0005bf408?, 0xc0003cc210?, 0x3?}, 0x0?})\n/home/runner/work/urunc/urunc/vendor/github.com/onsi/ginkgo/v2/internal/group.go:321 +0x1fb6\ngithub.com/onsi/ginkgo/v2/internal.(*group).run(0xc0003eb720, {0xc000148708?, 0xc0002f9a70?, 0x1?})\n/home/runner/work/urunc/urunc/vendor/github.com/onsi/ginkgo/v2/internal/group.go:384 +0x9a5\ngithub.com/onsi/ginkgo/v2/internal.(*Suite).runSpecs(0xc00038e008, {0xdb4ee0, 0x9}, {0x159c3e0, 0x0, 0x0}, {0x159c3e0, 0x0, 0x0}, 0xc0003a2240, ...)\n/home/runner/work/urunc/urunc/vendor/github.com/onsi/ginkgo/v2/internal/suite.go:519 +0xadb\ngithub.com/onsi/ginkgo/v2/internal.(*Suite).Run(_, {_, _}, {_, _, _}, {_, _, _}, 0xc0003a2240, ...)\n/home/runner/work/urunc/urunc/vendor/github.com/onsi/ginkgo/v2/internal/suite.go:136 +0x4b1\ngithub.com/onsi/ginkgo/v2.RunSpecs({0xef3b20, 0xc0000ba8c0}, {0xdb4ee0, 0x9}, {0x0, 0x0, 0x0})\n/home/runner/work/urunc/urunc/vendor/github.com/onsi/ginkgo/v2/core_dsl.go:315 +0x905\ngithub.com/urunc-dev/urunc/tests/e2e.TestE2E(0xc0000ba8c0)\n/home/runner/work/urunc/urunc/tests/e2e/suite_test.go:37 +0x4f\ntesting.tRunner(0xc0000ba8c0, 0xdff408)\ncreated by testing.(*T).Run in goroutine 1\n2026-04-21T01:11:54.0813238Z\ngoroutine 18 [syscall, 15 minutes]:\nos/signal.signal_recv()\nos/signal.loop()\ncreated by os/signal.Notify.func1.1 in goroutine 8\n2026-04-21T01:11:54.0817549Z\ngoroutine 34 [select, 15 minutes]:\ngithub.com/onsi/ginkgo/v2/internal/interrupt_handler.(*InterruptHandler).registerForInterrupts.func2(0x0?)\n/home/runner/work/urunc/urunc/vendor/github.com/onsi/ginkgo/v2/internal/interrupt_handler/interrupt_handler.go:131 +0x7d\ncreated by github.com/onsi/ginkgo/v2/internal/interrupt_handler.(*InterruptHandler).registerForInterrupts in goroutine 8\n/home/runner/work/urunc/urunc/vendor/github.com/onsi/ginkgo/v2/internal/interrupt_handler/interrupt_handler.go:128 +0x165\n2026-04-21T01:11:54.0822404Z\ngoroutine 39 [select, 15 minutes]:\ngithub.com/onsi/ginkgo/v2/internal.RegisterForProgressSignal.func1()\n/home/runner/work/urunc/urunc/vendor/github.com/onsi/ginkgo/v2/internal/progress_report.go:32 +0x8b\ncreated by github.com/onsi/ginkgo/v2/internal.RegisterForProgressSignal in goroutine 8\n/home/runner/work/urunc/urunc/vendor/github.com/onsi/ginkgo/v2/internal/progress_report.go:30 +0xd9\n2026-04-21T01:11:54.0825393Z\ngoroutine 324 [IO wait]:\ninternal/poll.runtime_pollWait(0x7f04a7c44e00, 0x72)\ninternal/poll.(*pollDesc).wait(0xc00007e300?, 0xc00052ee00?, 0x1)\ninternal/poll.(*pollDesc).waitRead(...)\ninternal/poll.(*FD).Read(0xc00007e300, {0xc00052ee00, 0x200, 0x200})\nos.(*File).read(...)\nos.(*File).Read(0xc000146008, {0xc00052ee00?, 0x41b93f?, 0xc99720?})\nbytes.(*Buffer).ReadFrom(0xc000158600, {0xef3960, 0xc000070170})\nio.copyBuffer({0xef3b40, 0xc000158600}, {0xef3960, 0xc000070170}, {0x0, 0x0, 0x0})\nio.Copy(...)\nos.genericWriteTo(0xc000146008?, {0xef3b40, 0xc000158600})\nos.(*File).WriteTo(0xc000146008, {0xef3b40, 0xc000158600})\nio.copyBuffer({0xef3b40, 0xc000158600}, {0xef39e0, 0xc000146008}, {0x0, 0x0, 0x0})\nio.Copy(...)\nos/exec.(*Cmd).writerDescriptor.func1()\nos/exec.(*Cmd).Start.func2(0xdff408?)\ncreated by os/exec.(*Cmd).Start in goroutine 356\n2026-04-21T01:11:54.0847178Z\ngoroutine 356 [syscall]:\nsyscall.Syscall6(0xf7, 0x3, 0xd, 0xc000054c00, 0x4, 0xc000150000, 0x0)\ninternal/syscall/unix.Waitid(0x598835?, 0xc0003180a8?, 0x1?, 0xc000158180?, 0x3?)\nos.(*Process).pidfdWait.func1(...)\nos.ignoringEINTR(...)\nos.(*Process).pidfdWait(0xc0003c6040)\nos.(*Process).wait(0x598b60?)\nos.(*Process).Wait(...)\nos/exec.(*Cmd).Wait(0xc000142000)\nos/exec.(*Cmd).Run(0xc000142000)\nos/exec.(*Cmd).Output(0xc000142000)\ngithub.com/urunc-dev/urunc/tests/e2e.commonCmdExec({0xc0000f0140, 0x4b})\n/home/runner/work/urunc/urunc/tests/e2e/common.go:115 +0xaf\ngithub.com/urunc-dev/urunc/tests/e2e.commonRmContainer({0xdb2699?, 0x0?}, {0xc000454370, 0x40})\n/home/runner/work/urunc/urunc/tests/e2e/common.go:189 +0x52\ngithub.com/urunc-dev/urunc/tests/e2e.(*nerdctlInfo).rmContainer(0xc000446000)\n/home/runner/work/urunc/urunc/tests/e2e/nerdctl.go:98 +0x36\ngithub.com/urunc-dev/urunc/tests/e2e.runDetachedTest.func1()\n/home/runner/work/urunc/urunc/tests/e2e/suite_test.go:115 +0x15e\nreflect.Value.call({0xc31ec0?, 0xc00031a1c8?, 0xc0005e5e20?}, {0xdaf9e3, 0x4}, {0x159c3e0, 0x0, 0xc0005e5e40?})\nreflect.Value.Call({0xc31ec0?, 0xc00031a1c8?, 0xc4a6c0?}, {0x159c3e0?, 0xc0005e5ea0?, 0x0?})\ngithub.com/onsi/ginkgo/v2/internal.NewCleanupNode.func3()\n/home/runner/work/urunc/urunc/vendor/github.com/onsi/ginkgo/v2/internal/node.go:707 +0x34\ngithub.com/onsi/ginkgo/v2/internal.extractBodyFunction.func3({0xc0005e5f20?, 0x415cbe?})\n/home/runner/work/urunc/urunc/vendor/github.com/onsi/ginkgo/v2/internal/node.go:585 +0x13\ngithub.com/onsi/ginkgo/v2/internal.(*Suite).runNode.func3()\n/home/runner/work/urunc/urunc/vendor/github.com/onsi/ginkgo/v2/internal/suite.go:946 +0x393\ncreated by github.com/onsi/ginkgo/v2/internal.(*Suite).runNode in goroutine 8\n/home/runner/work/urunc/urunc/vendor/github.com/onsi/ginkgo/v2/internal/suite.go:911 +0xd90\n2026-04-21T01:11:54.0878809Z\ngoroutine 325 [IO wait]:\ninternal/poll.runtime_pollWait(0x7f04a7c44a00, 0x72)\ninternal/poll.(*pollDesc).wait(0xc00007e420?, 0xc000572000?, 0x1)\ninternal/poll.(*pollDesc).waitRead(...)\ninternal/poll.(*FD).Read(0xc00007e420, {0xc000572000, 0x200, 0x200})\nos.(*File).read(...)\nos.(*File).Read(0xc000146020, {0xc000572000?, 0x41b93f?, 0xc99720?})\nbytes.(*Buffer).ReadFrom(0xc000158120, {0xef3960, 0xc000568068})\nio.copyBuffer({0xef3b40, 0xc000158120}, {0xef3960, 0xc000568068}, {0x0, 0x0, 0x0})\nio.Copy(...)\nos.genericWriteTo(0xc000146020?, {0xef3b40, 0xc000158120})\nos.(*File).WriteTo(0xc000146020, {0xef3b40, 0xc000158120})\nio.copyBuffer({0xef3b40, 0xc000158120}, {0xef39e0, 0xc000146020}, {0x0, 0x0, 0x0})\nio.Copy(...)\nos/exec.(*Cmd).writerDescriptor.func1()\nos/exec.(*Cmd).Start.func2(0x39323837643a3635?)\ncreated by os/exec.(*Cmd).Start in goroutine 356\nFAIL\tgithub.com/urunc-dev/urunc/tests/e2e\t900.016s\nFAIL\nmake: *** [Makefile:268: test_nerdctl] Error 1\n##[error]Process completed with exit code 2."
             }
           ],
           "run_attempt": 1
@@ -17224,7 +17204,7 @@
       "total_runs": 40,
       "failed_runs": 0,
       "failure_rate": 0,
-      "avg_duration_secs": 18.675,
+      "avg_duration_secs": 18.75,
       "weather_history": [
         "success",
         "success",
@@ -17235,26 +17215,46 @@
         "success"
       ],
       "last_run": {
-        "id": 26483098397,
+        "id": 26546804858,
         "name": "Automatically close stale PRs",
         "status": "completed",
         "conclusion": "success",
-        "run_number": 444,
-        "created_at": "2026-05-27T00:25:58Z",
-        "updated_at": "2026-05-27T00:26:16Z",
-        "run_started_at": "2026-05-27T00:25:58Z",
-        "html_url": "https://github.com/urunc-dev/urunc/actions/runs/26483098397",
+        "run_number": 445,
+        "created_at": "2026-05-28T00:23:34Z",
+        "updated_at": "2026-05-28T00:23:53Z",
+        "run_started_at": "2026-05-28T00:23:34Z",
+        "html_url": "https://github.com/urunc-dev/urunc/actions/runs/26546804858",
         "jobs": [
           {
             "name": "stale",
             "conclusion": "success",
-            "duration_sec": 15,
-            "html_url": "https://github.com/urunc-dev/urunc/actions/runs/26483098397/job/77984508004"
+            "duration_sec": 16,
+            "html_url": "https://github.com/urunc-dev/urunc/actions/runs/26546804858/job/78200308179"
           }
         ],
         "run_attempt": 1
       },
       "recent_runs": [
+        {
+          "id": 26546804858,
+          "name": "Automatically close stale PRs",
+          "status": "completed",
+          "conclusion": "success",
+          "run_number": 445,
+          "created_at": "2026-05-28T00:23:34Z",
+          "updated_at": "2026-05-28T00:23:53Z",
+          "run_started_at": "2026-05-28T00:23:34Z",
+          "html_url": "https://github.com/urunc-dev/urunc/actions/runs/26546804858",
+          "jobs": [
+            {
+              "name": "stale",
+              "conclusion": "success",
+              "duration_sec": 16,
+              "html_url": "https://github.com/urunc-dev/urunc/actions/runs/26546804858/job/78200308179"
+            }
+          ],
+          "run_attempt": 1
+        },
         {
           "id": 26483098397,
           "name": "Automatically close stale PRs",
@@ -18031,26 +18031,6 @@
               "conclusion": "success",
               "duration_sec": 18,
               "html_url": "https://github.com/urunc-dev/urunc/actions/runs/24616993232/job/71980716695"
-            }
-          ],
-          "run_attempt": 1
-        },
-        {
-          "id": 24592193524,
-          "name": "Automatically close stale PRs",
-          "status": "completed",
-          "conclusion": "success",
-          "run_number": 405,
-          "created_at": "2026-04-18T00:13:10Z",
-          "updated_at": "2026-04-18T00:13:26Z",
-          "run_started_at": "2026-04-18T00:13:10Z",
-          "html_url": "https://github.com/urunc-dev/urunc/actions/runs/24592193524",
-          "jobs": [
-            {
-              "name": "stale",
-              "conclusion": "success",
-              "duration_sec": 14,
-              "html_url": "https://github.com/urunc-dev/urunc/actions/runs/24592193524/job/71915064990"
             }
           ],
           "run_attempt": 1
