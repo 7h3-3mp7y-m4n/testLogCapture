@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-05-28T08:01:34.681491454Z",
+  "generated_at": "2026-05-28T11:46:34.781155209Z",
   "repo": "urunc-dev/urunc",
   "overall_health": 88.69047619047619,
   "workflows": [
@@ -11,37 +11,53 @@
       "total_runs": 40,
       "failed_runs": 0,
       "failure_rate": 0,
-      "avg_duration_secs": 1.525,
+      "avg_duration_secs": 1.4,
       "weather_history": [
-        "skipped",
-        "skipped",
         "skipped",
         "skipped",
         "success",
         "skipped",
-        "skipped"
+        "skipped",
+        "action_required",
+        "action_required"
       ],
       "last_run": {
-        "id": 26405089190,
+        "id": 26571022337,
         "name": "Add Git Trailers to PR commits",
         "status": "completed",
-        "conclusion": "skipped",
-        "run_number": 69,
-        "created_at": "2026-05-25T14:18:26Z",
-        "updated_at": "2026-05-25T14:18:33Z",
-        "run_started_at": "2026-05-25T14:18:31Z",
-        "html_url": "https://github.com/urunc-dev/urunc/actions/runs/26405089190",
-        "jobs": [
-          {
-            "name": "Add Git Trailers",
-            "conclusion": "skipped",
-            "duration_sec": 0,
-            "html_url": "https://github.com/urunc-dev/urunc/actions/runs/26405089190/job/77726440043"
-          }
-        ],
-        "run_attempt": 2
+        "conclusion": "action_required",
+        "run_number": 71,
+        "created_at": "2026-05-28T11:08:27Z",
+        "updated_at": "2026-05-28T11:08:27Z",
+        "run_started_at": "2026-05-28T11:08:27Z",
+        "html_url": "https://github.com/urunc-dev/urunc/actions/runs/26571022337",
+        "run_attempt": 1
       },
       "recent_runs": [
+        {
+          "id": 26571022337,
+          "name": "Add Git Trailers to PR commits",
+          "status": "completed",
+          "conclusion": "action_required",
+          "run_number": 71,
+          "created_at": "2026-05-28T11:08:27Z",
+          "updated_at": "2026-05-28T11:08:27Z",
+          "run_started_at": "2026-05-28T11:08:27Z",
+          "html_url": "https://github.com/urunc-dev/urunc/actions/runs/26571022337",
+          "run_attempt": 1
+        },
+        {
+          "id": 26569674077,
+          "name": "Add Git Trailers to PR commits",
+          "status": "completed",
+          "conclusion": "action_required",
+          "run_number": 70,
+          "created_at": "2026-05-28T10:38:07Z",
+          "updated_at": "2026-05-28T10:38:07Z",
+          "run_started_at": "2026-05-28T10:38:07Z",
+          "html_url": "https://github.com/urunc-dev/urunc/actions/runs/26569674077",
+          "run_attempt": 1
+        },
         {
           "id": 26405089190,
           "name": "Add Git Trailers to PR commits",
@@ -569,38 +585,6 @@
           "run_started_at": "2026-05-13T16:50:58Z",
           "html_url": "https://github.com/urunc-dev/urunc/actions/runs/25813478192",
           "run_attempt": 1
-        },
-        {
-          "id": 25813451494,
-          "name": "Add Git Trailers to PR commits",
-          "status": "completed",
-          "conclusion": "action_required",
-          "run_number": 31,
-          "created_at": "2026-05-13T16:50:30Z",
-          "updated_at": "2026-05-13T16:50:30Z",
-          "run_started_at": "2026-05-13T16:50:30Z",
-          "html_url": "https://github.com/urunc-dev/urunc/actions/runs/25813451494",
-          "run_attempt": 1
-        },
-        {
-          "id": 25807977611,
-          "name": "Add Git Trailers to PR commits",
-          "status": "completed",
-          "conclusion": "skipped",
-          "run_number": 30,
-          "created_at": "2026-05-13T15:10:22Z",
-          "updated_at": "2026-05-13T15:10:38Z",
-          "run_started_at": "2026-05-13T15:10:33Z",
-          "html_url": "https://github.com/urunc-dev/urunc/actions/runs/25807977611",
-          "jobs": [
-            {
-              "name": "Add Git Trailers",
-              "conclusion": "skipped",
-              "duration_sec": 0,
-              "html_url": "https://github.com/urunc-dev/urunc/actions/runs/25807977611/job/75816097145"
-            }
-          ],
-          "run_attempt": 2
         }
       ]
     },
