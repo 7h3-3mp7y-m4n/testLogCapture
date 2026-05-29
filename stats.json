@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-05-29T15:34:55.458760225Z",
+  "generated_at": "2026-05-29T18:37:22.142904602Z",
   "repo": "urunc-dev/urunc",
   "overall_health": 88.80952380952381,
   "workflows": [
@@ -16337,7 +16337,7 @@
       "total_runs": 40,
       "failed_runs": 0,
       "failure_rate": 0,
-      "avg_duration_secs": 58,
+      "avg_duration_secs": 58.15,
       "weather_history": [
         "success",
         "success",
@@ -16348,26 +16348,46 @@
         "success"
       ],
       "last_run": {
-        "id": 26405128334,
+        "id": 26653059944,
         "name": "Scorecard supply-chain security",
         "status": "completed",
         "conclusion": "success",
-        "run_number": 240,
-        "created_at": "2026-05-25T14:19:23Z",
-        "updated_at": "2026-05-25T14:20:25Z",
-        "run_started_at": "2026-05-25T14:19:23Z",
-        "html_url": "https://github.com/urunc-dev/urunc/actions/runs/26405128334",
+        "run_number": 241,
+        "created_at": "2026-05-29T17:49:23Z",
+        "updated_at": "2026-05-29T17:50:29Z",
+        "run_started_at": "2026-05-29T17:49:23Z",
+        "html_url": "https://github.com/urunc-dev/urunc/actions/runs/26653059944",
         "jobs": [
           {
             "name": "Scorecard analysis",
             "conclusion": "success",
-            "duration_sec": 58,
-            "html_url": "https://github.com/urunc-dev/urunc/actions/runs/26405128334/job/77726552059"
+            "duration_sec": 61,
+            "html_url": "https://github.com/urunc-dev/urunc/actions/runs/26653059944/job/78556116537"
           }
         ],
         "run_attempt": 1
       },
       "recent_runs": [
+        {
+          "id": 26653059944,
+          "name": "Scorecard supply-chain security",
+          "status": "completed",
+          "conclusion": "success",
+          "run_number": 241,
+          "created_at": "2026-05-29T17:49:23Z",
+          "updated_at": "2026-05-29T17:50:29Z",
+          "run_started_at": "2026-05-29T17:49:23Z",
+          "html_url": "https://github.com/urunc-dev/urunc/actions/runs/26653059944",
+          "jobs": [
+            {
+              "name": "Scorecard analysis",
+              "conclusion": "success",
+              "duration_sec": 61,
+              "html_url": "https://github.com/urunc-dev/urunc/actions/runs/26653059944/job/78556116537"
+            }
+          ],
+          "run_attempt": 1
+        },
         {
           "id": 26405128334,
           "name": "Scorecard supply-chain security",
@@ -17144,26 +17164,6 @@
               "conclusion": "success",
               "duration_sec": 45,
               "html_url": "https://github.com/urunc-dev/urunc/actions/runs/24254425321/job/70822149851"
-            }
-          ],
-          "run_attempt": 1
-        },
-        {
-          "id": 24230529410,
-          "name": "Scorecard supply-chain security",
-          "status": "completed",
-          "conclusion": "success",
-          "run_number": 201,
-          "created_at": "2026-04-10T06:51:52Z",
-          "updated_at": "2026-04-10T06:52:52Z",
-          "run_started_at": "2026-04-10T06:51:52Z",
-          "html_url": "https://github.com/urunc-dev/urunc/actions/runs/24230529410",
-          "jobs": [
-            {
-              "name": "Scorecard analysis",
-              "conclusion": "success",
-              "duration_sec": 56,
-              "html_url": "https://github.com/urunc-dev/urunc/actions/runs/24230529410/job/70740973961"
             }
           ],
           "run_attempt": 1
